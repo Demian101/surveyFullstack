@@ -31,6 +31,16 @@ export default function SignupForm() {
 
   const [postResult, setPostResult] = useState({'status':null, 'res':null});
 
+  const applyFunc = (func, e) => {
+    try { 
+      alert('报名成功！')
+      func(); 
+    } 
+    catch (err) { 
+      console.log('err', err)
+     }
+  }
+
   const { isLoading: isPostingTutorial, mutate: postWord } = useMutation(
     async () => {
       return await apiClient.post(`/form`,  {
@@ -50,14 +60,15 @@ export default function SignupForm() {
   return (
     <div className="flex min-h-screen items-center justify-start bg-white">
     <div className="mx-auto w-full max-w-lg">
-      <h1 className="text-4xl font-medium">Contact us</h1>
-      <p className="mt-3">Email us at help@domain.com or message us here:</p>
+      <h1 className="text-3xl font-medium">2022 国际化学合成生物学</h1>
+      <h1 className="text-2xl font-medium">前沿科技论坛（杭州）</h1>
+      <p className="mt-3 text-gray-700">报名表单填写：</p>
   
       <form className="mt-10">
       
         <div className="grid gap-2 sm:grid-cols-1">
           <div className="relative z-0">
-            <input type="text" name="name" className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " 
+            <input type="text" name="name" className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-b'a's'e text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " 
               value={name}
               onChange = {nameHandler} />
             <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-base text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500">姓名（或称呼）</label>
@@ -66,7 +77,7 @@ export default function SignupForm() {
 
 
           <div className="relative z-0 mt-4">
-            <input type="text" name="name" className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " 
+            <input type="text" name="name" className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-base text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " 
               value={employedInstitution}
               onChange = {employedInstitutionHandler} />
             <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-base text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500"> 就职单位 </label>
@@ -95,14 +106,14 @@ export default function SignupForm() {
           </div>
 
           <div className="relative z-0 mt-4">
-            <input type="text" name="name" className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " 
+            <input type="text" name="name" className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-base text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " 
               value={position}
               onChange = {positionHandler} />
             <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-base text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500"> 职务 </label>
           </div>
 
           <div className="relative z-0 mt-4">
-            <input type="text" name="name" className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-sm text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " 
+            <input type="text" name="name" className="peer block w-full appearance-none border-0 border-b border-gray-500 bg-transparent py-2.5 px-0 text-base text-gray-900 focus:border-blue-600 focus:outline-none focus:ring-0" placeholder=" " 
               value={contacts}
               onChange = {contactsHandler} />
             <label className="absolute top-3 -z-10 origin-[0] -translate-y-6 scale-75 transform text-base text-gray-500 duration-300 peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:left-0 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 peer-focus:dark:text-blue-500"> 联系方式（电话/邮箱）</label>
@@ -130,8 +141,10 @@ export default function SignupForm() {
 
         </div>
       </form>
-      <button type="submit" className="mt-5 rounded-md bg-black px-10 py-2 text-white"
-          onClick={postWord}> Send Message </button>
+      <div className='flex flex-col justify-center'> 
+        <button type="submit" className="mt-5  w-auto rounded-md bg-black px-10 py-2 text-white"
+            onClick={e => applyFunc(postWord)}> 参会登记 </button>
+      </div>
     </div>
   </div>
   );

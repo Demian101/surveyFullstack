@@ -7,6 +7,7 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import connectDb from "./config/db";
 import formRoutes from "./routes/formRoutes"
+import userRoutes from "./routes/userRoutes"
 
 // loads environment variables from a `.env` file into `process.env`. 
 dotenv.config({ path:"./.env"  });
@@ -15,8 +16,6 @@ dotenv.config({ path:"./.env"  });
 const PORT =  process.env.PORT || 8080;
 console.log("Port is : ", process.env.PORT)
 console.log("CLOUDINARY_API_SECRET is : ", process.env.CLOUDINARY_API_SECRET)
-
-
 
 // initialize express
 const app: Express = express();
@@ -57,6 +56,7 @@ app.get("/", (req: Request, res: Response) => {
   res.send('<h1>Social Network API</h1>');
 });
 
+app.use("/auth", userRoutes)
 app.use("/form", formRoutes)
 
 

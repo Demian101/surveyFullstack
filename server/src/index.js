@@ -12,6 +12,7 @@ var helmet_1 = __importDefault(require("helmet"));
 var morgan_1 = __importDefault(require("morgan"));
 var db_1 = __importDefault(require("./config/db"));
 var formRoutes_1 = __importDefault(require("./routes/formRoutes"));
+var userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 // loads environment variables from a `.env` file into `process.env`. 
 dotenv_1.default.config({ path: "./.env" });
 // define port
@@ -46,6 +47,7 @@ app.use(express_1.default.urlencoded({ extended: true }));
 app.get("/", function (req, res) {
     res.send('<h1>Social Network API</h1>');
 });
+app.use("/auth", userRoutes_1.default);
 app.use("/form", formRoutes_1.default);
 // initialize server
 app.listen(PORT, function () {

@@ -39,60 +39,60 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getInfo = exports.postInfo = void 0;
-var Form_1 = __importDefault(require("../models/Form"));
-var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name_1, employedInstitution, position, contacts, institution, participation, form_, savedForm, err_1;
+exports.authGuard = void 0;
+var jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+var User_1 = __importDefault(require("../models/User"));
+var authGuard = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
+    var token, decoded, _a, error_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 2, , 3]);
-                if (!req.body.name || !req.body.contacts) {
-                    res.status(500).json({ "Message": "Pls write name or contacts!" });
-                }
-                _a = req.body, name_1 = _a.name, employedInstitution = _a.employedInstitution, position = _a.position, contacts = _a.contacts, institution = _a.institution, participation = _a.participation;
-                console.log('postInfo - req.body: ', req.body);
-                form_ = new Form_1.default({
-                    name: name_1,
-                    employedInstitution: employedInstitution,
-                    position: position,
-                    contacts: contacts,
-                    institution: institution,
-                    participation: participation,
-                });
-                return [4 /*yield*/, form_.save()];
+                console.log('before req.user', req.user);
+                if (!(req.headers.authorization &&
+                    req.headers.authorization.startsWith("Bearer"))) return [3 /*break*/, 5];
+                _b.label = 1;
             case 1:
-                savedForm = _b.sent();
-                res.json(savedForm);
-                return [3 /*break*/, 3];
+                _b.trys.push([1, 3, , 4]);
+                token = req.headers.authorization.split(" ")[1];
+                decoded = jsonwebtoken_1.default.verify(token, process.env.ACCESS_TOKEN);
+                /* req.user: {
+                    _id: new ObjectId("62fd9f3036e6fe1f5552de47"),
+                    username: 'aa@aa.com',
+                    email: 'aa@aa.com',
+                    ...
+                    __v: 1  }
+                 */
+                // select("-password"): 表示排除掉 password 字段，不放到 req.user 里。
+                // req.user 是在下面的 next() 里传递给下一个中间件的。
+                // 也就是说，下一个中间件可以直接使用 req.user 来获取用户信息。
+                _a = req;
+                return [4 /*yield*/, User_1.default.findById(decoded.id).select("-password")];
             case 2:
-                err_1 = _b.sent();
-                console.log("error: ------- ", err_1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                /* req.user: {
+                    _id: new ObjectId("62fd9f3036e6fe1f5552de47"),
+                    username: 'aa@aa.com',
+                    email: 'aa@aa.com',
+                    ...
+                    __v: 1  }
+                 */
+                // select("-password"): 表示排除掉 password 字段，不放到 req.user 里。
+                // req.user 是在下面的 next() 里传递给下一个中间件的。
+                // 也就是说，下一个中间件可以直接使用 req.user 来获取用户信息。
+                _a.user = _b.sent();
+                console.log('after req.user', req.user);
+                next();
+                return [3 /*break*/, 4];
+            case 3:
+                error_1 = _b.sent();
+                (error_1); // 401 Unauthorized Error
+                res.status(401).json({ message: "Token failed ,you are not authorized" });
+                return [3 /*break*/, 4];
+            case 4: return [3 /*break*/, 6];
+            case 5:
+                res.status(401).json({ message: "Token failed, no token provided" });
+                _b.label = 6;
+            case 6: return [2 /*return*/];
         }
     });
 }); };
-exports.postInfo = postInfo;
-var getInfo = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var forms, err_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                console.log('Controller getInfo...');
-                return [4 /*yield*/, Form_1.default.find()
-                        .sort({ createdAt: -1 })];
-            case 1:
-                forms = _a.sent();
-                res.json(forms);
-                return [3 /*break*/, 3];
-            case 2:
-                err_2 = _a.sent();
-                console.log("error: ------- ", err_2);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
-    });
-}); };
-exports.getInfo = getInfo;
+exports.authGuard = authGuard;

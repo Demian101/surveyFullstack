@@ -1,23 +1,36 @@
-import React, { useState, useEffect, useRef } from "react";
-import Header from "./widgets/Header";
-import Footer from "./widgets/Footer";
-import ReactQuery from './components/ReactQuery'
-// import ReduxTest from './components/ReduxTest'
-import SignupForm from './form/SignupForm';
-const App = () => {
+import React from "react";
+import {Route, Routes} from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import ProfilePage from "./pages/ProfilePage";
+import NeedAuth from "./components/NeedAuth";
+import AuthPage from "./pages/AuthPage";
 
+// import Header from "./widgets/Header";
+// import Footer from "./widgets/Footer";
+// import ReactQuery from './components/ReactQuery'
+// import ReduxTest from './components/ReduxTest'
+// import SignupForm from './form/SignupForm';
+// import HookForm from './form/HookFormRadio';
+
+const App = () => {
   return (
-    <div className="container mx-auto p-4">
-      <Header />
-      <SignupForm />
- 
+    // <div className="container mx-auto p-4">
+    <>
+      <Routes>
+        <Route path={"/"} element={<HomePage/>}/>
+        <Route path={"forminfo"} element={<NeedAuth><ProfilePage/></NeedAuth>}/>
+        <Route path={"auth-form"} element={<AuthPage/>}/>
+      </Routes>
+
+      {/* <SignupForm /> */}
       {/* <ReactQueryTest /> */}
       {/* <ReduxTest /> */}
       {/* <ReactQuery /> */}
       {/* <Main /> */}
       {/* <EditWord /> */}
-      <Footer />
-    </div>
+      {/* <HookForm /> */}
+      {/* // </div> */}
+    </>
   );
 }
 

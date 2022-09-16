@@ -39,60 +39,48 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getInfo = exports.postInfo = void 0;
-var Form_1 = __importDefault(require("../models/Form"));
-var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name_1, employedInstitution, position, contacts, institution, participation, form_, savedForm, err_1;
-    return __generator(this, function (_b) {
-        switch (_b.label) {
-            case 0:
-                _b.trys.push([0, 2, , 3]);
-                if (!req.body.name || !req.body.contacts) {
-                    res.status(500).json({ "Message": "Pls write name or contacts!" });
-                }
-                _a = req.body, name_1 = _a.name, employedInstitution = _a.employedInstitution, position = _a.position, contacts = _a.contacts, institution = _a.institution, participation = _a.participation;
-                console.log('postInfo - req.body: ', req.body);
-                form_ = new Form_1.default({
-                    name: name_1,
-                    employedInstitution: employedInstitution,
-                    position: position,
-                    contacts: contacts,
-                    institution: institution,
-                    participation: participation,
-                });
-                return [4 /*yield*/, form_.save()];
-            case 1:
-                savedForm = _b.sent();
-                res.json(savedForm);
-                return [3 /*break*/, 3];
-            case 2:
-                err_1 = _b.sent();
-                console.log("error: ------- ", err_1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
+var mongoose_1 = require("mongoose");
+var bcryptjs_1 = __importDefault(require("bcryptjs"));
+var UserSchema = new mongoose_1.Schema({
+    username: { type: String, },
+    email: { type: String, required: true, unique: true, },
+    password: { type: String, required: true, },
+    avatar: {
+        type: String,
+        default: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdGr3fTJlsjdAEiSCDznslzUJXqeI22hIB20aDOvQsf9Hz93yoOiLaxnlPEA&s",
+    },
+    following: [{ type: mongoose_1.Schema.Types.ObjectId, ref: "User" }],
+    followers: [{ type: mongoose_1.Schema.Types.ObjectId, ref: "User" }],
+}, { collection: "users", timestamps: true });
+// 比较客户端传过来的密码，和数据库中是否一致
+// this.password 即 UserSchema 的实例的 password 字段，即数据库中的 password 字段
+UserSchema.methods.matchPassword = function (enteredPassword) {
+    return __awaiter(this, void 0, void 0, function () {
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, bcryptjs_1.default.compare(enteredPassword, this.password)];
+                case 1: return [2 /*return*/, _a.sent()];
+            }
+        });
     });
-}); };
-exports.postInfo = postInfo;
-var getInfo = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var forms, err_2;
-    return __generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                _a.trys.push([0, 2, , 3]);
-                console.log('Controller getInfo...');
-                return [4 /*yield*/, Form_1.default.find()
-                        .sort({ createdAt: -1 })];
-            case 1:
-                forms = _a.sent();
-                res.json(forms);
-                return [3 /*break*/, 3];
-            case 2:
-                err_2 = _a.sent();
-                console.log("error: ------- ", err_2);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
-        }
+};
+// 加 salt 保存加密密码到数据库
+UserSchema.pre("save", function (next) {
+    return __awaiter(this, void 0, void 0, function () {
+        var salt, _a;
+        return __generator(this, function (_b) {
+            switch (_b.label) {
+                case 0: return [4 /*yield*/, bcryptjs_1.default.genSalt(10)];
+                case 1:
+                    salt = _b.sent();
+                    _a = this;
+                    return [4 /*yield*/, bcryptjs_1.default.hash(this.password, salt)];
+                case 2:
+                    _a.password = _b.sent();
+                    return [2 /*return*/];
+            }
+        });
     });
-}); };
-exports.getInfo = getInfo;
+});
+var Users = (0, mongoose_1.model)("Users", UserSchema);
+exports.default = Users;
