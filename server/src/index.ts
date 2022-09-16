@@ -52,12 +52,12 @@ app.use(express.urlencoded({ extended: true }));
 
 
 // Routes
-app.get("/", (req: Request, res: Response) => {
+app.get("/api", (req: Request, res: Response) => {
   res.send('<h1>Social Network API</h1>');
 });
 
-app.use("/auth", userRoutes)
-app.use("/form", formRoutes)
+app.use("/api/auth", userRoutes)
+app.use("/api/form", formRoutes)
 
 
 // initialize server

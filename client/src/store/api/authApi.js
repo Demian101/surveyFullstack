@@ -5,7 +5,7 @@ export const authApi = createApi({
   baseQuery: fetchBaseQuery({
     // baseUrl: "http://localhost:1337/api/",   // Mac 调试 - fake backend 用  API
     // baseUrl: "http://localhost:8080/auth/",  // Mac 调试 - ./server 用 API
-    baseUrl: "http://39.105.169.246/auth", // 线上服务器用 API
+    baseUrl: "http://39.105.169.246/api/", // 线上服务器用 API
   }),
   endpoints(build) {
     return {
@@ -13,7 +13,7 @@ export const authApi = createApi({
         query(user) {
           return {
             // url: "auth/local/register",
-            url: "/register",
+            url: "auth/register",
             method: "post",
             body: user, // username password email
           };
@@ -24,7 +24,7 @@ export const authApi = createApi({
         query(user) {
           return {
             // url: "auth/local",
-            url: "/login",
+            url: "auth/login",
             method: "post",
             body: user, // identifier
           };
