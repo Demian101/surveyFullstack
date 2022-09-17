@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { postInfo, getInfo } from "../controllers/formController";
+import { authGuard } from "../middlewares/authenticate";
 
 const router = Router();
 
@@ -7,6 +8,6 @@ const router = Router();
 router
   .route("/")   // 39.105.169.246/form
   .post(postInfo)
-  .get(getInfo)
+  .get(authGuard, getInfo)  // 登录后才能获取 form 数据。
 
 export default router;

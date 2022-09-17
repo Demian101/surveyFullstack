@@ -7,7 +7,7 @@ const router = Router();
 
 router.post("/login", loginUser);
 router.post("/register", registerUser);
-router.get("/all", getAllUsers);
+router.route("all").get(authGuard, getAllUsers);
 
 // 同一个路由 url，请求方法不同 , 对应的处理函数也不同 ;
 

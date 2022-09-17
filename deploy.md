@@ -571,6 +571,23 @@ pm2  monit  myproj   # 查看日志打印等
 
 
 
+## 整套重新部署流程
+
+```
+
+cd /home/zhifeng/client &&  npm run build 
+
+cd /home/zhifeng/server  && npm run build && pm2 start ./src/index.js --name myproj
+
+sudo service nginx restart
+```
+
+
+
+
+
+
+
 ## SEO robots.txt文件
 
 起因：查看服务器日志发现不断有人有请求/robots.txt
