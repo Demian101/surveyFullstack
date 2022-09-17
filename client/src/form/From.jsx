@@ -26,14 +26,14 @@ const From = () => {
       }
       else{
         localStorage.setItem("submittedFlag", 'submitted');
-        console.log('Post —— postWord ', data)
-        postWord();
+        console.log('Post —— postForm ', data)
+        postForm();
         alert("提交成功 ~ ")
       }      
     }
   },[data]);
 
-  const { isLoading: isPostingTutorial, mutate: postWord } = useMutation(
+  const { isLoading: isPostingTutorial, mutate: postForm } = useMutation(
     async () => {
       return await apiClient.post(`/form`, data    
     )},
