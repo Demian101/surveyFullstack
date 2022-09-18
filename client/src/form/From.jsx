@@ -3,8 +3,7 @@ import React, {useState} from "react";
 import { useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
-import apiClient from "../api/http-common";
-import Modal from './Modal';
+import httpClient from "../api/http-common";
 
 const From = () => {
   const [showModal, setShowModal] = useState(false);
@@ -19,23 +18,26 @@ const From = () => {
   };
 
   useEffect(()=>{
-    if(data) { 
-      const token = localStorage.getItem("submittedFlag");
-      if(token){
-        alert("您已提交过 ~ ")
-      }
-      else{
-        localStorage.setItem("submittedFlag", 'submitted');
-        console.log('Post —— postForm ', data)
-        postForm();
-        alert("提交成功 ~ ")
-      }      
+    if(data){
+      postForm();
     }
+    // if(data) { 
+    //   const token = localStorage.getItem("submittedFlag");
+    //   if(token){
+    //     alert("您已提交过 ~ ")
+    //   }
+    //   else{
+    //     localStorage.setItem("submittedFlag", 'submitted');
+    //     console.log('Post —— postForm ', data)
+    //     postForm();
+    //     alert("提交成功 ~ ")
+    //   }      
+    // }
   },[data]);
 
   const { isLoading: isPostingTutorial, mutate: postForm } = useMutation(
     async () => {
-      return await apiClient.post(`/form`, data    
+      return await httpClient.post(`/form`, data    
     )},
     {
       onSuccess: (res) => { setPostResult({status: 'success',res: res}) },

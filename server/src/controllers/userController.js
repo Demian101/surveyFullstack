@@ -107,12 +107,12 @@ var streamUpload = function (req) {
     });
 };
 var registerUser = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, username, email, avatar, password, userExists, user, result, savedUser, accessToken, refreshToken, err_2;
+    var _a, username, email, password, userExists, user, result, savedUser, accessToken, refreshToken, err_2;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 7, , 8]);
-                _a = req.body, username = _a.username, email = _a.email, avatar = _a.avatar, password = _a.password;
+                _a = req.body, username = _a.username, email = _a.email, password = _a.password;
                 return [4 /*yield*/, User_1.default.findOne({ email: email })];
             case 1:
                 userExists = _b.sent();

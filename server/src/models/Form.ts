@@ -2,6 +2,7 @@ import mongoose, { Schema, Document, model } from "mongoose";
 import bcrypt from "bcryptjs";
 
 export interface IForm extends Document {
+  name: string;            // 姓名
   institution: string;     // 领域？ [高校、研究机构 /  企业  /  投资机构] 
   participation: string;   // 参会形式 [online、offline] 
   num: Number;             // 人数？？？
@@ -12,6 +13,7 @@ export interface IForm extends Document {
 
 const FormSchema: Schema = new Schema(
   {
+    name: {type: String, required: true},
     institution: { 
       type: String, 
       // enum : ['NEW','STATUS'],
@@ -20,7 +22,7 @@ const FormSchema: Schema = new Schema(
     num: { type: Number},
     employedInstitution: { type: String, },
     position: { type: String, },
-    contacts: { type: String, },    // 手机号或邮箱
+    contacts: { type: String, required: true},    // 手机号或邮箱
   },
   { collection: "forms", timestamps: true }
 );

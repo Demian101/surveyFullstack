@@ -44,11 +44,11 @@ app.use((0, morgan_1.default)('dev'));
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: true }));
 // Routes
-app.get("/", function (req, res) {
+app.get("/api", function (req, res) {
     res.send('<h1>Social Network API</h1>');
 });
-app.use("/auth", userRoutes_1.default);
-app.use("/form", formRoutes_1.default);
+app.use("/api/auth", userRoutes_1.default);
+app.use("/api/form", formRoutes_1.default);
 // initialize server
 app.listen(PORT, function () {
     console.log("Server is running in port ".concat(PORT));

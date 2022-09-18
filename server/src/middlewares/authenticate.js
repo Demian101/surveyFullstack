@@ -59,9 +59,8 @@ var authGuard = function (req, res, next) { return __awaiter(void 0, void 0, voi
                     _id: new ObjectId("62fd9f3036e6fe1f5552de47"),
                     username: 'aa@aa.com',
                     email: 'aa@aa.com',
-                    ...
                     __v: 1  }
-                 */
+                */
                 // select("-password"): 表示排除掉 password 字段，不放到 req.user 里。
                 // req.user 是在下面的 next() 里传递给下一个中间件的。
                 // 也就是说，下一个中间件可以直接使用 req.user 来获取用户信息。
@@ -72,9 +71,8 @@ var authGuard = function (req, res, next) { return __awaiter(void 0, void 0, voi
                     _id: new ObjectId("62fd9f3036e6fe1f5552de47"),
                     username: 'aa@aa.com',
                     email: 'aa@aa.com',
-                    ...
                     __v: 1  }
-                 */
+                */
                 // select("-password"): 表示排除掉 password 字段，不放到 req.user 里。
                 // req.user 是在下面的 next() 里传递给下一个中间件的。
                 // 也就是说，下一个中间件可以直接使用 req.user 来获取用户信息。
@@ -85,11 +83,12 @@ var authGuard = function (req, res, next) { return __awaiter(void 0, void 0, voi
             case 3:
                 error_1 = _b.sent();
                 (error_1); // 401 Unauthorized Error
+                console.log('req.headers.authorization', req.headers.authorization);
                 res.status(401).json({ message: "Token failed ,you are not authorized" });
                 return [3 /*break*/, 4];
             case 4: return [3 /*break*/, 6];
             case 5:
-                res.status(401).json({ message: "Token failed, no token provided" });
+                res.status(401).json({ message: "Token failed, No headers.authorization found" });
                 _b.label = 6;
             case 6: return [2 /*return*/];
         }

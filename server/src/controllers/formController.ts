@@ -5,7 +5,7 @@ import Form,{ IForm } from "../models/Form";
 
 const postInfo = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    if (!req.body.name || !req.body.contacts){ 
+    if (!req.body.name || !req.body.contacts){
       res.status(500).json( {"Message": "Pls write name or contacts!"} )
     }
     const {
@@ -41,6 +41,7 @@ const getInfo = async (req: Request, res: Response, next: NextFunction) => {
     console.log('Controller getInfo...');
     const forms = await Form.find()
       .sort({ createdAt: -1 })
+      
     res.json(forms);
   } catch(err){
      console.log("error: ------- ", err);

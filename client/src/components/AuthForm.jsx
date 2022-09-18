@@ -8,8 +8,8 @@ const AuthForm = () => {
     const [isLoginForm, setIsLoginForm] = useState(true);
 
     // 引入注册的api
-    const [regFn, {error:regError}] = useRegisterMutation();
-    const [loginFn, {error:loginError}] = useLoginMutation();
+    const [regFn, {error: regError}] = useRegisterMutation();
+    const [loginFn, {error: loginError}] = useLoginMutation();
 
     const usernameInp = useRef();
     const pwdInp = useRef();
@@ -91,7 +91,7 @@ const AuthForm = () => {
         //         }
         //         <div>
         //             <input ref={pwdInp} type="password" placeholder={"密码"}/>
-        //         </div>∏
+        //         </div>
         //         <div>
         //             <button>{isLoginForm?"登录":"注册"}</button>
         //             <a href="#" onClick={
@@ -113,24 +113,6 @@ const AuthForm = () => {
       <div
         className="flex flex-col text-center md:text-left md:flex-row h-screen justify-evenly md:items-center"
       >
-        {/* <div className="flex flex-col w-full">
-          <div>
-            <svg
-              className="w-20 h-20 mx-auto md:float-left fill-stroke text-gray-800"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"
-              ></path>
-            </svg>
-          </div>
-        </div> */}
         <div className="md:w-2/3 lg:w-2/5 mx-auto md:mx-0">
           <div className="bg-white p-10 flex flex-col w-full shadow-xl rounded-xl">
             <h2 className="text-2xl font-bold text-gray-800 text-left mb-5">
@@ -205,7 +187,6 @@ const AuthForm = () => {
       </div>
     </div>
     </div>
-
         );
 };
 

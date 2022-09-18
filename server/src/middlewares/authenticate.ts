@@ -18,9 +18,8 @@ const authGuard = async ( req: Request, res: Response, next: NextFunction ) => {
           _id: new ObjectId("62fd9f3036e6fe1f5552de47"),
           username: 'aa@aa.com',
           email: 'aa@aa.com',
-          ...
           __v: 1  } 
-       */
+      */
 
       // select("-password"): 表示排除掉 password 字段，不放到 req.user 里。
       // req.user 是在下面的 next() 里传递给下一个中间件的。
@@ -29,12 +28,13 @@ const authGuard = async ( req: Request, res: Response, next: NextFunction ) => {
       console.log('after req.user',req.user)
       next();
     } catch (error) { 
-      (error); // 401 Unauthorized Error
+      (error);  // 401 Unauthorized Error
+      console.log('req.headers.authorization', req.headers.authorization)
       res.status(401).json({message: "Token failed ,you are not authorized"});
     }
   }
-  else{
-    res.status(401).json({message: "Token failed, no token provided"})
+  else {
+    res.status(401).json({message: "Token failed, No headers.authorization found"})
   }
 };
 

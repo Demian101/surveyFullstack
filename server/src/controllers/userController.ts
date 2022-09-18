@@ -54,7 +54,7 @@ let streamUpload = (req: any) => {
 
 const registerUser = async ( req: Request, res: Response, next: NextFunction) => {
   try {
-    const { username, email, avatar, password,  } = req.body;
+    const { username, email, password,  } = req.body;
     const userExists = await User.findOne({ email });
     if (userExists) {    // if user exists
       res.status(409).json({ message: "User already exists" });

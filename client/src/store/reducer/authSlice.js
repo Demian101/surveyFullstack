@@ -23,7 +23,7 @@ export const authSlice = createSlice({
   },
   reducers: {
     login(state, action) {
-      console.log("action: ", action); // {token: undefined, user: 'a@a.a'}
+      // console.log("action: ", action); // {token: undefined, user: 'a@a.a'}
       state.isLogged = true;
       state.token = action.payload.token;
       state.user = action.payload.user;
