@@ -1,10 +1,9 @@
 
 import React from "react";
-import From from '../form/From';
-
+import Main from '../components/Main';
 const HomePage = () => {
   return(
-    <From />
+    <Main />
   )
 };
 

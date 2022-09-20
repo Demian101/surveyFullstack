@@ -4,6 +4,8 @@ import HomePage from "./pages/HomePage";
 import ProfilePage from "./pages/ProfilePage";
 import NeedAuth from "./components/NeedAuth";
 import AuthPage from "./pages/AuthPage";
+import FormPage from "./pages/FormPage";
+
 
 // import Header from "./widgets/Header";
 // import Footer from "./widgets/Footer";
@@ -18,8 +20,9 @@ const App = () => {
     <>
       <Routes>
         <Route path={"/"} element={<HomePage/>}/>
-        <Route path={"forminfo"} element={<NeedAuth><ProfilePage/></NeedAuth>}/>
+        <Route path={"form"} element={<FormPage />}/>
         <Route path={"auth-form"} element={<AuthPage/>}/>
+        <Route path={"forminfo"} element={<NeedAuth><ProfilePage/></NeedAuth>}/>
       </Routes>
 
       {/* <SignupForm /> */}
