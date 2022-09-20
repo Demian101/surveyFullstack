@@ -159,7 +159,23 @@ server {
 
 ## **阿里云 ECS**
 
+### 备案
 
+域名实名后，首先要管局审核，然后才能启动备案流程。
+
+最好是 A 持有域名，然后在 A 的服务器备案。
+
+如果是 B 持有域名，进行其公司备案，那么需要得到 A 的**备案服务码**
+
+> 注意：每个 ECS 实例只能申请 5个 备案服务码，无法申请新的备案服务码。
+>
+> 如果服务器对应的备案服务码如果已使用完，您需要购买新的服务器，在新的服务器上申请备案服务码。
+
+
+
+个人备案：不能出现行业信息
+
+企业备案：信息要一致 —— 域名需要持有在企业法人手里。
 
 ### 1. 域名购买
 
@@ -605,6 +621,13 @@ cd /home/zhifeng/client &&  npm run build
 cd /home/zhifeng/server  &&  npm run build && pm2 start ./src/index.js --name myproj
 
 sudo service nginx restart
+```
+
+```bash
+git fetch origin main:temp
+git diff temp
+git merge temp      # 合并temp分支到本地的master分支
+git branch -d temp  # 删除temp分支
 ```
 
 
