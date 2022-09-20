@@ -83,27 +83,28 @@ const From = () => {
 
         {/* Radios 单选 - 机构类型 */}
         <label className='text-gray-600 font-medium block mt-4'>机构类型：</label>
-        <div> <label className='ml-4 inline-block'>
-        <input
-            className='mt-4 mr-1'
-            value='高校、研究机构'
-            type='radio'
-            {...register("institution")}
-          />
-          高校、研究机构
+        <div> 
+          <label className='ml-4 inline-block'>
+            <input className='mt-4 mr-1'
+                value='高校、研究机构'
+                type='radio'
+                {...register("institution")}
+              /> 高校、研究机构
         </label></div>
 
-        <div><label className='ml-4 inline-block'>
-          <input className='mt-4 mr-1' type='radio'
-            value='企业' />
-          企业
-        </label></div>
+        <div>
+          <label className='ml-4 inline-block'>
+            <input className='mt-4 mr-1' type='radio' value='企业' {...register("institution")} />
+            企业
+          </label>
+        </div>
 
-        <div><label className='ml-4 inline-block'>
-          <input className='mt-4 mr-1' type='radio'
-            value='投资机构'/>
-          投资机构
-        </label></div>
+        <div>
+          <label className='ml-4 inline-block'>
+            <input className='mt-4 mr-1' type='radio' value='投资机构' {...register("institution")} />
+              投资机构
+          </label>
+        </div>
         {errors?.institution && (
           <div className='mb-3 text-normal text-red-500 '>
             {errors?.institution.message}
@@ -111,7 +112,7 @@ const From = () => {
         )}
 
 
-
+        {/* Radios 单选 - 就职单位名称： */}
         <label className='text-gray-600 font-medium block mt-4'>就职单位名称：</label>
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
@@ -164,8 +165,7 @@ const From = () => {
         </label></div>
 
         <div><label className='ml-4 inline-block'>
-          <input className='mt-4 mr-1' type='radio'
-            value='线下' />
+          <input className='mt-4 mr-1' type='radio' value='线下' {...register("participation")} />
           线下
         </label></div>
         {errors?.participation && (
