@@ -616,11 +616,13 @@ pm2  monit  myproj   # 查看日志打印等
 ## 整套重新部署流程
 
 ```
-cd /home/zhifeng/client &&  npm run build 
+cd /home/surveyFullstack/client &&  npm run build 
 
-cd /home/zhifeng/server  &&  npm run build && pm2 start ./src/index.js --name myproj
+cd /home/surveyFullstack/server  &&  npm run build && pm2 start ./src/index.js --name myproj
 
 sudo service nginx restart
+
+cp -r ./dist/img ./dist/assests
 ```
 
 ```bash

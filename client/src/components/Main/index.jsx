@@ -23,18 +23,16 @@ import CropZhonghua from '../../assets/corps/CropZhonghua.png'
 import CorpDeshang from '../../assets/corps/CorpDeshang.png'
 import CorpMirui from '../../assets/corps/CorpMirui.png'
 
-
 import organization from '../../assets/corps/organization.png'
 import MeetingBg from '../../assets/corps/MeetingBg.png'
 import Connect from '../../assets/corps/Connect.png'
-
-
 import livepng from '../../assets/corps/live.png'
 
+import Frame1 from '../../assets/Timelineslices/Frame1@2x.png';
+import Frame2 from '../../assets/Timelineslices/Frame2@2x.png';
+import triarrow from '../../assets/Timelineslices/triarrow.png';
 
 
-
-// import Frame1 from '../../assets/Timelineslices/Frame1@2x.png';
 import MeetingArrange from '../../assets/Timelineslices/MeetingArrange.png';
 import round1 from '../../assets/Timelineslices/round1.png';
 import { useNavigate } from "react-router-dom";
@@ -64,13 +62,12 @@ const Main = () =>{
 
   console.log('isMobile', isMobile) 
   return (
-    <div className='h-full bg-bg bg-clip-padding'>
+    <div className='w-screen h-auto bg-appbg md:bg-webbghome bg-contain bg-no-repeat mt-14 bg-clip-padding'>
       {/* <NavBar {...argRef}/> */}
-
 
       {/* NavBar  */}
       {/* <div className="shadow-md z-20 w-full fixed top-0 left-0  bg-gradient-to-r from-indigo-800 via-purple-600 to-black"> */}
-      <div className="shadow-md z-20 w-full fixed top-0 left-0 bg-pattern5">
+      <div className="shadow-md z-20 w-full fixed top-0 left-0 bg-webaboutbg">
         <div className="md:flex items-center justify-between py-4 md:px-10 px-7">
           
           <img src={logo} className="w-1/2 h-auto md:w-1/4 md:h-auto md:pl-20" alt="logo" />
@@ -78,7 +75,7 @@ const Main = () =>{
             onClick={() => setOpen(!open)}
             className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden"
           >
-            <AiOutlineMenu className='text-white' name={open ? "close" : "menu"} />
+            <AiOutlineMenu className='text-white text-g' name={open ? "close" : "menu"} />
           </div>
           
           <ul
@@ -96,14 +93,15 @@ const Main = () =>{
                 会议安排 </button>
             </li>
 
-            <li className="md:ml-8 text-xl md:my-0 my-7">
-              <button onClick={()=>scrollDown(aboutRef)} className=" md:text-slate-50 text-slate-600  hover:text-gray-400 duration-500" >
-                关于 </button>
-            </li>
 
             <li className="md:ml-8 text-xl md:my-0 my-7">
               <button onClick={()=>scrollDown(liveRef)} className=" md:text-slate-50 text-slate-600  hover:text-gray-400 duration-500" >
                 直播 </button>
+            </li>
+
+            <li className="md:ml-8 text-xl md:my-0 my-7">
+              <button onClick={()=>scrollDown(aboutRef)} className=" md:text-slate-50 text-slate-600  hover:text-gray-400 duration-500" >
+                关于 </button>
             </li>
 
             {/* <li className="md:ml-8 text-xl md:my-0 my-7">
@@ -116,23 +114,20 @@ const Main = () =>{
           {/* <button className='w-10 z-30 h-6'>注册参会</button> */}
           </ul>
           
-        </div>
-      </div>   {/* NavBar */}
+      </div>
+    </div>   {/* NavBar */}
 
 
-      <div>1</div>
-      <div>1</div>
-      <div>1</div>
-      <div>&nbsp; </div>
+      <div> &nbsp; </div>
       {/* <div className='bg-[url("../../assets/slices/logintakepartin.png")] bg-no-repeat'> 2222222222</div> */}
 
       {/* 论坛 大海报 */}
       {isMobile ? 
         ( <div>
-            <img src={maintitle_phone} className="cursor-pointer w-4/5 mt-24 mx-10 md:w-9/12 md:mt-24 md:ml-36"  alt="logo" />
+            <img src={maintitle_phone} className="cursor-pointer w-4/5 mt-44 mx-10 md:w-9/12 md:mt-24 md:ml-36"  alt="logo" />
           </div>):(
           <div>
-            <img src={main_title} className="cursor-pointer w-4/5 mt-44 mx-10 md:w-9/12 md:mt-24 md:ml-36"  alt="logo" />
+            <img src={main_title} className="cursor-pointer w-4/5 pt-20 mx-10 md:w-9/12 md:mt-24 md:ml-36"  alt="logo" />
            </div>
         )
       }
@@ -163,7 +158,7 @@ const Main = () =>{
 
 
       {/* 注册参会按钮 */}
-      <div className='md:flex md:justify-center pt-10 px-10'>
+      <div className='md:flex md:justify-center pt-10 px-10 md:mb-5'>
         <button className='px-6 py-3 bg-gradient bg-no-repeat rounded-md shadow-2xl text-lg text-black w-[160px] h-[61px]'
            onClick={()=> navigate("/form")}>
             注册参会
@@ -179,15 +174,11 @@ const Main = () =>{
         </div>
       }
 
-   {/* 会议直播 */}
-    <div className='grid grid-cols-1 items-center justify-items-center mt-40' ref={liveRef}>
-      <div><img src={livepng} className='w-[246pt] h-[239pt]'/></div>
-      <div><p className='pt-2 text-gray-100 text-lg font-thin'>观看会议直播</p></div>
-    </div>
-
-
-    {/* 11.06 内容 - 移动端！！！！！！！ */}
-    <div className='grid grid-cols-1 gap-2 pl-8 font-PingFang pt-28' ref={argRef}>
+    {isMobile && (
+     // {/* 11.06 内容 - 移动端！！！！！！！ */}
+    <div className='md:bg-webbgschedule bg-appbgschedule bg-cover bg-no-repeat w-screen h-auto'>  
+    
+    <div className='grid grid-cols-1 gap-2 pl-8 font-PingFang pt-16' ref={argRef}>
       <img src={MeetingArrange} className='w-[102pt] h-[23pt]'/>
       <img src={date1106} className='w-[132pt] h-[45pt] mt-2'/>
       <div>
@@ -282,150 +273,164 @@ const Main = () =>{
               </tr>
         </tbody>
       </table>
-    </div>  {/* 11.07 内容 - 移动端！！！！！！！  */}
+    </div>  // {/* 11.07 内容 - 移动端！！！！！！！  */}
+    </div>
+    )}
 
 
-    {  !isMobile && (
-    // 11.06 内容 - 网页端
-    <>
-    <div className='flex justify-center pr-20 pt-28' ref={argRef}>
-      <div className='flex flex-col '>
-        <div className='w-1/2 ' >
-          <img src={MeetingArrange} className='w-auto'/>
-        </div>  // 会议安排 
-        <div className="flex flex-col items-center pt-4 pb-10 mt-4 px-0 border-solid border-2 border-slate-50">
-          <div className='pt-4 pb-1'>
+    {/*
+      *
+      ****  Web 网页端  **************************************************************************
+      * 
+      */}
+    { !isMobile && (
+    // 11.06 内容
+    <div className='bg-webbgschedule pt-24' ref={argRef}>
+      <div className='flex items-center justify-center content-center flex-col'> {/* 1106 的 flex */}
+
+        <div className='relative' >
+          <div className='w-[102.5pt] h-[23pt] pt-10 pb-3'>
+            <img src={MeetingArrange} className='w-auto'/>
+          </div>
+
+        <div className='flex flex-row'>
+          <img src={Frame1} className='w-[156pt] h-[144pt] pt-10 mr-8'/>
+          {/* <span className='col-start-2 text-gray-100 inline-grid absolute z-50 left-3 top-12'> 1111</span>      */}
+          <div className='pt-4 pb-1 inline absolute left-[38px] top-28'>
+            <span><img src={triarrow} className='inline w-[8pt] mr-1 mb-1' ></img></span>
             <span className='inline text-slate-50 text-lg'> 11 月</span>
             <span className='inline text-slate-50 text-4xl'> 06</span>
             <span className='inline text-slate-50 text-lg'> 日</span>
+          </div>   
+
+          <div className="text-slate-50 pt-4 font-light relative" >
+            <span className='text-2xl text-slate-50'> 智慧谷 </span>
+            <table className="table-fixed">
+              <tbody className="">
+                <tr> 
+                  <td className="text-left text-xs pr-6 pb-4 pt-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' />12:00-14:30</td>
+                  <td className="text-left text-sm pb-4  pt-4">签到(循环播放短片)</td>
+                </tr>
+                <tr>
+                  <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' />14:30-15:00</td>
+                  <td className="text-left text-sm pb-4">开幕式、领导致辞</td>
+                </tr>
+                <tr>
+                  <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' />15:00-17:00</td>
+                  <td className="text-left text-sm pb-4">大会报告(政、学、企、投)</td>
+                </tr>
+                <tr>
+                  <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' />17:00</td>
+                  <td className="text-left text-sm pb-4">回酒店，晚宴</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>  // 左部分白框 
-      <div className='pl-10 pt-10 pb-2'>   // 右部分 - 智慧谷
-        <span className='text-2xl pb-8 text-slate-50'> 智慧谷 </span>
-        
-        // 大会报告处字数多，超出了范围，挤压图片
-        <div className="flex justify-center text-slate-50 pt-2">
-          <table className="table-fixed">
-            <tbody className=" ">
-              <tr> 
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' />12:00-14:30</td>
-                <td className="text-left px-2 text-sm">签到(循环播放短片)</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' />14:30-15:00</td>
-                <td className="text-left px-2 text-sm">开幕式、领导致辞</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' />15:00-17:00</td>
-                <td className="text-left px-2 text-sm">大会报告(政、学、企、投)</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' />17:00</td>
-                <td className="text-left px-2 text-sm">回酒店，晚宴</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div> // 11.06 内容 - 网页端
+        <hr className='ml-60  mt-4' />
 
-     
-    // 11.07 内容 - 网页端 
-    <div className='flex justify-center pr-20 pt-10' >
-      <div className='flex flex-col '>
-        <div className='w-1/2 ' >
-          <img src={MeetingArrange} className='w-auto'/>
-        </div>  {/* 会议安排 */}
-        <div className="flex flex-col items-center pt-4 pb-64 mt-4 px-0 border-solid border-2 border-slate-50">
-          <div className='pt-4 pb-1'>
-            <span className='inline text-slate-50 text-lg'> 11 月</span>
-            <span className='inline text-slate-50 text-4xl'> 07</span>
-            <span className='inline text-slate-50 text-lg'> 日</span>
+      </div>   {/* 1106 的 flex */}
+
+
+      {/* 1107 的 flex */}
+      <div className='flex flex-row'>
+        <div className='relative'>
+          <img src={Frame2} className='w-[155.5pt] h-[418pt] pt-10 mr-8'/>
+          {/* <span className='col-start-2 text-gray-100 inline-grid absolute z-50 left-3 top-12'> 1111</span>  */}
+          <div className='pt-4 pb-1 inline absolute left-[49px] top-16'>
+            <span><img src={triarrow} className='inline w-[8pt] mr-1 mb-1' ></img></span>
+            <span className='inline text-slate-50 text-lg'>11 月</span>
+            <span className='inline text-slate-50 text-4xl'>07</span>
+            <span className='inline text-slate-50 text-lg'>日</span>
+          </div>   
+        </div>
+
+          <div className="text-slate-50 pt-12 font-light relative" >
+            <span className='text-2xl text-slate-50'> 杭州龙湖皇冠假日酒店 </span>
+            <table className="table-fixed">
+              <tbody className="">
+              <tr> 
+                <td className="text-left text-xs pr-6 pb-4 pt-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' /> 08:30-09:00</td>
+                <td className="text-left text-sm pb-4 pt-4">签到(循环播放短片)</td>
+              </tr>
+              <tr>
+                <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' /> 09:00-10:00</td>
+                <td className="text-left text-sm pb-4">合成生物学“院士谈”</td>
+              </tr>
+              <tr>
+                <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='invisible inline pb-[2px] pr-1 w-[8pt]' /> 10:00-10:15</td>
+                <td className="text-left text-sm pb-4 italic">茶歇</td>
+              </tr>
+              <tr>
+                <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' /> 10:15-11:00</td>
+                <td className="text-left text-sm pb-4">合成生物学“企业说”</td>
+              </tr>
+              <tr>
+                <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' /> 11:00-12:00</td>
+                <td className="text-left text-sm pb-4">合成生物学学术前沿</td>
+              </tr>
+              <tr>
+                <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='invisible inline pb-[2px] pr-1 w-[8pt]' /> 12:00-12:15</td>
+                <td className="text-left text-sm pb-4 italic">合影</td>
+              </tr>
+              <tr>
+                <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' /> 12:15-13:30</td>
+                <td className="text-left text-sm pb-4">午餐</td>
+              </tr>
+              <tr>
+                <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' /> 13:30-14:30</td>
+                <td className="text-left text-sm pb-4">合成生物学“院士谈”</td>
+              </tr>
+              <tr>
+                <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' /> 14:30-16:30</td>
+                <td className="text-left text-sm pb-4">合成生物学“企业说”</td>
+              </tr>
+              <tr>
+                <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='invisible inline pb-[2px] pr-1 w-[8pt]' /> 16:30-16:45</td>
+                <td className="text-left text-sm pb-4 italic">茶歇</td>
+              </tr>
+              <tr>
+                <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' /> 16:45-18:00</td>
+                <td className="text-left text-sm pb-4">合成生物学投资圆桌论坛</td>
+              </tr>
+              <tr>
+                <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' /> 18:00-19:00</td>
+                <td className="text-left text-sm pb-4">晚餐</td>
+              </tr>
+              <tr>
+                <td className="text-left text-xs pr-6 pb-4"> <img src={round1} className='inline pb-[2px] pr-1 w-[8pt]' /> 19:00-22:00</td>
+                <td className="text-left text-sm pb-4">分论坛</td>
+              </tr>
+              </tbody>
+            </table>
           </div>
-        </div>
-      </div> {/* 左部分白框 */}
-      <div className='pl-10 pt-10 pb-20'>  {/* 右部分 - 智慧谷 */}
-        <span className='text-2xl pb-8 text-slate-50'> 杭州龙湖皇冠假日酒店 </span>
-        
-        <div className="flex justify-center text-slate-50 pt-2">
-          <table className="table-fixed">
-            <tbody className=" ">
-              <tr> 
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' /> 08:30-09:00</td>
-                <td className="text-left px-2 text-sm">签到(循环播放短片)</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' /> 09:00-10:00</td>
-                <td className="text-left px-2 text-sm">合成生物学“院士谈”</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' /> 10:00-10:15</td>
-                <td className="text-left px-2 text-sm">茶歇</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' /> 10:15-11:00</td>
-                <td className="text-left px-2 text-sm">合成生物学“企业说”</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' /> 11:00-12:00</td>
-                <td className="text-left px-2 text-sm">合成生物学学术前沿</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' /> 12:00-12:15</td>
-                <td className="text-left px-2 text-sm">合影</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' /> 12:15-13:30</td>
-                <td className="text-left px-2 text-sm">午餐</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' /> 13:30-14:30</td>
-                <td className="text-left px-2 text-sm">合成生物学“院士谈”</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' /> 14:30-16:30</td>
-                <td className="text-left px-2 text-sm">合成生物学“企业说”</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' /> 16:30-16:45</td>
-                <td className="text-left px-2 text-sm">茶歇</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' /> 16:45-18:00</td>
-                <td className="text-left px-2 text-sm">合成生物学投资圆桌论坛</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' /> 18:00-19:00</td>
-                <td className="text-left px-2 text-sm">晚餐</td>
-              </tr>
-              <tr>
-                <td className="text-left px-2 text-xs"> <img src={round1} className='inline pb-1 pr-1' /> 19:00-22:00</td>
-                <td className="text-left px-2 text-sm">分论坛</td>
-              </tr>
-
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>   // 11.07 内容 - 网页端*
-    </>
+        </div>  
+      </div>  {/* 1107 的 flex */}
+     </div>     // 会议议程 - 网页端 
     )}
 
 
 
+   {/* 会议直播 */}
+   {/* 修改直播图片大小的话， 直接修改下面的 py-96  */}
+   <div className='grid grid-cols-1 items-center justify-items-center py-60 md:bg-appBglive md:bg-contain bg-appBglive bg-contain' ref={liveRef}>
+      <div><img src={livepng} className='w-[246pt] h-[239pt]'/></div>
+      <div><p className='pt-2 text-gray-100 text-lg font-thin'>观看会议直播</p></div>
+    </div>
 
-    {/* 关于 */}
-    <div className='pl-[30px] grid grid-cols-1  pt-40 pb-6 text-gray-50 text-base' ref={aboutRef} >
+
+    {/* 移动端：关于 */}
+    { isMobile ? (
+    <div className='bg-appbgabout bg-cover'>
+      <div className='pl-[30px] grid grid-cols-1  pt-20 pb-6 text-gray-50 text-base' ref={aboutRef} >
         <img src={organization} className='w-[100pt] h-[22pt]' />
-
         <div className='pt-4'>
           <span className='pt-4 inline' > 指导单位： 天津大学 浙江省科技厅</span>  
         </div>
         <div className='pt-4'>
           <span className='pt-4 inline' > 主办单位：   钱塘新区   天津大学浙江校友会</span>  
         </div>
-    </div>
+      </div>
 
     <div className='w-screen h-auto bg-white pl-[30px]'>
       <p className='font-bold text-lg py-8' > 承办单位：</p>
@@ -433,7 +438,7 @@ const Main = () =>{
       <p className='text-base'>浙江天化科技发展有限公司</p>
       <p className='text-base  py-8'> 杭州市钱塘区经济信息化和科学技术局</p>
 
-      <p className='font-bold text-lg py-8' > 协办单位：</p>
+      <p className='font-bold text-lg py-8'> 协办单位：</p>
       <img src={corpLvcheng} className='w-[65.5pt] h-[20pt] mb-1'/>
       <p className='text-base'>  绿城科技产业服务集团有限公司</p>
 
@@ -465,7 +470,7 @@ const Main = () =>{
     <div className='px-[30px] text-gray-50  pt-2'>
       <img src={Connect} className='w-[102.5pt] h-[23pt] mt-10 mb-8' />
     </div>
-    <div className='grid grid-cols-4 gap-4 pl-[30px] text-gray-50 text-left'>
+    <div className='grid grid-cols-4 gap-4 pl-[30px] text-gray-50 text-left pb-12'>
       <div>会议酒店 </div>
       <div className='col-span-3'>
         <div>杭州龙湖皇冠假日酒店</div>
@@ -491,15 +496,141 @@ const Main = () =>{
         <div>绿城科技产业服务集团有限公司</div>
       </div>
     </div>
+    </div>)
+     :
 
 
 
 
 
-    <div className=" bg-inherit pt-20 text-gray-50" ref={guestRef}>
+    //  Connect
+    (
+    <div className=''>
+      <div className='flex items-center justify-center content-center flex-row md:bg-webaboutbg'> {/* 1106 的 flex */}
+        <div className=''>
+          <img src={organization} className='w-[102.5pt] h-[24pt] mr-10' />
+        </div>
+
+        <div className='text-gray-50 text-base font-light pl-16 pb-6 pt-8'>
+          <div className='pt-4  '>
+            <span className='pt-4 inline' > 指导单位： 天津大学 浙江省科技厅</span>  
+          </div>
+          <div className='pt-4'>
+            <span className='pt-4 inline' > 主办单位：   钱塘新区   天津大学浙江校友会</span>  
+          </div>
+        </div>
+      </div>
+
+
+
+      <div className='flex  justify-center flex-row  pl-[24px] pt-14 items-end'>
+        <table className="">
+          <tbody className="">
+            <tr> 
+              <td className="pt-[40px] text-left"> 承办单位：</td>
+              <td className="text-left pt-1 pl-8">
+                <div className=''>
+                  <img src={corpTianhua} className='w-[36pt] h-[24pt] mb-1'/>
+                  <p className='text-base'>浙江天化科技发展有限公司</p>  
+                </div>  
+              </td>
+              <td className='flex items-end pl-8'>
+                <div className='flex items-end'>
+                  <div><p className='text-base pt-10'> 杭州市钱塘区经济信息化和科学技术局</p></div>
+                </div>
+              </td>
+            </tr>
+            
+            <tr> 
+              <td className="pt-[40px] text-left"> 协办单位：</td>
+              <td className="text-left pt-1 pl-8">
+                <div className='pt-2'>
+                  <img src={corpLvcheng} className='w-[65.5pt] h-[20pt] mb-1'/>
+                  <p className='text-base'>  绿城科技产业服务集团有限公司</p>
+                </div>  
+              </td>
+              <td className='pl-8 pt-[10px]'>
+                <img src={CorpLianchuan} className='w-[65.5pt] h-[20pt] mb-1 mt-8'/>
+                <p className='text-base pb-8'>  杭州联川生物技术股份有限公司</p>
+              </td>
+            </tr>
+
+            <tr> 
+              <td className="pt-[40px] text-left"> </td>
+              <td className="text-left pt-1 pl-8">
+                <div className='pt-7'>
+                  <img src={CropZhonghua} className='w-[55.5pt] h-[28.5pt] mb-1'/>
+                  <p className='text-base pb-2'>  中化蓝天集团有限公司</p>
+                  <p className='text-base pb-8'>  蓝启生科（浙江)新材料有限公司</p>
+                </div>  
+              </td>
+              <td className='pl-8 pt-[10px]'>
+                <img src={CropDonggeng} className='w-[57.5pt] h-[19pt] mb-1'/>
+                <p className='text-base pb-8'>  上海东庚化工技术有限公司</p>
+              </td>
+            </tr>
+
+
+            <tr> 
+              <td className="pt-[40px] text-left"> </td>
+              <td className="text-left pt-1 pl-8">
+                <div className=''>
+                  <img src={CorpDeshang} className='w-[43.5pt] h-[27.5pt] mb-1'/>
+                  <p className='text-base pb-8'>  天津德尚科技有限公司</p>
+                </div>  
+              </td>
+              <td className='pl-8 pt-2'>
+                <img src={CorpMirui} className='w-[91pt] h-[24pt] mb-1'/>
+                <p className='text-base pb-8'>  觅瑞(杭州）生物科技有限公司</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+      <div className='flex  justify-center content-center flex-row md:bg-webaboutbg'> {/* 1106 的 flex */}
+        <div className='mr-20 pt-14'>
+          <img src={Connect} className='w-[115.5pt] h-[23pt]' />
+        </div>
+
+        <div className='grid grid-cols-4 gap-4 pl-[30px] text-gray-50 text-left font-light mt-14 mb-10'>
+          <div>会议酒店 </div>
+          <div className='col-span-3'>
+            <div>杭州龙湖皇冠假日酒店</div>
+            <div className='text-sm'>浙江省杭州市钱塘江区金沙大道523号</div>
+          </div>
+          <div className='flex justify-between pr-3'>
+            <div>联 </div>
+            <div>系 </div>
+            <div>人 </div>
+          </div>        
+          <div className='col-span-3'>
+            <div>潘清 18689857586</div>
+          </div>
+          <div className='flex justify-between pr-3'>
+            <div>邮 </div>
+            <div>箱 </div>
+          </div>        
+          <div className='col-span-3'>
+            <div>panqing@zj-th.com.cn</div>
+          </div>
+          <div>协办单位 </div>
+          <div className='col-span-3'>
+            <div>绿城科技产业服务集团有限公司</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    )
+    }  {/*关于*/} 
+
+{/* 
+    <div className=" bg-inherit pt-20 text-gray-500" ref={guestRef}>
         <h2>嘉宾-施工中</h2>
     </div>
-
+ */}
 
   </div>
   )

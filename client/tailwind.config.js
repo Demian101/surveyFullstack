@@ -5,6 +5,17 @@ module.exports = {
       bg: "url('./img/1.png')",
       bg2: "url('./img/Bg@2x.png')",
       gradient: "url('./img/gradient.png')",
+      webaboutbg: "url('./webbg/about.jpg')",
+      webbghome: "url('./webbg/bghome.jpg')",
+      webBglive: "url('./webbg/Bglive.jpg')",
+      webbgschedule: "url('./webbg/bgschedule.jpg')",
+      webBgspeaker: "url('./webbg/Bgspeaker.jpg')",
+
+      //app
+      appbg: "url('./appbg/bg.jpg')",
+      appbgschedule: "url('./appbg/bgschedule.jpg')",
+      appbgabout: "url('./appbg/bgabout.jpg')",
+      appBglive: "url('./appbg/Bglive.jpg')",
     },
     fontFamily: {
       PingFang: "PingFang-SC-Regular",
