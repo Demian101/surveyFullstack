@@ -1,6 +1,14 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
+    backgroundImage: {
+      bg: "url('./img/1.png')",
+      bg2: "url('./img/Bg@2x.png')",
+      gradient: "url('./img/gradient.png')",
+    },
+    fontFamily: {
+      PingFang: "PingFang-SC-Regular",
+    },
     extend: {
       colors: {
         blue: {
