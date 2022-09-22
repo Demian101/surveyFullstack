@@ -250,11 +250,11 @@ const MainEng = () =>{
       <table className="table-fixed">
         <tbody className=" text-white text-left px-2 text-sm">
         <tr> 
-                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 08:30-09:00</td>
+                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 08:30-09:00</td>
                 <td className="pl-1 pb-3">Registration</td>
               </tr>
               <tr>
-                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 09:00-10:00</td>
+                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 09:00-10:00</td>
                 <td className="pl-1 pb-3">
                   <p>Academician's Speech</p>
                   <p>on Chemical Synthetic</p>
@@ -262,11 +262,11 @@ const MainEng = () =>{
                 </td>
               </tr>
               <tr>
-                <td className="pb-3"> <img src={round1} className='invisible inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 10:00-10:15</td>
+                <td className="pb-3"> <img src={round1} className='invisible inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 10:00-10:15</td>
                 <td className="pl-1 pb-3 italic">Coffee Break</td>
               </tr>
               <tr>
-                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 10:15-11:00</td>
+                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 10:15-11:00</td>
                 <td className="pl-1 pb-3">
                   <p>Entrepreneur's Speech</p>
                   <p>on Chemical Synthetic </p>
@@ -274,22 +274,22 @@ const MainEng = () =>{
                 </td>
               </tr>
               <tr>
-                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 11:00-12:00</td>
+                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 11:00-12:00</td>
                 <td className="pl-1 pb-3">
                   <p>Academic Frontier of</p>
                   <p>Chemical Synthetic Biology</p>
                 </td>
               </tr>
               <tr>
-                <td className="pb-3"> <img src={round1} className='invisible inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 12:00-12:15</td>
+                <td className="pb-3"> <img src={round1} className='invisible inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 12:00-12:15</td>
                 <td className="pl-1 pb-3 italic">Group photograph</td>
               </tr>
               <tr>
-                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 12:15-13:30</td>
+                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 12:15-13:30</td>
                 <td className="pl-1 pb-3">Lunch</td>
               </tr>
               <tr>
-                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 13:30-14:30</td>
+                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 13:30-14:30</td>
                 <td className="pl-1 pb-3">
                   <p>Academician's Speech </p>
                   <p>on Chemical Synthetic </p>
@@ -297,7 +297,7 @@ const MainEng = () =>{
                 </td>
               </tr>
               <tr>
-                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 14:30-16:30</td>
+                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 14:30-16:30</td>
                 <td className="pl-1 pb-3">
                   <p>Entrepreneur's Speech</p>
                   <p> on  Chemical Synthetic </p>
@@ -305,11 +305,11 @@ const MainEng = () =>{
                 </td>
               </tr>
               <tr>
-                <td className="pb-3"> <img src={round1} className='invisible inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 16:30-16:45</td>
+                <td className="pb-3"> <img src={round1} className='invisible inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 16:30-16:45</td>
                 <td className="pl-1 pb-3 italic">Coffee Break</td>
               </tr>
               <tr>
-                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 16:45-18:00</td>
+                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 16:45-18:00</td>
                 <td className="pl-1 pb-3">
                   <p>Roundtable Forum on  </p>
                   <p>Chemical Synthetic </p>
@@ -317,11 +317,11 @@ const MainEng = () =>{
                 </td>
               </tr>
               <tr>
-                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 18:00-19:00</td>
+                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 18:00-19:00</td>
                 <td className="pl-1 pb-3">Dinner</td>
               </tr>
               <tr>
-                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 19:00-22:00</td>
+                <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 19:00-22:00</td>
                 <td className="pl-1 pb-3">Sub-Fourm</td>
               </tr>
         </tbody>
@@ -593,7 +593,7 @@ const MainEng = () =>{
     //  web 端的 About
     (
     <div ref={aboutRef}>
-      <div className='flex items-center justify-center content-center flex-row md:bg-webaboutbg pl-20'> {/* 1106 的 flex */}
+      <div className='flex items-center justify-center content-center flex-row md:bg-webaboutbg pl-20 pt-12'> {/*  1106 的 flex */}
         <div>
           <img src={organization} className='w-[171pt] h-[14.5pt] mr-10' />
         </div>
