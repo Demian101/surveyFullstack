@@ -1,46 +1,45 @@
 import React, { useRef, useState } from "react";
 import { useMediaQuery } from 'react-responsive';
-import Button from "./Button";
+import {Button} from "./Button";
 import { AiOutlineMenu } from "react-icons/ai";
 
 // png
-import main_title from '../../assets/slices/main title@2x.png';
-import maintitle_phone from '../../assets/slices/maintitle-phone.png';
-import arrow from '../../assets/slices/arrow.png';
+import main_title from '../assets/slices/main title@2x.png';
+import maintitle_phone from '../assets/slices/maintitle-phone.png';
+import arrow from '../assets/slices/arrow.png';
 
-import location from '../../assets/slices/zhiyuandidian3@2x.png'
-import calendar from '../../assets/slices/Calendar@2x.png'
-import logo from '../../assets/slices/logo@2x.png';
-import menu from '../../assets/slices/menu.png';
-
-
-import date1106 from '../../assets/1106-phone.png'
-import date1107 from '../../assets/1107-phone.png'
-
-import CorpLianchuan from '../../assets/corps/CorpLianchuan.png'
-import corpLvcheng from '../../assets/corps/corpLvcheng.png'
-import corpTianhua from '../../assets/corps/corpTianhua.png'
-import CropDonggeng from '../../assets/corps/CropDonggeng.png'
-import CropZhonghua from '../../assets/corps/CropZhonghua.png'
-import CorpDeshang from '../../assets/corps/CorpDeshang.png'
-import CorpMirui from '../../assets/corps/CorpMirui.png'
-
-import organization from '../../assets/corps/organization.png'
-import MeetingBg from '../../assets/corps/MeetingBg.png'
-import Connect from '../../assets/corps/Connect.png'
-import livepng from '../../assets/corps/live.png'
-import weblive from '../../assets/corps/weblive.png'
+import location from '../assets/slices/zhiyuandidian3@2x.png'
+import calendar from '../assets/slices/Calendar@2x.png'
+import logo from '../assets/slices/logo@2x.png';
+import menu from '../assets/slices/menu.png';
 
 
-import Frame1 from '../../assets/Timelineslices/Frame1@2x.png';
-import Frame2 from '../../assets/Timelineslices/Frame2@2x.png';
-import triarrow from '../../assets/Timelineslices/triarrow.png';
+import date1106 from '../assets/1106-phone.png'
+import date1107 from '../assets/1107-phone.png'
+
+import CorpLianchuan from '../assets/corps/CorpLianchuan.png'
+import corpLvcheng from '../assets/corps/corpLvcheng.png'
+import corpTianhua from '../assets/corps/corpTianhua.png'
+import CropDonggeng from '../assets/corps/CropDonggeng.png'
+import CropZhonghua from '../assets/corps/CropZhonghua.png'
+import CorpDeshang from '../assets/corps/CorpDeshang.png'
+import CorpMirui from '../assets/corps/CorpMirui.png'
+
+import organization from '../assets/corps/organization.png'
+import MeetingBg from '../assets/corps/MeetingBg.png'
+import Connect from '../assets/corps/Connect.png'
+import livepng from '../assets/corps/live.png'
+import weblive from '../assets/corps/weblive.png'
 
 
-import MeetingArrange from '../../assets/Timelineslices/MeetingArrange.png';
-import round1 from '../../assets/Timelineslices/round1.png';
+import Frame1 from '../assets/Timelineslices/Frame1@2x.png';
+import Frame2 from '../assets/Timelineslices/Frame2@2x.png';
+import triarrow from '../assets/Timelineslices/triarrow.png';
+
+
+import MeetingArrange from '../assets/Timelineslices/MeetingArrange.png';
+import round1 from '../assets/Timelineslices/round1.png';
 import { useNavigate } from "react-router-dom";
-
 
 
 const Main = () =>{
@@ -629,11 +628,11 @@ const Main = () =>{
 
 
       {/* web 会议背景 */}
-      <div className='flex  justify-center content-center flex-row md:bg-webaboutbg text-gray-50 pl-[340px] pt-4 pb-4'> {/* 1106 的 flex */}
+      <div className='flex  justify-center content-center flex-row md:bg-webaboutbg text-gray-50 pl-[240px] py-6 pb-4'> {/* 1106 的 flex */}
         <div className='mr-20 pt-14'>
           <img src={MeetingBg} className='w-[115.5pt] h-[23pt]' />
         </div>
-          <div className='w-[700px]'>
+          <div className='w-[600px]'>
             <p> 合成生物学是现代科学最富前景的领域之一，是将生物科技领域基础研究转化为社会生产力的关键技术。天津大学是国内最早开展合成生物学研究的单位之一，是国内首个建立合成生物学专业硕士点、博士点以及本科生培养的单位。浙江省自 2019 年与天津大学签订战略合作，已在化工、应急医学、智能智造等多领域展开深入合作。 </p>
             <p className='pt-2'> 本次会议依托国家“科技强国”战略，浙江省与天津大学联袂举办合成生物学领域高水平会议，邀请了多位国内外学术界院士级专家、上市企业负责人及著名投资人共同探讨政产学研用各方协同，支持合成生物学研究，推动相关产业高质量发展，打造浙江省合成生物学高地。 </p>
             </div>
