@@ -7,7 +7,7 @@ const Button = (props) => {
   return (
     <>
     <button
-      className="bg-no-repeat text-white font-[Poppins] py-2 px-6 rounded-lg md:ml-44  duration-200"
+      className="bg-no-repeat text-white font-[Poppins] py-1 rounded-lg md:ml-44  duration-200"
       onClick={() => navigate("/form")}
     >
       <img src={logintakepartin} className='w-[120px] h-[41px]'/>

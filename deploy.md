@@ -622,7 +622,10 @@ cd /home/surveyFullstack/server  &&  npm run build && pm2 start ./src/index.js -
 
 sudo service nginx restart
 
-cp -r ./dist/img ./dist/assests
+cd ./dist
+cp -r img ./assets
+cp -r appbg ./assets
+cp -r webbg ./assets
 ```
 
 ```bash

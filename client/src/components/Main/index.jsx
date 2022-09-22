@@ -11,6 +11,8 @@ import arrow from '../../assets/slices/arrow.png';
 import location from '../../assets/slices/zhiyuandidian3@2x.png'
 import calendar from '../../assets/slices/Calendar@2x.png'
 import logo from '../../assets/slices/logo@2x.png';
+import menu from '../../assets/slices/menu.png';
+
 
 import date1106 from '../../assets/1106-phone.png'
 import date1107 from '../../assets/1107-phone.png'
@@ -27,6 +29,8 @@ import organization from '../../assets/corps/organization.png'
 import MeetingBg from '../../assets/corps/MeetingBg.png'
 import Connect from '../../assets/corps/Connect.png'
 import livepng from '../../assets/corps/live.png'
+import weblive from '../../assets/corps/weblive.png'
+
 
 import Frame1 from '../../assets/Timelineslices/Frame1@2x.png';
 import Frame2 from '../../assets/Timelineslices/Frame2@2x.png';
@@ -45,6 +49,8 @@ const Main = () =>{
     { name: "嘉宾", link: "/" },
   ];
   const navigate = useNavigate();
+
+  const topRef = useRef(null);
   const argRef = useRef(null);
   const guestRef = useRef(null);
   const aboutRef = useRef(null);
@@ -61,51 +67,69 @@ const Main = () =>{
   };
 
   console.log('isMobile', isMobile) 
+
+  const jumplink = () => {
+    const liveurl = "https://wx.vzan.com/live/page/9A17846543DDA7556F5DEAB8C5A8FF0A?topicid=262691401&shauid=P6sbCBC4MEGJA2TYmizZsg**&vprid=0&sharetstamp=1663328096048"
+    window.location.href = liveurl
+  }
+
   return (
-    <div className='w-screen h-auto bg-appbg md:bg-webbghome bg-contain bg-no-repeat mt-14 bg-clip-padding'>
+    <div className='w-screen h-auto bg-appbg md:bg-webbghome bg-contain bg-no-repeat mt-14 bg-clip-padding' ref={topRef}>
       {/* <NavBar {...argRef}/> */}
 
       {/* NavBar  */}
       {/* <div className="shadow-md z-20 w-full fixed top-0 left-0  bg-gradient-to-r from-indigo-800 via-purple-600 to-black"> */}
-      <div className="shadow-md z-20 w-full fixed top-0 left-0 bg-webaboutbg">
-        <div className="md:flex items-center justify-between py-4 md:px-10 px-7">
+      <div className="shadow-md w-full fixed top-0 left-0 bg-webaboutbg">
+        <div className="flex items-center justify-between md:px-10 py-3 px-7">
           
-          <img src={logo} className="w-1/2 h-auto md:w-1/4 md:h-auto md:pl-20" alt="logo" />
+          {/* 左上角 Logo */}
+          {/* <img src={logo} className="w-1/2 h-auto md:w-1/4 md:h-auto md:pl-20" alt="logo" /> */}
+          {isMobile ? 
+          <img src={logo} className="w-1/2 h-auto pb-2" alt="logo" />
+            :
+          <div><img src={logo} className="w-[264px] h-[69px] mr-20 ml-44" alt="logo" /></div> 
+          }
+          
           <div
             onClick={() => setOpen(!open)}
-            className="text-3xl absolute right-8 top-6 cursor-pointer md:hidden"
+            // className="text-4xl absolute right-8 top-10 cursor-pointer md:hidden"
+            className="text-4xl cursor-pointer md:hidden"
           >
-            <AiOutlineMenu className='text-white text-g' name={open ? "close" : "menu"} />
+            {/* <AiOutlineMenu className='text-white text-g' name={open ? "close" : "menu"} /> */}
+            <img src={menu} className='w-[24px] h-[22]px' name={open ? "close" : "menu"} />
           </div>
           
           <ul
-            className={`md:flex md:items-center md:pb-0 pb-4 rounded-md absolute md:static bg-white md:bg-inherit md:z-auto -z-40 left-0 w-full md:w-auto md:pl-0 pl-9  duration-75 transition-all  ease-in ${
-              open ? "top-16 " : "top-[-490px]"
+            className={`md:flex md:items-center md:pb-0 pb-4 rounded-md absolute md:static bg-gray-900 bg-opacity-90 md:bg-inherit md:z-auto -z-40 left-0 w-full md:w-auto md:pl-0 pl-9  duration-75 transition-all  ease-in ${
+              open ? " top-[55px]" : "top-[-490px]"
             }`}
           >
             
             <li className="md:ml-8 text-xl md:my-0 my-7">
-              <a href={"/"} className=" md:text-slate-50 text-slate-600  hover:text-gray-400 duration-500" >
-                {"首页"} </a>
+              {/* <a href={"/"} className="text-slate-50 hover:text-gray-400 duration-500" >
+                {"首页"} </a> */}
+              <button onClick={()=>scrollDown(topRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
+                首页 </button>
+
             </li>
             <li className="md:ml-8 text-xl md:my-0 my-7">
-              <button onClick={()=>scrollDown(argRef)} className=" md:text-slate-50 text-slate-600  hover:text-gray-400 duration-500" >
+              <button onClick={()=>scrollDown(argRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
                 会议安排 </button>
             </li>
 
 
             <li className="md:ml-8 text-xl md:my-0 my-7">
-              <button onClick={()=>scrollDown(liveRef)} className=" md:text-slate-50 text-slate-600  hover:text-gray-400 duration-500" >
+              <button onClick={()=>scrollDown(liveRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
                 直播 </button>
             </li>
 
             <li className="md:ml-8 text-xl md:my-0 my-7">
-              <button onClick={()=>scrollDown(aboutRef)} className=" md:text-slate-50 text-slate-600  hover:text-gray-400 duration-500" >
+              <button onClick={()=>scrollDown(aboutRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
                 关于 </button>
             </li>
 
             {/* <li className="md:ml-8 text-xl md:my-0 my-7">
-              <button onClick={()=>scrollDown(guestRef)} className=" md:text-slate-50 text-slate-600  hover:text-gray-400 duration-500" >
+              <button onClick={()=>scrollDown(guestRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
               嘉宾 </button>
             </li> */}
             
@@ -124,10 +148,12 @@ const Main = () =>{
       {/* 论坛 大海报 */}
       {isMobile ? 
         ( <div>
-            <img src={maintitle_phone} className="cursor-pointer w-4/5 mt-44 mx-10 md:w-9/12 md:mt-24 md:ml-36"  alt="logo" />
+            <img src={maintitle_phone} className="cursor-pointer w-4/5 mt-36 mx-10 md:w-9/12 md:mt-24 md:ml-36"  alt="logo" />
           </div>):(
-          <div>
-            <img src={main_title} className="cursor-pointer w-4/5 pt-20 mx-10 md:w-9/12 md:mt-24 md:ml-36"  alt="logo" />
+
+            // Web 端主图大海报
+          <div className='flex items-center justify-center align-middle content-center pr-4 mt-24  pt-20'>
+            <img src={main_title} className="cursor-pointer w-9/12"  alt="logo" />
            </div>
         )
       }
@@ -281,11 +307,11 @@ const Main = () =>{
     {/*
       *
       ****  Web 网页端  **************************************************************************
-      * 
+      *
       */}
     { !isMobile && (
     // 11.06 内容
-    <div className='bg-webbgschedule pt-24' ref={argRef}>
+    <div className='bg-webbgschedule pt-24 pb-24'  ref={argRef}>
       <div className='flex items-center justify-center content-center flex-col'> {/* 1106 的 flex */}
 
         <div className='relative' >
@@ -413,9 +439,23 @@ const Main = () =>{
 
    {/* 会议直播 */}
    {/* 修改直播图片大小的话， 直接修改下面的 py-96  */}
-   <div className='grid grid-cols-1 items-center justify-items-center py-60 md:bg-appBglive md:bg-contain bg-appBglive bg-contain' ref={liveRef}>
-      <div><img src={livepng} className='w-[246pt] h-[239pt]'/></div>
-      <div><p className='pt-2 text-gray-100 text-lg font-thin'>观看会议直播</p></div>
+   <div className='grid grid-cols-1 items-center justify-items-center py-60 md:bg-appBglive md:bg-contain bg-appBglive bg-contain' 
+    ref={liveRef}
+    >
+      { isMobile ? (
+        <><div><img src={livepng} className='w-[246pt] h-[239pt] cursor-pointer'
+              onClick = {jumplink} /></div>
+      <div><p className='pt-2 text-gray-100 text-lg font-thin cursor-pointer'
+              onClick = {jumplink} >观看会议直播</p></div>
+              </>)
+              :
+      (
+        <><div><img src={weblive} className='w-[838px] h-[434px] cursor-pointer'
+              onClick = {jumplink} /></div>
+      <div><p className='pt-2 text-gray-100 text-lg font-thin cursor-pointer'
+              onClick = {jumplink} >观看会议直播</p></div>
+              </>
+      )}
     </div>
 
 
@@ -491,23 +531,23 @@ const Main = () =>{
       <div className='col-span-3'>
         <div>panqing@zj-th.com.cn</div>
       </div>
-      <div>协办单位 </div>
+      {/* <div>协办单位 </div>
       <div className='col-span-3'>
         <div>绿城科技产业服务集团有限公司</div>
-      </div>
+      </div> */}
     </div>
     </div>)
+
+
      :
 
 
 
-
-
-    //  Connect
+    //  web 端的关于
     (
-    <div className=''>
+    <div ref={aboutRef}>
       <div className='flex items-center justify-center content-center flex-row md:bg-webaboutbg'> {/* 1106 的 flex */}
-        <div className=''>
+        <div>
           <img src={organization} className='w-[102.5pt] h-[24pt] mr-10' />
         </div>
 
@@ -522,7 +562,7 @@ const Main = () =>{
       </div>
 
 
-
+     {/* web */}
       <div className='flex  justify-center flex-row  pl-[24px] pt-14 items-end'>
         <table className="">
           <tbody className="">
@@ -540,7 +580,6 @@ const Main = () =>{
                 </div>
               </td>
             </tr>
-            
             <tr> 
               <td className="pt-[40px] text-left"> 协办单位：</td>
               <td className="text-left pt-1 pl-8">
@@ -589,12 +628,32 @@ const Main = () =>{
       </div>
 
 
-      <div className='flex  justify-center content-center flex-row md:bg-webaboutbg'> {/* 1106 的 flex */}
+      {/* web 会议背景 */}
+      <div className='flex  justify-center content-center flex-row md:bg-webaboutbg text-gray-50 pl-[340px] pt-4 pb-4'> {/* 1106 的 flex */}
         <div className='mr-20 pt-14'>
+          <img src={MeetingBg} className='w-[115.5pt] h-[23pt]' />
+        </div>
+          <div className='w-[700px]'>
+            <p> 合成生物学是现代科学最富前景的领域之一，是将生物科技领域基础研究转化为社会生产力的关键技术。天津大学是国内最早开展合成生物学研究的单位之一，是国内首个建立合成生物学专业硕士点、博士点以及本科生培养的单位。浙江省自 2019 年与天津大学签订战略合作，已在化工、应急医学、智能智造等多领域展开深入合作。 </p>
+            <p className='pt-2'> 本次会议依托国家“科技强国”战略，浙江省与天津大学联袂举办合成生物学领域高水平会议，邀请了多位国内外学术界院士级专家、上市企业负责人及著名投资人共同探讨政产学研用各方协同，支持合成生物学研究，推动相关产业高质量发展，打造浙江省合成生物学高地。 </p>
+            </div>
+        {/* <div className='grid grid-cols-4 gap-4 pl-[30px] text-gray-50 text-left font-light mt-14 mb-10'>
+          <div className='col col-start-2 col-span-3'>
+            <p> 合成生物学是现代科学最富前景的领域之一，是将生物科技领域基础研究转化为社会生产力的关键技术。天津大学是国内最早开展合成生物学研究的单位之一，是国内首个建立合成生物学专业硕士点、博士点以及本科生培养的单位。浙江省自 2019 年与天津大学签订战略合作，已在化工、应急医学、智能智造等多领域展开深入合作。 </p>
+            <p className='pt-2'> 本次会议依托国家“科技强国”战略，浙江省与天津大学联袂举办合成生物学领域高水平会议，邀请了多位国内外学术界院士级专家、上市企业负责人及著名投资人共同探讨政产学研用各方协同，支持合成生物学研究，推动相关产业高质量发展，打造浙江省合成生物学高地。 </p>
+          </div>          
+        </div> */}
+
+      </div>
+
+
+      {/* web 联系地址*/}
+      <div className='flex justify-center content-center flex-row md:bg-webaboutbg'> {/* 1106 的 flex */}
+        <div className='mr-20 pt-8'>
           <img src={Connect} className='w-[115.5pt] h-[23pt]' />
         </div>
 
-        <div className='grid grid-cols-4 gap-4 pl-[30px] text-gray-50 text-left font-light mt-14 mb-10'>
+        <div className='grid grid-cols-4 gap-4 pl-[30px] text-gray-50 text-left font-light mt-8 mb-10'>
           <div>会议酒店 </div>
           <div className='col-span-3'>
             <div>杭州龙湖皇冠假日酒店</div>
@@ -615,13 +674,12 @@ const Main = () =>{
           <div className='col-span-3'>
             <div>panqing@zj-th.com.cn</div>
           </div>
-          <div>协办单位 </div>
+          {/* <div>协办单位 </div>
           <div className='col-span-3'>
             <div>绿城科技产业服务集团有限公司</div>
-          </div>
+          </div> */}
         </div>
       </div>
-
     </div>
     )
     }  {/*关于*/} 
