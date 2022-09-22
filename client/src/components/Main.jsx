@@ -664,14 +664,15 @@ const Main = () =>{
 
 
       {/* web 会议背景 */}
-      <div className='flex  justify-center content-center flex-row md:bg-webaboutbg text-gray-50 pl-[240px] py-6 pb-4'> {/* 1106 的 flex */}
-        <div className='mr-20 pt-14'>
+      <div className='flex justify-center content-center flex-row md:bg-webaboutbg text-gray-50 pl-[240px] py-6 pb-4 pr-60'> {/* 1106 的 flex */}
+        <div className='pt-14'>  {/* mr-20 pt-14 */}
           <img src={MeetingBg} className='w-[115.5pt] h-[23pt]' />
         </div>
-          <div className='w-[600px]'>
+        <div> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div>
+        <div className='w-96 pl-[64px]'>
             <p> 合成生物学是现代科学最富前景的领域之一，是将生物科技领域基础研究转化为社会生产力的关键技术。天津大学是国内最早开展合成生物学研究的单位之一，是国内首个建立合成生物学专业硕士点、博士点以及本科生培养的单位。浙江省自 2019 年与天津大学签订战略合作，已在化工、应急医学、智能智造等多领域展开深入合作。 </p>
             <p className='pt-2'> 本次会议依托国家“科技强国”战略，浙江省与天津大学联袂举办合成生物学领域高水平会议，邀请了多位国内外学术界院士级专家、上市企业负责人及著名投资人共同探讨政产学研用各方协同，支持合成生物学研究，推动相关产业高质量发展，打造浙江省合成生物学高地。 </p>
-            </div>
+        </div>
         {/* <div className='grid grid-cols-4 gap-4 pl-[30px] text-gray-50 text-left font-light mt-14 mb-10'>
           <div className='col col-start-2 col-span-3'>
             <p> 合成生物学是现代科学最富前景的领域之一，是将生物科技领域基础研究转化为社会生产力的关键技术。天津大学是国内最早开展合成生物学研究的单位之一，是国内首个建立合成生物学专业硕士点、博士点以及本科生培养的单位。浙江省自 2019 年与天津大学签订战略合作，已在化工、应急医学、智能智造等多领域展开深入合作。 </p>
