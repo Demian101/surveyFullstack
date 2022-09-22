@@ -248,7 +248,7 @@ const MainEng = () =>{
         <span className='text-[22px] pb-8 text-slate-50 inline'> Crowne Plaza Hangzhou HEDA </span>
       </div>
       <table className="table-fixed">
-        <tbody className=" text-white text-left px-2 text-sm">
+        <tbody className=" text-white px-2 text-sm">    {/* text-left  */}
         <tr> 
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 08:30-09:00</td>
                 <td className="pl-1 pb-3">Registration</td>

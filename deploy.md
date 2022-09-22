@@ -629,12 +629,21 @@ cp -r webbg ./assets
 ```
 
 ```bash
-git fetch origin main:temp
+git add . && git commit -m 'update' && git push origin main
+sodaoo
+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
+
+cd /home/surveyFullstack && git fetch origin main:temp
 git diff temp
 # 合并temp分支到本地的master分支
-git merge temp      
+git merge temp -m 'xx'
 # 删除temp分支
 git branch -d temp  
+
+cd ./dist
+cp -r img ./assets
+cp -r appbg ./assets
+cp -r webbg ./assets
 ```
 
 
