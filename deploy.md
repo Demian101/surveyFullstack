@@ -631,8 +631,10 @@ cp -r webbg ./assets
 ```bash
 git fetch origin main:temp
 git diff temp
-git merge temp      # 合并temp分支到本地的master分支
-git branch -d temp  # 删除temp分支
+# 合并temp分支到本地的master分支
+git merge temp      
+# 删除temp分支
+git branch -d temp  
 ```
 
 

@@ -43,9 +43,10 @@ const HomePage = () => {
     setLanguage(i18next.language)
   },[i18next.language]);
 
+  console.log('home page language', language )
   return(
 
-    (language === 'en-US') ?
+    (language === 'en-US' || language === 'en') ?
       (<MainEng />)
       :
       (<Main />)

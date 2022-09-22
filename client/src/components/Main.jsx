@@ -147,7 +147,7 @@ const Main = () =>{
       {/* 论坛 大海报 */}
       {isMobile ? 
         ( <div>
-            <img src={maintitle_phone} className="cursor-pointer w-4/5 mt-36 mx-10 md:w-9/12 md:mt-24 md:ml-36"  alt="logo" />
+            <img src={maintitle_phone} className="cursor-pointer w-4/5 mt-24 mx-10 md:w-9/12 md:mt-24 md:ml-36"  alt="logo" />
           </div>):(
 
             // Web 端主图大海报
@@ -191,7 +191,7 @@ const Main = () =>{
       </div>
 
       {isMobile && 
-        <div className='pt-4'
+        <div className='pt-4 mb-36'
           onClick={()=>scrollDown(argRef, false)}>
           <span className='text-white px-14 pt-4 mt-4 '> 会议议程
             <img src={arrow} className='ml-1 w-[8pt] h-[5pt] inline' />
@@ -438,7 +438,7 @@ const Main = () =>{
 
    {/* 会议直播 */}
    {/* 修改直播图片大小的话， 直接修改下面的 py-96  */}
-   <div className='grid grid-cols-1 items-center justify-items-center py-60 md:bg-appBglive md:bg-contain bg-appBglive bg-contain' 
+   <div className='grid grid-cols-1 items-center justify-items-center py-52 md:bg-appBglive md:bg-contain bg-appBglive bg-contain' 
     ref={liveRef}
     >
       { isMobile ? (

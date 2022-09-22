@@ -146,7 +146,7 @@ const MainEng = () =>{
       {/* 论坛 大海报 */}
       {isMobile ? 
         ( <div>
-            <img src={maintitle_phone} className="cursor-pointer w-4/5 mt-36 mx-10 md:w-9/12 md:mt-24 md:ml-36"  alt="logo" />
+            <img src={maintitle_phone} className="cursor-pointer w-4/5 mt-24 mx-10 md:w-9/12 md:mt-24 md:ml-36"  alt="logo" />
           </div>):(
 
             // Web 端主图大海报
@@ -210,7 +210,7 @@ const MainEng = () =>{
         <span className='text-[22px] pb-8 text-slate-50 inline'> Smart Valley </span>
       </div>
       <table className="table-fixed ">
-        <tbody className=" text-white text-left px-2 text-base">
+        <tbody className=" text-white text-left px-2 text-sm">
               <tr > 
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' />12:00-14:30</td>
                 <td className="pl-2 pb-3">Registration</td>
@@ -248,76 +248,81 @@ const MainEng = () =>{
         <span className='text-[22px] pb-8 text-slate-50 inline'> Crowne Plaza Hangzhou HEDA </span>
       </div>
       <table className="table-fixed">
-        <tbody className=" text-white text-left px-2 text-base">
-              <tr> 
+        <tbody className=" text-white text-left px-2 text-sm">
+        <tr> 
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 08:30-09:00</td>
-                <td className="pl-2 pb-3">Registration</td>
+                <td className="pl-1 pb-3">Registration</td>
               </tr>
               <tr>
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 09:00-10:00</td>
-                <td className="pl-2 pb-3">
-                  <p>Academician's Speech on</p>
-                  <p>Chemical Synthetic Biology</p>
+                <td className="pl-1 pb-3">
+                  <p>Academician's Speech</p>
+                  <p>on Chemical Synthetic</p>
+                  <p> Biology</p>
                 </td>
               </tr>
               <tr>
                 <td className="pb-3"> <img src={round1} className='invisible inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 10:00-10:15</td>
-                <td className="pl-2 pb-3 italic">Coffee Break</td>
+                <td className="pl-1 pb-3 italic">Coffee Break</td>
               </tr>
               <tr>
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 10:15-11:00</td>
-                <td className="pl-2 pb-3">
-                  <p>Entrepreneur's Speech on </p>
-                  <p>Chemical Synthetic Biology</p>
+                <td className="pl-1 pb-3">
+                  <p>Entrepreneur's Speech</p>
+                  <p>on Chemical Synthetic </p>
+                  <p>Biology</p>
                 </td>
               </tr>
               <tr>
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 11:00-12:00</td>
-                <td className="pl-2 pb-3">
+                <td className="pl-1 pb-3">
                   <p>Academic Frontier of</p>
                   <p>Chemical Synthetic Biology</p>
                 </td>
               </tr>
               <tr>
                 <td className="pb-3"> <img src={round1} className='invisible inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 12:00-12:15</td>
-                <td className="pl-2 pb-3 italic">Group photograph</td>
+                <td className="pl-1 pb-3 italic">Group photograph</td>
               </tr>
               <tr>
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 12:15-13:30</td>
-                <td className="pl-2 pb-3">Lunch</td>
+                <td className="pl-1 pb-3">Lunch</td>
               </tr>
               <tr>
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 13:30-14:30</td>
-                <td className="pl-2 pb-3">
-                  <p>Academician's Speech on</p>
-                  <p>Chemical Synthetic Biology</p>
+                <td className="pl-1 pb-3">
+                  <p>Academician's Speech </p>
+                  <p>on Chemical Synthetic </p>
+                  <p>Biology</p>
                 </td>
               </tr>
               <tr>
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 14:30-16:30</td>
-                <td className="pl-2 pb-3">
-                  <p>Entrepreneur's Speech on </p>
-                  <p>Chemical Synthetic Biology</p>
+                <td className="pl-1 pb-3">
+                  <p>Entrepreneur's Speech</p>
+                  <p> on  Chemical Synthetic </p>
+                  <p> Biology</p>
                 </td>
               </tr>
               <tr>
                 <td className="pb-3"> <img src={round1} className='invisible inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 16:30-16:45</td>
-                <td className="pl-2 pb-3 italic">Coffee Break</td>
+                <td className="pl-1 pb-3 italic">Coffee Break</td>
               </tr>
               <tr>
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 16:45-18:00</td>
-                <td className="pl-2 pb-3">
-                  <p>Roundtable Forum on </p>
-                  <p>Chemical Synthetic Biology Investment</p>
+                <td className="pl-1 pb-3">
+                  <p>Roundtable Forum on  </p>
+                  <p>Chemical Synthetic </p>
+                  <p>  Biology Investment</p>
                 </td>
               </tr>
               <tr>
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 18:00-19:00</td>
-                <td className="pl-2 pb-3">Dinner</td>
+                <td className="pl-1 pb-3">Dinner</td>
               </tr>
               <tr>
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' /> 19:00-22:00</td>
-                <td className="pl-2 pb-3">Sub-Fourm</td>
+                <td className="pl-1 pb-3">Sub-Fourm</td>
               </tr>
         </tbody>
       </table>
@@ -484,7 +489,7 @@ const MainEng = () =>{
 
    {/* 会议直播 */}
    {/* 修改直播图片大小的话， 直接修改下面的 py-96  */}
-   <div className='grid grid-cols-1 items-center justify-items-center py-60 md:bg-appBglive md:bg-contain bg-appBglive bg-contain' 
+   <div className='grid grid-cols-1 items-center justify-items-center  py-52  md:bg-appBglive md:bg-contain bg-appBglive bg-contain' 
     ref={liveRef}
     >
       { isMobile ? (
