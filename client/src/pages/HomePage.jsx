@@ -2,6 +2,7 @@
 import React, {useEffect, useState} from "react";
 import Main from '../components/Main';
 import MainEng from '../components/MainEng';
+import Select from '../components/Select';
 
 
 import i18next, { use } from 'i18next';
@@ -45,12 +46,10 @@ const HomePage = () => {
 
   console.log('home page language', language )
   return(
-
     (language === 'en-US' || language === 'en') ?
       (<MainEng />)
       :
       (<Main />)
-    
   )
 };
 

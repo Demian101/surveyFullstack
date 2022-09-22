@@ -41,8 +41,17 @@ import MeetingArrange from '../assets/Timelineslices/MeetingArrange.png';
 import round1 from '../assets/Timelineslices/round1.png';
 import { useNavigate } from "react-router-dom";
 
+import logintakepartin from '../assets/slices/logintakepartin.png';
+import MainEng from './MainEng';
 
 const Main = () =>{
+  const [lang, setLang] = useState('zh')
+  const onChangeHandler = (e) => {
+    setLang(e.target.value)
+  }
+
+
+
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
     let Links = [
     { name: "嘉宾", link: "/" },
@@ -65,13 +74,17 @@ const Main = () =>{
     });
   };
 
-  console.log('isMobile', isMobile) 
+
 
   const jumplink = () => {
     const liveurl = "https://wx.vzan.com/live/page/9A17846543DDA7556F5DEAB8C5A8FF0A?topicid=262691401&shauid=P6sbCBC4MEGJA2TYmizZsg**&vprid=0&sharetstamp=1663328096048"
     window.location.href = liveurl
   }
 
+
+  if( lang==='en' ){
+    return( <MainEng />)
+  }
   return (
     <div className='w-screen h-auto bg-appbg md:bg-webbghome bg-contain bg-no-repeat mt-14 bg-clip-padding' ref={topRef}>
       {/* <NavBar {...argRef}/> */}
@@ -81,13 +94,18 @@ const Main = () =>{
       <div className="shadow-md w-full fixed top-0 left-0 bg-webaboutbg">
         <div className="flex items-center justify-between md:px-10 py-3 px-7">
           
-          {/* 左上角 Logo */}
-          {/* <img src={logo} className="w-1/2 h-auto md:w-1/4 md:h-auto md:pl-20" alt="logo" /> */}
-          {isMobile ? 
-          <img src={logo} className="w-1/2 h-auto pb-2" alt="logo" />
-            :
-          <div><img src={logo} className="w-[264px] h-[69px] mr-20 ml-44" alt="logo" /></div> 
-          }
+          <div>
+            <img src={logo} className={`${isMobile ? "w-7/12 h-auto pb-2": "w-[264px] h-[69px] mr-20 ml-44"}`} alt="logo" />
+          </div>
+          <div>
+            <select
+              className={`${isMobile ? 'visible' : 'hidden'} bg-inherit text-gray-50 text-sm mr-2`}
+              defaultValue="zh"
+              onChange={(e) => onChangeHandler(e)} >
+              <option  value="zh">中文</option>
+              <option value="en">Eng/</option>
+            </select>
+          </div>
           
           <div
             onClick={() => setOpen(!open)}
@@ -132,8 +150,26 @@ const Main = () =>{
               嘉宾 </button>
             </li> */}
             
-          <Button> 注册参会 </Button>
-          
+
+        <div className='flex md:flex-row md:items-center md:justify-between md:content-center text-white py-1 rounded-lg md:ml-44  duration-200'>
+          <select
+            className={`${isMobile ? 'hidden' : 'visible'} bg-inherit text-gray-50 text-lg mr-2`}
+            defaultValue="zh"
+            onChange={(e) => onChangeHandler(e)} >
+            <option  value="zh">zh</option>
+            <option value="en">Eng</option>
+          </select>
+
+          <button
+            className="bg-no-repeat "
+            onClick={() => navigate("/form")}
+          >
+            <img src={logintakepartin} className='w-[120px] h-[41px]'/>
+            {/* {props.children} */}
+          </button>
+        </div>
+
+                
           {/* <button className='w-10 z-30 h-6'>注册参会</button> */}
           </ul>
           
@@ -191,7 +227,7 @@ const Main = () =>{
       </div>
 
       {isMobile && 
-        <div className='pt-4 mb-36'
+        <div className='pt-4 mb-36 '
           onClick={()=>scrollDown(argRef, false)}>
           <span className='text-white px-14 pt-4 mt-4 '> 会议议程
             <img src={arrow} className='ml-1 w-[8pt] h-[5pt] inline' />

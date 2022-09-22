@@ -40,8 +40,10 @@ i18next.use(LanguageDetector).init({
 
 
 
-const From = () => {
-  const options = [
+const From = (props) => {
+
+  // 如果需要自己判断的话，原来的逻辑
+  const options = [ 
     { value: 'zh-CN', label: 'zh-CN' },
     { value: 'en-US', label: 'en-US' },
   ]
@@ -63,14 +65,21 @@ const From = () => {
     setSelectDefault({ value: 'zh-CN', label: 'zh-CN' })
   },[language])
 
-  const [showModal, setShowModal] = useState(false);
   const [postResult, setPostResult] = useState({'status':null, 'res':null});
   const { register, errors, handleSubmit } = useForm();
   const [data, setData] = useState();
 
+
+  /* 
+  console.log(props?.location?.state?.lang)
+  const [language, setLanguage] = useState()
+  useEffect(()=>{
+    setLanguage(props.location.state.lang)
+  },[props.location.state.lang]);
+    */
+
   const onSubmit = async (data) => {    
     setData(data);
-    setShowModal(true)
     console.log('setData',data)
   };
 

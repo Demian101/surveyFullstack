@@ -35,13 +35,19 @@ import weblive from '../assets/corps/weblive.png'
 import Frame1 from '../assets/Timelineslices/Frame1@2x.png';
 import Frame2 from '../assets/Timelineslices/Frame2@2x.png';
 import triarrow from '../assets/Timelineslices/triarrow.png';
+import logintakepartinEn from '../assets/slices/logintakepartinEn.png';
 
 
 import round1 from '../assets/Timelineslices/round1.png';
 import { useNavigate } from "react-router-dom";
-
+import Main from './Main';
 
 const MainEng = () =>{
+  const [lang, setLang] = useState('en')
+  const onChangeHandler = (e) => {
+    setLang(e.target.value)
+  }
+
   const isMobile = useMediaQuery({ query: `(max-width: 760px)` });
     let Links = [
     { name: "嘉宾", link: "/" },
@@ -64,13 +70,15 @@ const MainEng = () =>{
     });
   };
 
-  console.log('isMobile', isMobile) 
 
   const jumplink = () => {
     const liveurl = "https://wx.vzan.com/live/page/9A17846543DDA7556F5DEAB8C5A8FF0A?topicid=262691401&shauid=P6sbCBC4MEGJA2TYmizZsg**&vprid=0&sharetstamp=1663328096048"
     window.location.href = liveurl
   }
 
+  if( lang==='zh' ){
+    return( <Main />)
+  }
   return (
     <div className='w-screen h-auto bg-appbg md:bg-webbghome bg-contain bg-no-repeat mt-14 bg-clip-padding' ref={topRef}>
       {/* <NavBar {...argRef}/> */}
@@ -80,14 +88,19 @@ const MainEng = () =>{
       <div className="shadow-md w-full fixed top-0 left-0 bg-webaboutbg">
         <div className="flex items-center justify-between md:px-10 py-3 px-7">
           
-          {/* 左上角 Logo */}
-          {/* <img src={logo} className="w-1/2 h-auto md:w-1/4 md:h-auto md:pl-20" alt="logo" /> */}
-          {isMobile ? 
-          <img src={logo} className="w-1/2 h-auto pb-2" alt="logo" />
-            :
-          <div><img src={logo} className="w-[264px] h-[69px] mr-20 ml-44" alt="logo" /></div> 
-          }
-          
+          <div>
+            <img src={logo} className={`${isMobile ? "w-7/12 h-auto pb-2": "w-[264px] h-[69px] mr-20 ml-44"}`} alt="logo" />
+          </div>
+          <div>
+            <select
+              className={`${isMobile ? 'visible' : 'hidden'} bg-inherit text-gray-50 text-sm mr-2`}
+              defaultValue="en"
+              onChange={(e) => onChangeHandler(e)} >
+              <option  value="zh">zh</option>
+              <option value="en">Eng</option>
+            </select>
+          </div>
+
           <div
             onClick={() => setOpen(!open)}
             // className="text-4xl absolute right-8 top-10 cursor-pointer md:hidden"
@@ -96,47 +109,61 @@ const MainEng = () =>{
             {/* <AiOutlineMenu className='text-white text-g' name={open ? "close" : "menu"} /> */}
             <img src={menu} className='w-[24px] h-[22]px' name={open ? "close" : "menu"} />
           </div>
-          
-          <ul
-            className={`md:flex md:items-center md:pb-0 pb-4 rounded-md absolute md:static bg-gray-900 bg-opacity-90 md:bg-inherit md:z-auto -z-40 left-0 w-full md:w-auto md:pl-0 pl-9  duration-75 transition-all  ease-in ${
-              open ? " top-[55px]" : "top-[-490px]"
-            }`}
-          >
-            
-            <li className="md:ml-8 text-xl md:my-0 my-7">
-              {/* <a href={"/"} className="text-slate-50 hover:text-gray-400 duration-500" >
-                {"首页"} </a> */}
-              <button onClick={()=>scrollDown(topRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
-              Home </button>
-
-            </li>
-            <li className="md:ml-8 text-xl md:my-0 my-7">
-              <button onClick={()=>scrollDown(argRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
-              Agenda </button>
-            </li>
 
 
-            <li className="md:ml-8 text-xl md:my-0 my-7">
-              <button onClick={()=>scrollDown(liveRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
-              Live stream </button>
-            </li>
 
-            <li className="md:ml-8 text-xl md:my-0 my-7">
-              <button onClick={()=>scrollDown(aboutRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
-              About us </button>
-            </li>
+            <ul
+              className={`md:flex md:items-center md:pb-0 pb-4 rounded-md absolute md:static bg-gray-900 bg-opacity-90 md:bg-inherit md:z-auto -z-40 left-0 w-full md:w-auto md:pl-0 pl-9  duration-75 transition-all  ease-in ${
+                open ? " top-[55px]" : "top-[-490px]"
+              }`}
+            >
+              <li className="md:ml-8 text-xl md:my-0 my-7">
+                {/* <a href={"/"} className="text-slate-50 hover:text-gray-400 duration-500" >
+                  {"首页"} </a> */}
+                <button onClick={()=>scrollDown(topRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
+                Home </button>
 
-            {/* <li className="md:ml-8 text-xl md:my-0 my-7">
-              <button onClick={()=>scrollDown(guestRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
-              嘉宾 </button>
-            </li> */}
-            
-          <ButtonEng> Register </ButtonEng>
-          
-          {/* <button className='w-10 z-30 h-6'>注册参会</button> */}
-          </ul>
-          
-      </div>
+              </li>
+              <li className="md:ml-8 text-xl md:my-0 my-7">
+                <button onClick={()=>scrollDown(argRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
+                Agenda </button>
+              </li>
+
+
+              <li className="md:ml-8 text-xl md:my-0 my-7">
+                <button onClick={()=>scrollDown(liveRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
+                Live stream </button>
+              </li>
+
+              <li className="md:ml-8 text-xl md:my-0 my-7">
+                <button onClick={()=>scrollDown(aboutRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
+                About us </button>
+              </li>
+
+              {/* <li className="md:ml-8 text-xl md:my-0 my-7">
+                <button onClick={()=>scrollDown(guestRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
+                嘉宾 </button>
+              </li> */}
+                
+              <div className='flex md:flex-row md:items-center md:justify-between md:content-center text-white py-1 rounded-lg md:ml-44  duration-200'>
+                <select
+                  className={`${isMobile ? 'hidden' : 'visible'} bg-inherit text-gray-50 text-lg mr-2`}
+                  defaultValue="en"
+                  onChange={(e) => onChangeHandler(e)} >
+                  <option  value="zh">zh</option>
+                  <option value="en">Eng</option>
+                </select>
+
+                <button
+                  className="bg-no-repeat "
+                  onClick={() => navigate("/form", { state: { lang: lang }})}
+                >
+                  <img src={logintakepartinEn} className='w-[120px] h-[41px]'/>
+                  {/* {props.children} */}
+                </button>
+              </div>
+            </ul>
+          </div>
     </div>   {/* NavBar */}
 
 
@@ -184,15 +211,15 @@ const MainEng = () =>{
       {/* 注册参会按钮 */}
       <div className='md:flex md:justify-center pt-10 px-10 md:mb-5'>
         <button className='px-6 py-3 bg-gradient bg-no-repeat rounded-md shadow-2xl text-lg text-black w-[160px] h-[61px]'
-           onClick={()=> navigate("/form")}>
+           onClick={()=> navigate("/form", { state: { lang: lang }})}>
             Register
         </button>
       </div>
 
       {isMobile && 
-        <div className='pt-4'
+        <div className='pt-4 pb-32'
           onClick={()=>scrollDown(argRef, false)}>
-          <span className='text-white px-14 pt-4 mt-4 '> Agenda
+          <span className='text-white px-14 pt-4 mt-4 '>  Agenda
             <img src={arrow} className='ml-1 w-[8pt] h-[5pt] inline' />
           </span>
         </div>
@@ -218,7 +245,7 @@ const MainEng = () =>{
               <tr>
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt]' />14:30-15:00</td>
                 <td className="pl-2  pb-3">
-                  <p>Opening Ceremony &  </p>
+                  <p>Opening Ceremony& </p>
                   <p>Leader's Speech </p>
                 </td>
               </tr>
@@ -248,8 +275,8 @@ const MainEng = () =>{
         <span className='text-[22px] pb-8 text-slate-50 inline'> Crowne Plaza Hangzhou HEDA </span>
       </div>
       <table className="table-fixed">
-        <tbody className=" text-white px-2 text-sm">    {/* text-left  */}
-        <tr> 
+        <tbody className=" text-white px-2 text-sm">
+          <tr> 
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 08:30-09:00</td>
                 <td className="pl-1 pb-3">Registration</td>
               </tr>
@@ -300,7 +327,7 @@ const MainEng = () =>{
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 14:30-16:30</td>
                 <td className="pl-1 pb-3">
                   <p>Entrepreneur's Speech</p>
-                  <p> on  Chemical Synthetic </p>
+                  <p> on Chemical Synthetic </p>
                   <p> Biology</p>
                 </td>
               </tr>
@@ -311,9 +338,9 @@ const MainEng = () =>{
               <tr>
                 <td className="pb-3"> <img src={round1} className='inline pb-1 pr-1 w-[8pt] h-[8pt] text-right' /> 16:45-18:00</td>
                 <td className="pl-1 pb-3">
-                  <p>Roundtable Forum on  </p>
+                  <p>Roundtable Forum on</p>
                   <p>Chemical Synthetic </p>
-                  <p>  Biology Investment</p>
+                  <p>Biology Investment</p>
                 </td>
               </tr>
               <tr>

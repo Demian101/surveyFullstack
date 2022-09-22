@@ -633,12 +633,19 @@ git add . && git commit -m 'update' && git push origin main
 sodaoo
 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
 
+ssh root@39.105.169.246
+ALYZFXq!*985
+
 cd /home/surveyFullstack && git fetch origin main:temp
 git diff temp
 # 合并temp分支到本地的master分支
 git merge temp -m 'xx'
 # 删除temp分支
 git branch -d temp  
+
+
+cd /home/surveyFullstack/client &&  npm run build 
+
 
 cd ./dist
 cp -r img ./assets
