@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteForm = exports.getInfo = exports.postInfo = void 0;
 var Form_1 = __importDefault(require("../models/Form"));
 var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name_1, employedInstitution, position, email, tel, institution, participation, form_, savedForm, err_1;
+    var _a, name_1, employedInstitution, position, email, tel, institution, participation, num, isNeedHotel, roomNum, checkInDate, form_, savedForm, err_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -50,7 +50,7 @@ var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void
                 if (!req.body.name || !req.body.email) {
                     res.status(500).json({ "Message": "Pls write name or email!" });
                 }
-                _a = req.body, name_1 = _a.name, employedInstitution = _a.employedInstitution, position = _a.position, email = _a.email, tel = _a.tel, institution = _a.institution, participation = _a.participation;
+                _a = req.body, name_1 = _a.name, employedInstitution = _a.employedInstitution, position = _a.position, email = _a.email, tel = _a.tel, institution = _a.institution, participation = _a.participation, num = _a.num, isNeedHotel = _a.isNeedHotel, roomNum = _a.roomNum, checkInDate = _a.checkInDate;
                 console.log('postInfo - req.body: ', req.body);
                 form_ = new Form_1.default({
                     name: name_1,
@@ -60,6 +60,10 @@ var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void
                     tel: tel,
                     institution: institution,
                     participation: participation,
+                    num: num,
+                    isNeedHotel: isNeedHotel,
+                    roomNum: roomNum,
+                    checkInDate: checkInDate.toString(),
                 });
                 return [4 /*yield*/, form_.save()];
             case 1:
@@ -90,7 +94,8 @@ var getInfo = function (req, res, next) { return __awaiter(void 0, void 0, void 
                 return [3 /*break*/, 3];
             case 2:
                 err_2 = _a.sent();
-                console.log("error: ------- ", err_2);
+                //  console.log("error: ------- ", err);
+                res.status(500).json({ message: "Something went wrong" });
                 return [3 /*break*/, 3];
             case 3: return [2 /*return*/];
         }
@@ -119,7 +124,8 @@ var deleteForm = function (req, res) { return __awaiter(void 0, void 0, void 0, 
             case 4: return [3 /*break*/, 6];
             case 5:
                 err_3 = _a.sent();
-                console.log(err_3);
+                // console.log(err)
+                res.status(500).send({ message: "Something goes wrong" });
                 return [3 /*break*/, 6];
             case 6: return [2 /*return*/];
         }

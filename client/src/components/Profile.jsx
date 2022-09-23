@@ -76,7 +76,7 @@ const Profile = () => {
             <div className="px-5 py-4 border-b font-extrabold border-gray-100">
                 <div className="font-semibold text-gray-800">报名表单 </div>
             </div>
-            <button className='mx-2 my-1 py-2 px-1 bg-gray-300 rounded'
+            <button className='mx-2 my-1 h-8 px-4 hover:bg-gray-400 bg-gray-300 rounded'
               onClick={() => downloadExcel(postResult.res)}> 导出表单 </button>
             
           </div>
@@ -85,7 +85,6 @@ const Profile = () => {
             <table className="table-auto w-full">
             <thead className="text-xs font-semibold uppercase text-gray-400 bg-gray-50">
               <tr>
-                <th></th>
                 <th className="p-2">
                   <div className="font-semibold text-left">姓名</div>
                 </th>
@@ -107,6 +106,18 @@ const Profile = () => {
                 <th className="p-2">
                   <div className="font-semibold text-center">参会方式</div>
                 </th>
+                <th className="p-2">
+                  <div className="font-semibold text-center">随行人数</div>
+                </th>
+                <th className="p-2">
+                  <div className="font-semibold text-center">酒店预订</div>
+                </th>
+                <th className="p-2">
+                  <div className="font-semibold text-center">房间数</div>
+                </th>
+                <th className="p-2">
+                  <div className="font-semibold text-center">入住时间</div>
+                </th>
               </tr>
             </thead>
 
@@ -116,11 +127,11 @@ const Profile = () => {
 
                { postResult?.res?.map( item => {
                     return (
-                      <tr key={item._id}>
-                        <td className="p-2">
+                    <tr key={item._id}>
+                      {/* <td className="p-2">
                         <input type="checkbox" className="w-5 h-5" value="id-1"
                         click="toggleCheckbox($el, 2890.66)" />
-                    </td>
+                      </td> */}
                     <td className="p-2">
                         <div className="font-medium text-gray-800">
                         {item?.name}
@@ -132,6 +143,10 @@ const Profile = () => {
                     <td className="p-2"> {item?.employedInstitution} </td>
                     <td className="p-2"> {item?.position} </td>
                     <td className="p-2"> {item?.participation} </td>
+                    <td className="p-2"> {item?.num} </td>
+                    <td className="p-2"> {item?.isNeedHotel} </td>
+                    <td className="p-2"> {item?.roomNum} </td>
+                    <td className="p-2"> {item?.checkInDate} </td>
                     <td> <AiFillDelete onClick={ (e) => delHandler(item._id)} /></td>
                     </tr>
                     )

@@ -143,11 +143,11 @@ const From = (props) => {
       <h1 className="text-center text-2xl font-medium">前沿科技论坛（杭州）</h1>
       
     <form
-        className='max-w-xl m-auto py-10 mt-10 px-12 border'
+        className='max-w-xl m-auto py-10 mt-10 px-12 border text-gray-700'
         onSubmit={handleSubmit(onSubmit)}
       >
         <p className="mb-3 text-gray-500">报名表单填写：</p>
-        <label className='text-gray-600 font-medium'>*姓名、称呼：</label>
+        <label className='text-gray-700 font-medium'>*姓名、称呼：</label>
 
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4 w-full rounded text-gray-700'
@@ -163,14 +163,14 @@ const From = (props) => {
         )}
 
         {/* Radios 单选 - 机构类型  */}
-        <label className='text-gray-600 font-medium block mt-4'>机构类型：</label>
+        <label className='text-gray-700 font-medium block mt-4'>机构类型：</label>
         <div> 
           <label className='ml-4 inline-block'>
             <input className='mt-4 mr-1'
                 value='高校、研究机构'
                 type='radio'
                 {...register("institution")}
-              /> 高校、研究机构
+              />高校、研究机构
         </label></div>
 
         <div>
@@ -194,7 +194,7 @@ const From = (props) => {
 
 
         {/* Radios 单选 - 就职单位名称： */}
-        <label className='text-gray-600 font-medium block mt-4'>就职单位名称：</label>
+        <label className='text-gray-700 font-medium block mt-4'>就职单位名称：</label>
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
           type='text'
@@ -207,7 +207,7 @@ const From = (props) => {
           </div>
         )}
 
-      <label className='text-gray-600 font-medium block mt-4'>职务：</label>
+      <label className='text-gray-700 font-medium block mt-4'>职务：</label>
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
           type='text'
@@ -220,7 +220,7 @@ const From = (props) => {
           </div>
         )}
 
-      <label className='text-gray-600 font-medium block mt-4'>*邮箱：</label>
+      <label className='text-gray-700 font-medium block mt-4'>*邮箱：</label>
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
           type='email'
@@ -234,7 +234,7 @@ const From = (props) => {
         )}
 
 
-      <label className='text-gray-600 font-medium block mt-4'>*手机号：</label>
+      <label className='text-gray-700 font-medium block mt-4'>*手机号：</label>
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
           type='tel'
@@ -248,7 +248,7 @@ const From = (props) => {
         )}
 
         {/*  Radios 单选 - 参与形式  */}
-        <label className='text-gray-600 font-medium block mt-4'>参会形式：</label>
+        <label className='text-gray-700 font-medium block mt-4'>参会形式：</label>
         <div> <label className='ml-4 inline-block'>
         <input
             className='mt-4 mr-1'
@@ -268,30 +268,111 @@ const From = (props) => {
             {errors?.participation.message}
           </div>
         )}
+      
 
-      <button
+
+
+
+        <label className='text-gray-700 font-medium block mt-4'>随行人数：</label>
+        <input
+          className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
+          type='number'
+          {...register("num")}
+        />
+        {errors?.num && (
+          <div className='mb-3 text-normal text-red-500 '>
+            {errors?.num.message}
+          </div>
+        )}
+
+        <label className='text-gray-700 font-medium block mt-4'>是否需要预定会议酒店（520￥/间）</label>
+        <p className='itelic font-thin text-gray-500 text-xs'>* 注：大会报告特邀嘉宾免房费，协办企业 2 人以内免房费</p>
+        <label className='ml-4 inline-block'>
+        <input
+            className='mt-4 mr-1'
+            value='是'
+            type='radio'
+            {...register("isNeedHotel")}
+          />是
+        </label>
+
+        <label className='ml-4 inline-block'>
+          <input className='mt-4 mr-1' type='radio' value='否' {...register("isNeedHotel")} />
+          否
+        </label>
+        {errors?.isNeedHotel && (
+          <div className='mb-3 text-normal text-red-500 '>
+            {errors?.isNeedHotel.message}
+          </div>
+        )}
+
+        <label className='text-gray-700 font-medium block mt-4'>房间数量：</label>
+        <input
+          className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
+          type='number'
+          {...register("roomNum")}
+        />
+        {errors?.roomNum && (
+          <div className='mb-3 text-normal text-red-500 '>
+            {errors?.roomNum.message}
+          </div>
+        )}
+
+        <label className='text-gray-700 font-medium block mt-4'>入住日期</label>
+          <input
+            type='checkbox'
+            value='11月06日'
+            placeholder='11月06日'
+            {...register('checkInDate')}
+            className='mx-3'
+          />
+        <label htmlFor=''>11月06日</label>
+
+          <input
+            type='checkbox'
+            value='11月7日'
+            placeholder='11月7日'
+            {...register('checkInDate')}
+            className='mx-3'
+          />
+          <label htmlFor=''>11月7日</label>
+
+        <button
           className='mt-4 w-full rounded-md bg-black px-20  py-2 text-white border font-semibold text-md'
           type='submit'
         > 提交
         </button>
+
+      {/* 
+      随行人数 
+        是否需要预定会议酒店 （520￥/间）
+        
+        房间数量
+        入住天数（勾选日期） 
+          
+          11月07日
+      */}
+
+      
       </form>
       </>
     )
+
     
+
+
     :
     
     (
-      // <h1 className='text-center text-4xl font-semibold mt-10'>Post a job</h1> 
       <>
       <h1 className="pt-20 text-center text-3xl font-medium">International Forum on Chemical Synthetic Biology (Hangzhou)</h1>
-      {/* <h1 className="text-center text-2xl font-medium">前沿科技论坛（杭州）</h1> */}
       
     <form
         className='max-w-xl m-auto py-10 mt-10 px-12 border'
         onSubmit={handleSubmit(onSubmit)}
       >
         <p className="mb-3 text-gray-500">Please fill out the registration form:</p>
-        <label className='text-gray-600 font-medium'>* Name:</label>
+        <label className='text-gray-700 font-medium'>* Name:</label>
 
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4 w-full rounded text-gray-700'
@@ -307,7 +388,7 @@ const From = (props) => {
         )}
 
         {/* Radios 单选 - 机构类型  */}
-        <label className='text-gray-600 font-medium block mt-4'>Type of your employer:</label>
+        <label className='text-gray-700 font-medium block mt-4'>Type of your employer:</label>
         <div> 
           <label className='ml-4 inline-block'>
             <input className='mt-4 mr-1'
@@ -338,7 +419,7 @@ const From = (props) => {
 
 
         {/* Radios 单选 - 就职单位名称： */}
-        <label className='text-gray-600 font-medium block mt-4'>Employer:</label>
+        <label className='text-gray-700 font-medium block mt-4'>Employer:</label>
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
           type='text'
@@ -351,7 +432,7 @@ const From = (props) => {
           </div>
         )}
 
-      <label className='text-gray-600 font-medium block mt-4'>Title:</label>
+      <label className='text-gray-700 font-medium block mt-4'>Title:</label>
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
           type='text'
@@ -364,7 +445,7 @@ const From = (props) => {
           </div>
         )}
 
-      <label className='text-gray-600 font-medium block mt-4'>* Contact: email:</label>
+      <label className='text-gray-700 font-medium block mt-4'>* Contact: email:</label>
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
           type='text'
@@ -377,7 +458,7 @@ const From = (props) => {
         )}
 
         {/*  Radios 单选 - 参与形式  */}
-        <label className='text-gray-600 font-medium block mt-4'>Form of Participation:</label>
+        <label className='text-gray-700 font-medium block mt-4'>Form of Participation:</label>
         <div> <label className='ml-4 inline-block'>
         <input
             className='mt-4 mr-1'
@@ -408,7 +489,7 @@ const From = (props) => {
     )}
 
 
-        {/* <label className='text-gray-600 font-medium block mt-4'>
+        {/* <label className='text-gray-700 font-medium block mt-4'>
           Description
         </label>
         <textarea
@@ -425,7 +506,7 @@ const From = (props) => {
           </div>
         )} */}
 
-        {/* <label className='text-gray-600 font-medium block mt-4'>
+        {/* <label className='text-gray-700 font-medium block mt-4'>
           Link to apply for this job
         </label>
         <input
@@ -442,7 +523,7 @@ const From = (props) => {
           </div>
         )}
 
-        <label className='text-gray-600 font-medium block mt-4'> Email </label>
+        <label className='text-gray-700 font-medium block mt-4'> Email </label>
         <input className='border-solid border-gray-300 border py-2 px-4 w-full rounded text-gray-700' 
           type="email" 
           {...register("email", {

@@ -2,7 +2,6 @@ import { NextFunction, Request, Response } from "express";
 import { ElementFlags } from "typescript";
 import Form,{ IForm } from "../models/Form";
 
-
 const postInfo = async (req: Request, res: Response, next: NextFunction) => {
   try {
     if (!req.body.name || !req.body.email){
@@ -16,7 +15,11 @@ const postInfo = async (req: Request, res: Response, next: NextFunction) => {
       tel,
       institution,
       participation,  
-    } = req.body;
+      num,
+      isNeedHotel,
+      roomNum,
+      checkInDate,
+      } = req.body;
 
     console.log('postInfo - req.body: ' , req.body)
 
@@ -28,6 +31,10 @@ const postInfo = async (req: Request, res: Response, next: NextFunction) => {
       tel,
       institution,
       participation,  
+      num,
+      isNeedHotel,
+      roomNum,
+      checkInDate: checkInDate.toString(),
     });
     const savedForm = await form_.save();
     res.json(savedForm)
@@ -46,8 +53,8 @@ const getInfo = async (req: Request, res: Response, next: NextFunction) => {
       
     res.json(forms);
   } catch(err){
-     console.log("error: ------- ", err);
-    // res.status(500).json( {message: "Something went wrong"} )
+    //  console.log("error: ------- ", err);
+    res.status(500).json( {message: "Something went wrong"} )
   }
 };
 
@@ -63,8 +70,8 @@ const deleteForm = async (req: Request, res: Response) => {
     }
   }
   catch(err) {
-    console.log(err)
-    // res.status(500).send({ message: "Something goes wrong" });
+    // console.log(err)
+    res.status(500).send({ message: "Something goes wrong" });
   }
 };
 

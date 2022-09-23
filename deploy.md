@@ -629,6 +629,8 @@ cp -r webbg ./assets
 ```
 
 ```bash
+把 http-common 的 API 改成部署 API
+
 git add . && git commit -m 'update' && git push origin main
 sodaoo
 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
