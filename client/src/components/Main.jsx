@@ -102,7 +102,7 @@ const Main = () =>{
               className={`${isMobile ? 'visible' : 'hidden'} bg-inherit text-gray-50 text-sm mr-2`}
               defaultValue="zh"
               onChange={(e) => onChangeHandler(e)} >
-              <option  value="zh">中文</option>
+              <option  value="zh">Zh</option>
               <option value="en">Eng/</option>
             </select>
           </div>

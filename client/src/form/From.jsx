@@ -135,7 +135,7 @@ const From = (props) => {
       }
 
     {/* 中文页面 */}
-    { (language === 'zh-CN') ? (
+    { (language.startsWith('zh')) ? (
 
       // <h1 className='text-center text-4xl font-semibold mt-10'>Post a job</h1> 
       <>

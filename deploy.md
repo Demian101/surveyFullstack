@@ -616,7 +616,7 @@ pm2  monit  myproj   # 查看日志打印等
 ## 整套重新部署流程
 
 ```
-cd /home/surveyFullstack/client &&  npm run build 
+cd /home/surveyFullstack/client && npm i &&  npm run build 
 
 cd /home/surveyFullstack/server  &&  npm run build && pm2 start ./src/index.js --name myproj
 

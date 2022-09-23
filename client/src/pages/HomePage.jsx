@@ -46,7 +46,7 @@ const HomePage = () => {
 
   console.log('home page language', language )
   return(
-    (language === 'en-US' || language === 'en') ?
+    (language?.startsWith('en')) ?
       (<MainEng />)
       :
       (<Main />)
