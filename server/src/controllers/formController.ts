@@ -5,14 +5,15 @@ import Form,{ IForm } from "../models/Form";
 
 const postInfo = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    if (!req.body.name || !req.body.contacts){
-      res.status(500).json( {"Message": "Pls write name or contacts!"} )
+    if (!req.body.name || !req.body.email){
+      res.status(500).json( {"Message": "Pls write name or email!"} )
     }
     const {
       name,
       employedInstitution,
       position,
-      contacts,
+      email,
+      tel,
       institution,
       participation,  
     } = req.body;
@@ -23,7 +24,8 @@ const postInfo = async (req: Request, res: Response, next: NextFunction) => {
       name,
       employedInstitution,
       position,
-      contacts,
+      email,
+      tel,
       institution,
       participation,  
     });

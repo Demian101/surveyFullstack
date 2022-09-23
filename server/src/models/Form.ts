@@ -8,7 +8,8 @@ export interface IForm extends Document {
   num: Number;             // 人数？？？
   employedInstitution: string;  // 就职单位
   position: string;        // 职务
-  contacts: string;        // 手机号或邮箱
+  email: string;        // 邮箱
+  tel:  string;        // 手机号
 }
 
 const FormSchema: Schema = new Schema(
@@ -22,7 +23,8 @@ const FormSchema: Schema = new Schema(
     num: { type: Number},
     employedInstitution: { type: String, },
     position: { type: String, },
-    contacts: { type: String, required: true},    // 手机号或邮箱
+    email: { type: String, required: true},    // 手机号或邮箱
+    tel: { type: String, },
   },
   { collection: "forms", timestamps: true }
 );

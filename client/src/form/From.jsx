@@ -56,7 +56,7 @@ const From = (props) => {
     setLanguage(i18next.language)
   },[i18next.language]);
 
-  console.log(selectDefault)
+  // console.log(selectDefault)
   useEffect(()=>{
     const dv = options.filter( item =>{ return item.label === language })
     if (dv?.length > 0){
@@ -84,9 +84,6 @@ const From = (props) => {
   };
 
   useEffect(()=>{
-    if(data){
-      postForm();
-    }
     if(data) { 
       const token = localStorage.getItem("submittedFlag");
       if(token){
@@ -223,16 +220,30 @@ const From = (props) => {
           </div>
         )}
 
-      <label className='text-gray-600 font-medium block mt-4'>*联系方式：</label>
+      <label className='text-gray-600 font-medium block mt-4'>*邮箱：</label>
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
-          type='text'
-          placeholder='Email、手机号'
-          {...register("contacts", { required: "Please enter your contacts",})}
+          type='email'
+          placeholder='请填写 Email...'
+          {...register("email", { required: "Please enter your email",})}
         />
-        {errors?.contacts && (
+        {errors?.email && (
           <div className='mb-3 text-normal text-red-500 '>
-            {errors?.contacts.message}
+            {errors?.email.message}
+          </div>
+        )}
+
+
+      <label className='text-gray-600 font-medium block mt-4'>*手机号：</label>
+        <input
+          className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
+          type='tel'
+          placeholder='请填写手机号...'
+          {...register("tel", {required: true, minLength: 11, maxLength: 11})}
+        />
+        {errors?.tel && (
+          <div className='mb-3 text-normal text-red-500 '>
+            {errors?.tel.message}
           </div>
         )}
 
@@ -357,11 +368,11 @@ const From = (props) => {
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
           type='text'
-          {...register("contacts", { required: "Please enter your contacts",})}
+          {...register("email", { required: "Please enter your email",})}
         />
-        {errors?.contacts && (
+        {errors?.email && (
           <div className='mb-3 text-normal text-red-500 '>
-            {errors?.contacts.message}
+            {errors?.email.message}
           </div>
         )}
 
