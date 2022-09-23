@@ -1,8 +1,12 @@
 import React, {useState, useEffect} from "react";
-import { useQuery } from "react-query";
-import { ReactReduxContext } from 'react-redux';
+// import { ReactReduxContext } from 'react-redux';
+
+import { useMutation, useQuery } from "react-query";
 import httpClient from "../api/http-common";
+
 import store from '../store';
+import {AiFillDelete} from "react-icons/ai";
+import * as XLSX from 'xlsx';
 
 const Profile = () => {
   const [postResult, setPostResult] = useState({'status':null, 'res':null});
@@ -10,7 +14,7 @@ const Profile = () => {
   const token = store.getState().auth?.token
 
   // refetch 重命名为 getOneWord手动 拾取
-  const { data, status, getForm } = useQuery(
+  const { data, status, refetch: getForm } = useQuery(
     ['query-form-info', token],
     async () => {
       return await httpClient.get(`/form`)
@@ -18,7 +22,7 @@ const Profile = () => {
     {
       onSuccess: (res) => { 
         setPostResult({status: 'success',res: res?.data}) 
-        console.log('res',res)
+        // console.log('res',res)
       },
       onError: (err) => { setPostResult({status: 'error', res: err.response?.data || err});},
       refetchOnWindowFocus: true,
@@ -28,17 +32,54 @@ const Profile = () => {
     } 
   );
 
+
+  const delHandler = (id ) => {
+    try{
+      httpClient.delete(`/form/${id}`)
+      getForm()
+    }
+    catch(err){
+      console.log(err)
+    }
+  }
+
+
+  
+  const { isLoading: isEditing, mutate: editWord } = useMutation(
+    delHandler,
+    {
+      onSuccess: (res) => {   console.log(res) },
+      onError: (err) => { console.log(err)},  
+    },
+    );
+
+  
+  const downloadExcel = (data) => {
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, "Sheet1");
+    //let buffer = XLSX.write(workbook, { bookType: "xlsx", type: "buffer" });
+    //XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
+    XLSX.writeFile(workbook, "报名表单.xlsx");
+  };
+
+  console.log('postResult.res', postResult.res)
+
   if(status === "loading") {
     return  <p>Loading...</p>
   }
-
   return data ? (      
-    <section className="antialiased bg-gray-100 text-gray-600 h-auto px-4 pt-10" x-data="app">
-    <div className="flex flex-col justify-center h-full">
-        <div className="w-full max-w-2xl mx-auto bg-white shadow-lg rounded-sm border border-gray-200">
-        <header className="px-5 py-4 border-b border-gray-100">
-            <div className="font-semibold text-gray-800">报名表单 </div>
-        </header>
+    <section className="antialiased bg-gray-100 text-gray-600 w-screen h-full" x-data="app">
+    <div className="flex flex-col justify-center ">
+        <div className=" bg-white md:mx-10 md:my-10 shadow-lg rounded-sm border border-gray-200">
+          <div className='flex justify-between'>
+            <div className="px-5 py-4 border-b font-extrabold border-gray-100">
+                <div className="font-semibold text-gray-800">报名表单 </div>
+            </div>
+            <button className='mx-2 my-1 py-2 px-1 bg-gray-300 rounded'
+              onClick={() => downloadExcel(postResult.res)}> 导出表单 </button>
+            
+          </div>
 
         <div className="overflow-x-auto p-3">
             <table className="table-auto w-full">
@@ -49,7 +90,10 @@ const Profile = () => {
                   <div className="font-semibold text-left">姓名</div>
                 </th>
                 <th className="p-2">
-                  <div className="font-semibold text-left">联系方式</div>
+                  <div className="font-semibold text-left">Email</div>
+                </th>
+                <th className="p-2">
+                  <div className="font-semibold text-left">Tel</div>
                 </th>
                 <th className="p-2">
                   <div className="font-semibold text-left">机构类型</div>
@@ -82,11 +126,13 @@ const Profile = () => {
                         {item?.name}
                         </div>
                     </td>
-                    <td className="p-2"> {item?.contacts} </td>
+                    <td className="p-2"> {item?.email} </td>
+                    <td className="p-2"> {item?.tel} </td>
                     <td className="p-2"> {item?.institution} </td>
                     <td className="p-2"> {item?.employedInstitution} </td>
                     <td className="p-2"> {item?.position} </td>
                     <td className="p-2"> {item?.participation} </td>
+                    <td> <AiFillDelete onClick={ (e) => delHandler(item._id)} /></td>
                     </tr>
                     )
                 })}
@@ -97,7 +143,7 @@ const Profile = () => {
 
 
         <div className="flex justify-end font-bold space-x-4 text-base border-t border-gray-100 px-5 py-4">
-            <div>Develop By @Demian https://github.com/Sodaoo</div>
+            <div></div>
         </div>
 
         </div>

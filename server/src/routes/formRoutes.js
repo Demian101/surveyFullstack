@@ -9,4 +9,5 @@ router
     .route("/") // 39.105.169.246/form...
     .post(formController_1.postInfo)
     .get(authenticate_1.authGuard, formController_1.getInfo); // 登录后才能获取 form 数据。
+router.route('/:id').delete(authenticate_1.authGuard, formController_1.deleteForm);
 exports.default = router;

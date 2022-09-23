@@ -11,7 +11,8 @@ var FormSchema = new mongoose_1.Schema({
     num: { type: Number },
     employedInstitution: { type: String, },
     position: { type: String, },
-    contacts: { type: String, required: true }, // 手机号或邮箱
+    email: { type: String, required: true },
+    tel: { type: String, },
 }, { collection: "forms", timestamps: true });
 var Form = (0, mongoose_1.model)("User", FormSchema);
 exports.default = Form;

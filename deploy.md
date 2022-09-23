@@ -631,7 +631,7 @@ cp -r webbg ./assets
 ```bash
 git add . && git commit -m 'update' && git push origin main
 sodaoo
-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
+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
 
 ssh root@39.105.169.246
 ALYZFXq!*985
@@ -645,7 +645,7 @@ git branch -d temp
 
 
 cd /home/surveyFullstack/client &&  npm run build 
-
+cd /home/surveyFullstack/server &&  npm run build 
 
 cd ./dist
 cp -r img ./assets

@@ -51,7 +51,26 @@ const getInfo = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
+
+const deleteForm = async (req: Request, res: Response) => {
+  const formId: string = req.params.id;
+  console.log('req.params.id')
+  const form = await Form.findOne({ _id: formId });
+  try{
+    if(form){
+      const deleteFormById = await Form.findByIdAndDelete(formId);
+      res.status(200).json({ message: "Form deleted successfully" });
+    }
+  }
+  catch(err) {
+    console.log(err)
+    // res.status(500).send({ message: "Something goes wrong" });
+  }
+};
+
+
 export {
   postInfo,
   getInfo,
+  deleteForm,
 };

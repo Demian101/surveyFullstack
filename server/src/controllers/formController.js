@@ -39,24 +39,25 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getInfo = exports.postInfo = void 0;
+exports.deleteForm = exports.getInfo = exports.postInfo = void 0;
 var Form_1 = __importDefault(require("../models/Form"));
 var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name_1, employedInstitution, position, contacts, institution, participation, form_, savedForm, err_1;
+    var _a, name_1, employedInstitution, position, email, tel, institution, participation, form_, savedForm, err_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 _b.trys.push([0, 2, , 3]);
-                if (!req.body.name || !req.body.contacts) {
-                    res.status(500).json({ "Message": "Pls write name or contacts!" });
+                if (!req.body.name || !req.body.email) {
+                    res.status(500).json({ "Message": "Pls write name or email!" });
                 }
-                _a = req.body, name_1 = _a.name, employedInstitution = _a.employedInstitution, position = _a.position, contacts = _a.contacts, institution = _a.institution, participation = _a.participation;
+                _a = req.body, name_1 = _a.name, employedInstitution = _a.employedInstitution, position = _a.position, email = _a.email, tel = _a.tel, institution = _a.institution, participation = _a.participation;
                 console.log('postInfo - req.body: ', req.body);
                 form_ = new Form_1.default({
                     name: name_1,
                     employedInstitution: employedInstitution,
                     position: position,
-                    contacts: contacts,
+                    email: email,
+                    tel: tel,
                     institution: institution,
                     participation: participation,
                 });
@@ -96,3 +97,32 @@ var getInfo = function (req, res, next) { return __awaiter(void 0, void 0, void 
     });
 }); };
 exports.getInfo = getInfo;
+var deleteForm = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var formId, form, deleteFormById, err_3;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                formId = req.params.id;
+                console.log('req.params.id');
+                return [4 /*yield*/, Form_1.default.findOne({ _id: formId })];
+            case 1:
+                form = _a.sent();
+                _a.label = 2;
+            case 2:
+                _a.trys.push([2, 5, , 6]);
+                if (!form) return [3 /*break*/, 4];
+                return [4 /*yield*/, Form_1.default.findByIdAndDelete(formId)];
+            case 3:
+                deleteFormById = _a.sent();
+                res.status(200).json({ message: "Form deleted successfully" });
+                _a.label = 4;
+            case 4: return [3 /*break*/, 6];
+            case 5:
+                err_3 = _a.sent();
+                console.log(err_3);
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
+        }
+    });
+}); };
+exports.deleteForm = deleteForm;
