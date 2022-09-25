@@ -147,7 +147,8 @@ const Profile = () => {
                     <td className="p-2"> {item?.isNeedHotel} </td>
                     <td className="p-2"> {item?.roomNum} </td>
                     <td className="p-2"> {item?.checkInDate} </td>
-                    <td> <AiFillDelete onClick={ (e) => delHandler(item._id)} /></td>
+                    {/* 删除数据按钮，暂时下掉吧 */}
+                    {/* <td> <AiFillDelete onClick={ (e) => delHandler(item._id)} /></td> */}
                     </tr>
                     )
                 })}

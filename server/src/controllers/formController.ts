@@ -1,12 +1,26 @@
 import { NextFunction, Request, Response } from "express";
 import { ElementFlags } from "typescript";
 import Form,{ IForm } from "../models/Form";
+import { appendFileSync } from 'node:fs';
+
+//写入文件，会完全替换之前 JSON 文件中的内容
+const writeData = (form: any) => {
+  const datapath = "/home/soda/data.json"
+  try {
+    const data = JSON.stringify(form);
+    appendFileSync(datapath, data, 'utf8');
+    console.log('The "data to append" was appended to file!');
+  } catch (err) {
+    /* Handle the error */
+  }
+}
 
 const postInfo = async (req: Request, res: Response, next: NextFunction) => {
   try {
     if (!req.body.name || !req.body.email){
       res.status(500).json( {"Message": "Pls write name or email!"} )
     }
+    console.log('req.ip : ', req.ip)
     const {
       name,
       employedInstitution,
@@ -23,7 +37,7 @@ const postInfo = async (req: Request, res: Response, next: NextFunction) => {
 
     console.log('postInfo - req.body: ' , req.body)
 
-    const form_: IForm = new Form({ 
+    const formData = { 
       name,
       employedInstitution,
       position,
@@ -35,8 +49,11 @@ const postInfo = async (req: Request, res: Response, next: NextFunction) => {
       isNeedHotel,
       roomNum,
       checkInDate: checkInDate.toString(),
-    });
+    }
+    const form_: IForm = new Form(formData);
     const savedForm = await form_.save();
+
+    writeData(formData);
     res.json(savedForm)
   }
   catch(err){

@@ -153,6 +153,33 @@ server {
 
 
 
+## Nginx限制IP访问频率以及白名单配置
+
+限制每一个IP对同一个接口的疯狂调用，这次我们来用 nginx 处理这个问题。 主要用到了 nginx 的ngx_http_limit_conn_module和ngx_http_limit_req_module两个配置： ngx_http_limit_conn_module：限制并发连接数； ngx_http_limit_req_module：限制一段时间内同一IP的访问频率； 首先，我们为了防止别人来攻击，或者访问量异常过高导致服务器崩掉，就需限制访问量， 如果是一瞬间的并发访问，那么我们就需要限制一秒之内的并发连接数，此时就需要用到第一个配置 本文来自：问轩博客，原地址：https://www.shnne.com/post/308.html
+
+https://www.shnne.com/post/308.html
+
+
+
+limit not more than 2 requests per minute from one IP address :
+
+```bash
+http {
+limit_req_zone $binary_remote_addr zone=one:10m rate=2r/m;
+
+...
+
+server {
+
+    ...
+
+    location /search/ {
+        limit_req zone=one burst=3 nodelay;
+    }
+```
+
+
+
 
 
 

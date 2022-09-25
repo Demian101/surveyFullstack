@@ -41,8 +41,21 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteForm = exports.getInfo = exports.postInfo = void 0;
 var Form_1 = __importDefault(require("../models/Form"));
+var node_fs_1 = require("node:fs");
+//写入文件，会完全替换之前 JSON 文件中的内容
+var writeData = function (form) {
+    var datapath = "/Users/soda/data.json";
+    try {
+        var data = JSON.stringify(form);
+        (0, node_fs_1.appendFileSync)(datapath, data, 'utf8');
+        console.log('The "data to append" was appended to file!');
+    }
+    catch (err) {
+        /* Handle the error */
+    }
+};
 var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name_1, employedInstitution, position, email, tel, institution, participation, num, isNeedHotel, roomNum, checkInDate, form_, savedForm, err_1;
+    var _a, name_1, employedInstitution, position, email, tel, institution, participation, num, isNeedHotel, roomNum, checkInDate, formData, form_, savedForm, err_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -50,9 +63,10 @@ var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void
                 if (!req.body.name || !req.body.email) {
                     res.status(500).json({ "Message": "Pls write name or email!" });
                 }
+                console.log('req.ip : ', req.ip);
                 _a = req.body, name_1 = _a.name, employedInstitution = _a.employedInstitution, position = _a.position, email = _a.email, tel = _a.tel, institution = _a.institution, participation = _a.participation, num = _a.num, isNeedHotel = _a.isNeedHotel, roomNum = _a.roomNum, checkInDate = _a.checkInDate;
                 console.log('postInfo - req.body: ', req.body);
-                form_ = new Form_1.default({
+                formData = {
                     name: name_1,
                     employedInstitution: employedInstitution,
                     position: position,
@@ -64,10 +78,12 @@ var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void
                     isNeedHotel: isNeedHotel,
                     roomNum: roomNum,
                     checkInDate: checkInDate.toString(),
-                });
+                };
+                form_ = new Form_1.default(formData);
                 return [4 /*yield*/, form_.save()];
             case 1:
                 savedForm = _b.sent();
+                writeData(formData);
                 res.json(savedForm);
                 return [3 /*break*/, 3];
             case 2:
