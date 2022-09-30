@@ -4,8 +4,8 @@ import { logout } from "../store/reducer/authSlice";
 
 
 const httpClient = axios.create({
-  // baseURL: "http://localhost:8080/api",     // Mac 测试用的 API
-  baseURL: "http://39.105.169.246/api",  // 服务器在用的 API
+  baseURL: "http://localhost:8080/api",     // Mac 测试用的 API
+  // baseURL: "http://39.105.169.246/api",  // 服务器在用的 API
 })
 
 httpClient.interceptors.request.use(

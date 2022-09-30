@@ -519,6 +519,221 @@ cd /home/zhifeng/client/ && npm run build
 
 
 
+## HTTPS
+
+nginx配置后https 无法访问，冷静分析：
+
+- nginx都没有返回状态吗，直接无法连接。这到底请求到了吗？
+
+
+
+新增端口监听，域名绑定新虚拟主机等等，需要完整重启。
+
+
+
+```
+curl http://39.105.169.246
+curl https://39.105.169.246
+```
+
+
+
+
+
+安全证书绑定的地址： 
+
+```
+www.chem-synbio.net
+chem-synbio.net
+```
+
+
+
+
+
+### 防火墙
+
+```
+打开防火墙后，无论 80 是否开启， http://chem-synbio.net/ 都无法访问
+关闭防火墙后，http://chem-synbio.net可以访问。
+```
+
+
+
+`netstat -anp` 查看防火墙开的端口 :
+
+```
+netstat -anp | grep 443
+```
+
+
+
+```bash
+#这里要开放80端口，因此可以使用防火墙命令查看80端口是否开放
+#如果防火墙已经关闭的话，要先开启防火墙
+systemctl start firewalld
+
+# 查看是否开放
+firewall-cmd --query-port=80/tcp   
+
+# 如果未开放则使用以下命令开放
+firewall-cmd --zone=public --add-port=80/tcp --permanent
+firewall-cmd --zone=public --add-port=443/tcp --permanent
+
+
+# 最后重启防火墙
+firewall-cmd --reload
+```
+
+
+
+
+
+
+
+
+
+```bash
+server {
+    listen 443 ssl;
+    #配置HTTPS的默认访问端口为443。
+    #如果未在此处配置HTTPS的默认访问端口，可能会造成Nginx无法启动。
+    #如果您使用Nginx 1.15.0及以上版本，请使用listen 443 ssl代替listen 443和ssl on。
+    server_name domain; #需要将domain替换成证书绑定的域名。
+    root html;
+    index index.html index.htm;
+    ssl_certificate cert/cert-file-name.pem;  #需要将cert-file-name.pem替换成已上传的证书文件的名称。
+    ssl_certificate_key cert/cert-file-name.key; #需要将cert-file-name.key替换成已上传的证书私钥文件的名称。
+    ssl_session_timeout 5m;
+    ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+    #表示使用的加密套件的类型。
+    ssl_protocols TLSv1.1 TLSv1.2 TLSv1.3; #表示使用的TLS协议的类型。
+    ssl_prefer_server_ciphers on;
+    location / {
+        root address;  #address网站程序存放目录。
+        index index.html index.htm;
+    }
+}
+server {
+    listen 80;
+    server_name domain; #需要将domain替换成证书绑定的域名。
+    rewrite ^(.*)$ https://$host$1; #将所有HTTP请求通过rewrite指令重定向到HTTPS。
+    location / {
+        index index.html index.htm;
+    }
+}
+
+
+```
+
+
+
+```
+        ssl_certificate cert/8444101_cloud.***.com.pem;
+        ssl_certificate_key cert/8444101_cloud.***.com.key;
+        ssl_session_timeout  5m;
+        ssl_protocols TLSv1 TLSv1.1 TLSv1.2; # Dropping SSLv3, ref: POODLE
+        ssl_ciphers ECDHE-RSA-AES128-GCM-SHA256:ECDHE:ECDH:AES:HIGH:!NULL:!aNULL:!MD5:!ADH:!RC4;
+        ssl_prefer_server_ciphers on;
+```
+
+
+
+
+
+
+
+设置HTTP请求自动跳转HTTPS。
+如果您希望所有的HTTP访问自动跳转到HTTPS页面，则可以在需要跳转的HTTP站点下添加以下rewrite语句。
+
+```bash
+server {
+    listen 80;
+    server_name yourdomain.com; #需要将yourdomain.com替换成证书绑定的域名。
+    rewrite ^(.*)$ https://$host$1; #将所有HTTP请求通过rewrite指令重定向到HTTPS。
+    location / {
+        index index.html index.htm;
+    }
+}
+
+
+或者： 
+
+
+server {
+    listen 80;
+    server_name cloud.***.com; 
+    # 把http的域名请求转成https
+    return 301 https://$host$request_uri; 
+```
+
+
+
+同理，server.js 里面配置也要变：
+
+![](https://upload-images.jianshu.io/upload_images/14245154-53858d1958c62323.png?imageMogr2/auto-orient/strip|imageView2/2/w/798)
+
+
+
+### 浏览器显示不安全：
+
+可以在 f12 浏览器安全中查看具体不安全的原因，于是我发现了是我的后端接口地址
+
+问题，我用的是ip ，而不是域名
+
+<img src="http://imagesoda.oss-cn-beijing.aliyuncs.com/Sodaoo/2022-09-29-112445.png" style="zoom:40%;" />
+
+- 顺着这个思路，我们就把前端指向的地址改了（修改 server.js 文件）。
+  cat /usr/share/nginx/html/server.js
+
+
+
+```rust
+window.app = {
+       VUE_APP_BASE_API: 'https://cloud.***.com/api',
+    VUE_APP_IMAGE_URL: 'https://cloud.***.com/Data/',
+    VUE_APP_LOG_URL: 'https://cloud.***.com/Log',
+    VUE_APP_DOWNLOAD_URL: 'https://cloud.***.com/DownLoad/',
+    VUE_APP_LOG_URL: 'https://cloud.***.com/Log/',
+    Version: '(V1.0.2)'
+}
+```
+
+
+
+### Error Grave
+
+**400 The plain HTTP request was sent to HTTPS** 
+
+然后在 http 里加入：
+
+```
+map  $scheme  $fastcgi_https { ## Detect when HTTPS is used
+    default off;
+    https on;
+}
+
+server里加
+
+fastcgi_param HTTPS  $fastcgi_https;
+```
+
+ 
+
+server里加
+
+```xml
+fastcgi_param HTTPS $fastcgi_https;
+```
+
+| https://blog.csdn.net/chengtaopai5214/article/details/100991752?spm=1001.2101.3001.6661.1&utm_medium=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-100991752-blog-113094423.pc_relevant_aa&depth_1-utm_source=distribute.pc_relevant_t0.none-task-blog-2%7Edefault%7ECTRLIST%7ERate-1-100991752-blog-113094423.pc_relevant_aa&utm_relevant_index=1
+
+
+
+
+
+
+
 ### 前后端分离配置： 
 
 ```bash
@@ -686,9 +901,7 @@ cp -r webbg ./assets
 
 
 
-
-
-## SEO robots.txt文件
+## SEO robots.txt 文件
 
 起因：查看服务器日志发现不断有人有请求/robots.txt
 
@@ -741,3 +954,41 @@ Disallow: *.aspx
 
 
 
+```rust
+//  sources/student.move
+address 0x1 {
+  module student {
+    struct Empty {}
+    struct Student {
+      id: u64,
+      age: u8,
+      sex: bool,
+    }
+    public fun newStudent(sid: u64, sage: u8, ssex: bool): Student {  //
+      return Student {
+        id: sid,
+        age: sage,
+        sex: ssex,
+      }
+    }
+  }
+}
+
+
+// scripts/05-struct.move
+script {
+  use 0x1::student;
+  use 0x1::Debug;
+  fun main() {
+    let stu1 = student::newStudent(10001, 24, true);
+    let id = student::getId(stu1);
+    Debug::print(&id);
+  }
+}
+```
+
+
+
+- address 0x1  是另一种（配置 address）的写法
+- struct Empty {}  说明可以建一个空的 Struct ， ps：后面不需要加分号 ; 
+- sid , sage, ssex 是比较推荐的标准写法;

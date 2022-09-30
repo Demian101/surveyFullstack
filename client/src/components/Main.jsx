@@ -81,6 +81,11 @@ const Main = () =>{
     window.location.href = liveurl
   }
 
+  const jumpoffice = () => {
+    const liveurl = "https://beian.miit.gov.cn/"
+    window.location.href = liveurl
+  }
+
 
   if( lang==='en' ){
     return( <MainEng />)
@@ -91,11 +96,11 @@ const Main = () =>{
 
       {/* NavBar  */}
       {/* <div className="shadow-md z-20 w-full fixed top-0 left-0  bg-gradient-to-r from-indigo-800 via-purple-600 to-black"> */}
-      <div className="shadow-md w-full fixed top-0 left-0 bg-webaboutbg">
+      <div className="shadow-md w-full fixed top-0 left-0 bg-webaboutbg  z-20">
         <div className="flex items-center justify-between md:px-10 py-3 px-7">
           
           <div>
-            <img src={logo} className={`${isMobile ? "w-7/12 h-auto pb-2": "w-[264px] h-[69px] mr-20 ml-44"}`} alt="logo" />
+            <img src={logo} className={`${isMobile ? "w-7/12 h-auto pb-2": "w-[264px] h-[69px] mr-20 ml-32"}`} alt="logo" />
           </div>
           <div>
             <select
@@ -103,7 +108,7 @@ const Main = () =>{
               defaultValue="zh"
               onChange={(e) => onChangeHandler(e)} >
               <option  value="zh">Zh</option>
-              <option value="en">Eng/</option>
+              <option value="en">Eng</option>
             </select>
           </div>
           
@@ -117,30 +122,30 @@ const Main = () =>{
           </div>
           
           <ul
-            className={`md:flex md:items-center md:pb-0 pb-4 rounded-md absolute md:static bg-gray-900 bg-opacity-90 md:bg-inherit md:z-auto -z-40 left-0 w-full md:w-auto md:pl-0 pl-9  duration-75 transition-all  ease-in ${
+            className={`md:text-base md:flex md:items-center md:pb-0 pb-2 rounded-md absolute md:static bg-gray-900 bg-opacity-90 md:bg-inherit md:z-auto -z-40 left-0 w-full md:w-auto md:pl-0 pl-9  duration-75 transition-all  ease-in ${
               open ? " top-[55px]" : "top-[-490px]"
             }`}
           >
             
-            <li className="md:ml-8 text-xl md:my-0 my-7">
+            <li className="md:ml-8 md:my-0 my-7">
               {/* <a href={"/"} className="text-slate-50 hover:text-gray-400 duration-500" >
                 {"首页"} </a> */}
               <button onClick={()=>scrollDown(topRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
                 首页 </button>
 
             </li>
-            <li className="md:ml-8 text-xl md:my-0 my-7">
+            <li className="md:ml-8  md:my-0 my-7">
               <button onClick={()=>scrollDown(argRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
                 会议安排 </button>
             </li>
 
 
-            <li className="md:ml-8 text-xl md:my-0 my-7">
+            <li className="md:ml-8   md:my-0 my-7">
               <button onClick={()=>scrollDown(liveRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
                 直播 </button>
             </li>
 
-            <li className="md:ml-8 text-xl md:my-0 my-7">
+            <li className="md:ml-8 md:my-0 my-7">
               <button onClick={()=>scrollDown(aboutRef)} className="text-slate-50 hover:text-gray-400 duration-500" >
                 关于 </button>
             </li>
@@ -151,7 +156,7 @@ const Main = () =>{
             </li> */}
             
 
-        <div className='flex md:flex-row md:items-center md:justify-between md:content-center text-white py-1 rounded-lg md:ml-44  duration-200'>
+        <div className='flex md:flex-row md:items-center md:justify-between md:content-center text-white py-1 rounded-lg md:ml-12  duration-200'>
           <select
             className={`${isMobile ? 'hidden' : 'visible'} bg-inherit text-gray-50 text-lg mr-2`}
             defaultValue="zh"
@@ -545,7 +550,7 @@ const Main = () =>{
     <div className='px-[30px] text-gray-50  pt-2'>
       <img src={Connect} className='w-[102.5pt] h-[23pt] mt-10 mb-8' />
     </div>
-    <div className='grid grid-cols-4 gap-4 pl-[30px] text-gray-50 text-left pb-12'>
+    <div className='grid grid-cols-4 gap-4 pl-[30px] text-gray-50 text-left pb-10'>
       <div>会议酒店 </div>
       <div className='col-span-3'>
         <div>杭州龙湖皇冠假日酒店</div>
@@ -720,11 +725,20 @@ const Main = () =>{
     )
     }  {/*关于*/} 
 
-{/* 
-    <div className=" bg-inherit pt-20 text-gray-500" ref={guestRef}>
-        <h2>嘉宾-施工中</h2>
-    </div>
- */}
+    {/*  备案信息 */}
+    <div className='bg-webaboutbg bg-cover'>
+        {/* <div  className="h-[5px] w-96 bg-gradient-to-r from-[#6DD6EC] to-[#DC7DFB]"></div> */}
+        <hr className='md:mx-64 mx-12'/>
+        <div className='py-4 flex justify-center items-center content-center text-center text-slate-50'>
+          <button onClick={jumpoffice}> 浙ICP备2022028247号-1 </button>
+        </div>
+      </div>
+
+  {/* 
+      <div className=" bg-inherit pt-20 text-gray-500" ref={guestRef}>
+          <h2>嘉宾-施工中</h2>
+      </div>
+  */}
 
   </div>
   )
