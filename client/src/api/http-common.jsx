@@ -1,5 +1,6 @@
 import axios from "axios";
 import store from '../store';
+import { logout } from "../store/reducer/authSlice";
 
 
 const httpClient = axios.create({
@@ -30,7 +31,9 @@ httpClient.interceptors.response.use(
   response => response,
   async(error) => {
     if (error?.response?.status === 401) {  // 401 Unauthorized - 身份认证失败
-      store.dispatch(logoutUser());
+      // store.dispatch(logoutUser());
+      console.log('error?.response?.status', error?.response?.status);
+      store.dispatch(logout());
     }
   }
 );

@@ -44,7 +44,7 @@ var Form_1 = __importDefault(require("../models/Form"));
 var node_fs_1 = require("node:fs");
 //写入文件，会完全替换之前 JSON 文件中的内容
 var writeData = function (form) {
-    var datapath = "/Users/soda/data.json";
+    var datapath = "/home/soda/data.json";
     try {
         var data = JSON.stringify(form);
         (0, node_fs_1.appendFileSync)(datapath, data, 'utf8');
