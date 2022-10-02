@@ -34,12 +34,13 @@ const AuthForm = () => {
         const password = pwdInp.current.value;
         // 处理登录功能
         if(isLoginForm){
-            // console.log('登录 -->', username, password);
+            console.log('登录 -->', username, password);
             loginFn({
                 identifier:username,
                 password
             }).then(res => {
                 if(!res.error){
+                  console.log('res.data.token', res.data.token)
                     dispatch(login(
                         {
                             token:res.data.token,
