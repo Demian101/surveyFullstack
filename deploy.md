@@ -407,6 +407,10 @@ export PATH=$PATH:/usr/local/mongoDB/bin
 source ~/.bashrc
 
 mongod --config /usr/local/mongoDB/mongodb.conf --dbpath /usr/local/mongoDB/data/db
+
+后台（非前台）启动：
+重启后千万别忘了启动数据库：
+mongod --dbpath=/usr/local/mongoDB/data/db --fork --logpath=/usr/local/mongoDB/logs/mongodb.log
 ```
 
 
