@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { postInfo, getInfo, deleteForm } from "../controllers/formController";
+import { postInfo, getInfo, deleteForm, modifyNote } from "../controllers/formController";
 import { authGuard } from "../middlewares/authenticate";
 
 const router = Router();
@@ -11,5 +11,7 @@ router
   .get(authGuard, getInfo)  // 登录后才能获取 form 数据。
 
 router.route('/:id').delete(authGuard, deleteForm);
+router.route('/:id/note').put(authGuard, modifyNote);
+
 
 export default router;

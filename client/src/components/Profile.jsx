@@ -1,17 +1,19 @@
 import React, {useState, useEffect} from "react";
-// import { ReactReduxContext } from 'react-redux';
-
 import { useMutation, useQuery } from "react-query";
 import httpClient from "../api/http-common";
-
 import store from '../store';
-import {AiFillDelete} from "react-icons/ai";
+// import {AiFillDelete} from "react-icons/ai";
 import * as XLSX from 'xlsx';
+import Td from './Td';
 
 const Profile = () => {
   const [postResult, setPostResult] = useState({'status':null, 'res':null});
-
   const token = store.getState().auth?.token
+  const [notes, setNotes] = useState("");
+  const [toggl, setToggl] = useState(false);
+  const [curid, setCurid] = useState("");
+
+  useEffect(()=>{}, [])
 
   // refetch 重命名为 getOneWord手动 拾取
   const { data, status, refetch: getForm } = useQuery(
@@ -68,6 +70,8 @@ const Profile = () => {
   if(status === "loading") {
     return  <p>Loading...</p>
   }
+
+  console.log('curid',curid, 'toggl', toggl)
   return data ? (      
     <section className="antialiased bg-gray-100 text-gray-600 w-screen h-full" x-data="app">
     <div className="flex flex-col justify-center ">
@@ -118,6 +122,11 @@ const Profile = () => {
                 <th className="p-2">
                   <div className="font-semibold text-center">入住时间</div>
                 </th>
+                <th className="p-2">
+                  <div className="font-semibold text-center">备注</div>
+                  {/* <button className=' bg-slate-300 rounded-md px-4 py-1 ml-2  text-cyan-900 font-extrabold text-sm shadow-md border-r border-b'> 更改 </button> */}
+                </th>
+                <th></th>
               </tr>
             </thead>
 
@@ -147,8 +156,13 @@ const Profile = () => {
                     <td className="p-2"> {item?.isNeedHotel} </td>
                     <td className="p-2"> {item?.roomNum} </td>
                     <td className="p-2"> {item?.checkInDate} </td>
-                    {/* 删除数据按钮，暂时下掉吧 */}
-                    {/* <td> <AiFillDelete onClick={ (e) => delHandler(item._id)} /></td> */}
+                    <Td note={item?.note} id={item?._id} />
+                    {/* <td className="p-2 flex"> 
+                     <button onClick={()=>{ setToggl((pre)=>{setToggl(!pre)}); setCurid(item?._id);console.log(item?._id) }}
+                      className='text-green-500 h-full items-end'> <FaEdit /> </button>
+                    </td> */}
+                    {/* 删除数据按钮，暂时下掉吧  
+                      <td> <AiFillDelete onClick={ (e) => delHandler(item._id)} /></td> */}
                     </tr>
                     )
                 })}

@@ -39,7 +39,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteForm = exports.getInfo = exports.postInfo = void 0;
+exports.modifyNote = exports.deleteForm = exports.getInfo = exports.postInfo = void 0;
 var Form_1 = __importDefault(require("../models/Form"));
 var node_fs_1 = require("node:fs");
 //写入文件，会完全替换之前 JSON 文件中的内容
@@ -55,7 +55,7 @@ var writeData = function (form) {
     }
 };
 var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name_1, employedInstitution, position, email, tel, institution, participation, num, isNeedHotel, roomNum, checkInDate, formData, form_, savedForm, err_1;
+    var _a, name_1, employedInstitution, position, email, tel, institution, participation, num, isNeedHotel, roomNum, checkInDate, note, formData, form_, savedForm, err_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -64,7 +64,7 @@ var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void
                     res.status(500).json({ "Message": "Pls write name or email!" });
                 }
                 console.log('req.ip : ', req.ip);
-                _a = req.body, name_1 = _a.name, employedInstitution = _a.employedInstitution, position = _a.position, email = _a.email, tel = _a.tel, institution = _a.institution, participation = _a.participation, num = _a.num, isNeedHotel = _a.isNeedHotel, roomNum = _a.roomNum, checkInDate = _a.checkInDate;
+                _a = req.body, name_1 = _a.name, employedInstitution = _a.employedInstitution, position = _a.position, email = _a.email, tel = _a.tel, institution = _a.institution, participation = _a.participation, num = _a.num, isNeedHotel = _a.isNeedHotel, roomNum = _a.roomNum, checkInDate = _a.checkInDate, note = _a.note;
                 console.log('postInfo - req.body: ', req.body);
                 formData = {
                     name: name_1,
@@ -78,6 +78,7 @@ var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void
                     isNeedHotel: isNeedHotel,
                     roomNum: roomNum,
                     checkInDate: checkInDate.toString(),
+                    note: note,
                 };
                 form_ = new Form_1.default(formData);
                 return [4 /*yield*/, form_.save()];
@@ -148,3 +149,35 @@ var deleteForm = function (req, res) { return __awaiter(void 0, void 0, void 0, 
     });
 }); };
 exports.deleteForm = deleteForm;
+var modifyNote = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var id, text, form, modiFormById, err_4;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                id = req.params.id;
+                text = req.body.text;
+                console.log('modifyNote - req.params.id', req.params.id);
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 5, , 6]);
+                return [4 /*yield*/, Form_1.default.findOne({ _id: id })];
+            case 2:
+                form = _a.sent();
+                if (!form) return [3 /*break*/, 4];
+                return [4 /*yield*/, Form_1.default.findByIdAndUpdate(id, { note: text })];
+            case 3:
+                modiFormById = _a.sent();
+                if (modiFormById) {
+                    res.status(200).json({ message: "Form deleted successfully" });
+                }
+                _a.label = 4;
+            case 4: return [3 /*break*/, 6];
+            case 5:
+                err_4 = _a.sent();
+                console.log(err_4);
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
+        }
+    });
+}); };
+exports.modifyNote = modifyNote;

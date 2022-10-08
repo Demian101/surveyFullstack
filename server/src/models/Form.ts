@@ -12,7 +12,8 @@ export interface IForm extends Document {
   tel:  string;            // 手机号
   isNeedHotel:  string;    // 是否需要预定会议酒店
   roomNum:  Number;        // 房间数量
-  checkInDate: string      // 入住日期[11.6 11.7]
+  checkInDate: string;     // 入住日期[11.6 11.7]
+  note: string;            // 备注信息
 }
 
 const FormSchema: Schema = new Schema(
@@ -31,6 +32,7 @@ const FormSchema: Schema = new Schema(
     isNeedHotel: {type: String, },
     roomNum:  { type: Number},
     checkInDate: {type: String, },
+    note: {type: String, },
   },
   { collection: "forms", timestamps: true }
 );

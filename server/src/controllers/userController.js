@@ -84,7 +84,8 @@ var loginUser = function (req, res, next) { return __awaiter(void 0, void 0, voi
                 return [3 /*break*/, 5];
             case 4:
                 err_1 = _c.sent();
-                res.status(500).json({ message: "Something went wrong" });
+                // res.status(500).json({message: "Something went wrong"})
+                console.log(err_1);
                 return [3 /*break*/, 5];
             case 5: return [2 /*return*/];
         }

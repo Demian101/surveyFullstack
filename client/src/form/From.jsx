@@ -86,11 +86,15 @@ const From = (props) => {
   useEffect(()=>{
     if(data) { 
       const token = localStorage.getItem("submittedFlag");
-      if(token){
-        alert("您已提交过 ~ ")
+      const s_T = localStorage.getItem("submittedTime");
+      let diff = (Date.now() - s_T)/(1000 * 60 )
+      console.log(diff)
+      if(token && diff < 2  ){
+        alert("您已提交过，请等待 2 分钟后再提交。")
       }
       else{
         localStorage.setItem("submittedFlag", 'submitted');
+        localStorage.setItem("submittedTime", Date.now());        
         console.log('Post —— postForm ', data)
         postForm();
         alert("提交成功 ~ ")
@@ -121,7 +125,8 @@ const From = (props) => {
      console.log('e.target.value', e,v)
      setLanguage(v.value)
   }
-  console.log('i18next :', i18next.language)
+  // console.log('i18next :', i18next.language)
+  console.log('data', data)
   return (
     <>
       {selectDefault && 
@@ -336,6 +341,20 @@ const From = (props) => {
             className='mx-3'
           />
           <label htmlFor=''>11月7日</label>
+
+
+        <label className='text-gray-700 font-medium block mt-4'>备注：</label>
+        <textarea
+          rows={2}
+          className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
+          {...register("note")}
+        />
+        {errors?.note && (
+          <div className='mb-3 text-normal text-red-500 '>
+            {errors?.note.message}
+          </div>
+        )}
+
 
         <button
           className='mt-4 w-full rounded-md bg-black px-20  py-2 text-white border font-semibold text-md'

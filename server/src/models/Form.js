@@ -16,6 +16,7 @@ var FormSchema = new mongoose_1.Schema({
     isNeedHotel: { type: String, },
     roomNum: { type: Number },
     checkInDate: { type: String, },
+    note: { type: String, },
 }, { collection: "forms", timestamps: true });
 var Form = (0, mongoose_1.model)("User", FormSchema);
 exports.default = Form;

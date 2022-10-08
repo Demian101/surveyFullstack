@@ -33,6 +33,7 @@ const postInfo = async (req: Request, res: Response, next: NextFunction) => {
       isNeedHotel,
       roomNum,
       checkInDate,
+      note,
       } = req.body;
 
     console.log('postInfo - req.body: ' , req.body)
@@ -49,6 +50,7 @@ const postInfo = async (req: Request, res: Response, next: NextFunction) => {
       isNeedHotel,
       roomNum,
       checkInDate: checkInDate.toString(),
+      note,
     }
     const form_: IForm = new Form(formData);
     const savedForm = await form_.save();
@@ -92,9 +94,28 @@ const deleteForm = async (req: Request, res: Response) => {
   }
 };
 
+const modifyNote = async (req: Request, res: Response) => {
+  const id: string = req.params.id;
+  const { text } = req.body;
+  console.log('modifyNote - req.params.id', req.params.id)
+  try{
+    const form = await Form.findOne({_id: id});
+    if(form){
+      const modiFormById = await Form.findByIdAndUpdate(id, {note: text});
+      if(modiFormById){
+        res.status(200).json(modiFormById);
+      } else{res.status(500).send({ message: "Something goes wrong" });}
+    }
+  }
+  catch(err) {
+    console.log(err)
+    // res.status(500).send({ message: "Something goes wrong" });
+  }
+};
 
 export {
   postInfo,
   getInfo,
   deleteForm,
+  modifyNote,
 };
