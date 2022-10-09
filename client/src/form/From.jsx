@@ -56,6 +56,10 @@ const From = (props) => {
     setLanguage(i18next.language)
   },[i18next.language]);
 
+  const [isNeed, setIsNeed] = useState(false); // 是否需要酒店
+  const [isOnline, setIsOnline] = useState(false); // 线上 or 线下
+  
+
   // console.log(selectDefault)
   useEffect(()=>{
     const dv = options.filter( item =>{ return item.label === language })
@@ -66,10 +70,10 @@ const From = (props) => {
   },[language])
 
   const [postResult, setPostResult] = useState({'status':null, 'res':null});
-  const { register, errors, handleSubmit } = useForm();
+  const { register,  handleSubmit, formState: { errors } } = useForm();
   const [data, setData] = useState();
 
-
+  console.log('errors', errors)
   /* 
   console.log(props?.location?.state?.lang)
   const [language, setLanguage] = useState()
@@ -168,13 +172,18 @@ const From = (props) => {
         )}
 
         {/* Radios 单选 - 机构类型  */}
-        <label className='text-gray-700 font-medium block mt-4'>机构类型：</label>
+        <label className='text-gray-700 font-medium block mt-4'>*机构类型：</label>
+        {errors?.institution && (
+          <div className='text-normal text-red-500 '>
+            {errors?.institution.message}
+          </div>
+        )}
         <div> 
           <label className='ml-4 inline-block'>
             <input className='mt-4 mr-1'
                 value='高校、研究机构'
                 type='radio'
-                {...register("institution")}
+                {...register("institution", {'required': "This is required.",})}
               />高校、研究机构
         </label></div>
 
@@ -191,20 +200,16 @@ const From = (props) => {
               投资机构
           </label>
         </div>
-        {errors?.institution && (
-          <div className='mb-3 text-normal text-red-500 '>
-            {errors?.institution.message}
-          </div>
-        )}
+        
 
 
         {/* Radios 单选 - 就职单位名称： */}
-        <label className='text-gray-700 font-medium block mt-4'>就职单位名称：</label>
+        <label className='text-gray-700 font-medium block mt-4'>*就职单位名称：</label>
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
           type='text'
           placeholder=''
-          {...register("employedInstitution")}
+          {...register("employedInstitution" ,{'required': "This is required.",})}
         />
         {errors?.employedInstitution && (
           <div className='mb-3 text-normal text-red-500 '>
@@ -212,12 +217,12 @@ const From = (props) => {
           </div>
         )}
 
-      <label className='text-gray-700 font-medium block mt-4'>职务：</label>
+      <label className='text-gray-700 font-medium block mt-4'>*职务：</label>
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
           type='text'
           placeholder=''
-          {...register("position")}
+          {...register("position", {'required': "This is required.",})}
         />
         {errors?.position && (
           <div className='mb-3 text-normal text-red-500 '>
@@ -244,7 +249,7 @@ const From = (props) => {
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
           type='tel'
           placeholder='请填写手机号...'
-          {...register("tel", {required: true, minLength: 11, maxLength: 11})}
+          {...register("tel", {required: "Please enter your mobile number.", minLength: 11, maxLength: 11,})}
         />
         {errors?.tel && (
           <div className='mb-3 text-normal text-red-500 '>
@@ -253,31 +258,33 @@ const From = (props) => {
         )}
 
         {/*  Radios 单选 - 参与形式  */}
-        <label className='text-gray-700 font-medium block mt-4'>参会形式：</label>
+        <label className='text-gray-700 font-medium block mt-4'>*参会形式：</label>
+        {errors?.participation && (
+          <div className='text-normal text-red-500 '>
+            {errors?.participation.message}
+          </div>
+        )}
         <div> <label className='ml-4 inline-block'>
         <input
             className='mt-4 mr-1'
             value='线上'
             type='radio'
-            {...register("participation")}
+            onClick={()=>{ setIsOnline(false) }}
+            {...register("participation", {'required': "This is required.",})}
           />
           线上
         </label></div>
 
         <div><label className='ml-4 inline-block'>
-          <input className='mt-4 mr-1' type='radio' value='线下' {...register("participation")} />
+          <input className='mt-4 mr-1' type='radio' value='线下' {...register("participation")} 
+            onClick={()=>{ setIsOnline(true) }}/>
           线下
         </label></div>
-        {errors?.participation && (
-          <div className='mb-3 text-normal text-red-500 '>
-            {errors?.participation.message}
-          </div>
-        )}
       
 
 
-
-
+      {isOnline && 
+      <>
         <label className='text-gray-700 font-medium block mt-4'>随行人数：</label>
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
@@ -290,19 +297,22 @@ const From = (props) => {
           </div>
         )}
 
-        <label className='text-gray-700 font-medium block mt-4'>是否需要预定会议酒店（520￥/间）</label>
-        <p className='itelic font-thin text-gray-500 text-xs'>* 注：大会报告特邀嘉宾免房费，协办企业 2 人以内免房费</p>
+        <label className='text-gray-700 font-medium block mt-4'>是否需要预定会议酒店（￥520/间）</label>
+        <p className='itelic font-thin text-gray-500 text-xs'>*注：大会报告特邀嘉宾免房费，协办企业 2 人以内免房费</p>
         <label className='ml-4 inline-block'>
         <input
             className='mt-4 mr-1'
             value='是'
             type='radio'
+            onClick={()=>{ setIsNeed(true) }}
             {...register("isNeedHotel")}
           />是
         </label>
 
         <label className='ml-4 inline-block'>
-          <input className='mt-4 mr-1' type='radio' value='否' {...register("isNeedHotel")} />
+          <input className='mt-4 mr-1' type='radio' value='否' {...register("isNeedHotel")} 
+            onClick={()=>{ setIsNeed(false) }}
+          />
           否
         </label>
         {errors?.isNeedHotel && (
@@ -311,6 +321,8 @@ const From = (props) => {
           </div>
         )}
 
+      {isNeed &&
+      <>
         <label className='text-gray-700 font-medium block mt-4'>房间数量：</label>
         <input
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
@@ -335,13 +347,15 @@ const From = (props) => {
 
           <input
             type='checkbox'
-            value='11月7日'
-            placeholder='11月7日'
+            value='11月07日'
+            placeholder='11月07日'
             {...register('checkInDate')}
             className='mx-3'
           />
-          <label htmlFor=''>11月7日</label>
+          <label htmlFor=''>11月07日</label>
+        </> }
 
+        </>}
 
         <label className='text-gray-700 font-medium block mt-4'>备注：</label>
         <textarea
@@ -413,7 +427,7 @@ const From = (props) => {
             <input className='mt-4 mr-1'
                 value='高校、研究机构'
                 type='radio'
-                {...register("institution")}
+                {...register("institution", {required: true})}
               />University/Research Institution
         </label></div>
 
@@ -443,7 +457,7 @@ const From = (props) => {
           className='border-solid border-gray-300 border py-1 mt-1 px-4  w-full rounded text-gray-700'
           type='text'
           placeholder=''
-          {...register("employedInstitution")}
+          {...register("employedInstitution", {required: true })}
         />
         {errors?.employedInstitution && (
           <div className='mb-3 text-normal text-red-500 '>
