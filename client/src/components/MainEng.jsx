@@ -547,12 +547,13 @@ const MainEng = () =>{
       <div className='pl-[30px] grid grid-cols-1  pt-20 pb-6 text-gray-50 text-base' ref={aboutRef} >
         <img src={organization} className='w-[171pt] h-[14.5pt]' />
         <div className='pt-4'>
-          <span className='pt-4 inline' > Directed by Tianjin University Science and Technology Department of Zhejiang Province </span>  
+          <span className='pt-4 inline' > Directed by  Tianjin University;  Science and Technology Department of Zhejiang Province </span>  
         </div>
         <div className='pt-4'>
-          <span className='pt-4 inline' > Hosted by the People's Government of Hangzhou Qiantang New Area zhejiang TJU Alumni</span>
+          <span className='pt-4 inline' > Hosted by  Zhejiang Alumni of Tianjin University；Peiyang Begonia Fund</span>
         </div>
       </div>
+      
 
     <div className='w-screen h-auto bg-white pl-[30px] '>
       {/* <p className='font-bold text-lg py-8' > 承办单位：</p> */}
@@ -632,10 +633,10 @@ const MainEng = () =>{
 
         <div className='text-gray-50 text-base pl-16 pb-6 pt-8'>
           <div className='pt-4  '>
-            <span className='pt-4 inline' > Directed by Tianjin University Science and Technology Department of Zhejiang Province</span>  
+            <span className='pt-4 inline' > Directed by  Tianjin University;  Science and Technology Department of Zhejiang Province</span>  
           </div>
           <div className='pt-4'>
-            <span className='pt-4 inline' > Hosted by the People's Government of Hangzhou Qiantang New Area zhejiang TJU Alumni</span>  
+            <span className='pt-4 inline' > Hosted by  Zhejiang Alumni of Tianjin University；Peiyang Begonia Fund</span>  
           </div>
         </div>
       </div>

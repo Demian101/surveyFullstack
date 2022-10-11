@@ -505,24 +505,26 @@ const Main = () =>{
       <div className='pl-[30px] grid grid-cols-1  pt-20 pb-6 text-gray-50 text-base' ref={aboutRef} >
         <img src={organization} className='w-[100pt] h-[22pt]' />
         <div className='pt-4'>
-          <span className='pt-4 inline' > 指导单位： 天津大学 浙江省科技厅</span>  
+          <span className='pt-4 inline' > 指导单位： 浙江省科技厅 天津大学</span>  
         </div>
         <div className='pt-4'>
-          <span className='pt-4 inline' > 主办单位：   钱塘新区   天津大学浙江校友会</span>  
+          <span className='pt-4 inline' > 主办单位：   杭州市钱塘新区  杭州市科技局 </span>  
+          <p className='pl-[84px]'> 天津大学浙江校友会 北洋海棠基金    </p>      
         </div>
       </div>
 
     <div className='w-screen h-auto bg-white pl-[30px]'>
       <p className='font-bold text-lg py-8' > 承办单位：</p>
+      <p className='text-base  pb-8'> 杭州市钱塘区经济信息化和科学技术局</p>
       <img src={corpTianhua} className='w-[36pt] h-[24pt] mb-1'/>
       <p className='text-base'>浙江天化科技发展有限公司</p>
-      <p className='text-base  py-8'> 杭州市钱塘区经济信息化和科学技术局</p>
+     
+      <p className='font-bold text-lg py-8'> 企业社群：</p>
+      
+      {/* <img src={corpLvcheng} className='w-[65.5pt] h-[20pt] mb-1'/>
+      <p className='text-base'>  绿城科技产业服务集团有限公司</p> */}
 
-      <p className='font-bold text-lg py-8'> 协办单位：</p>
-      <img src={corpLvcheng} className='w-[65.5pt] h-[20pt] mb-1'/>
-      <p className='text-base'>  绿城科技产业服务集团有限公司</p>
-
-      <img src={CorpLianchuan} className='w-[65.5pt] h-[20pt] mb-1 mt-8'/>
+      <img src={CorpLianchuan} className='w-[65.5pt] h-[20pt] mb-1'/>
       <p className='text-base pb-8'>  杭州联川生物技术股份有限公司</p>
 
 
@@ -593,10 +595,10 @@ const Main = () =>{
 
         <div className='text-gray-50 text-base font-light pl-16 pb-6 pt-8'>
           <div className='pt-4  '>
-            <span className='pt-4 inline' > 指导单位： 天津大学 浙江省科技厅</span>  
+            <span className='pt-4 inline' > 指导单位： 浙江省科技厅  天津大学</span>  
           </div>
           <div className='pt-4'>
-            <span className='pt-4 inline' > 主办单位：   钱塘新区   天津大学浙江校友会</span>  
+            <span className='pt-4 inline' > 主办单位：   杭州市钱塘新区  杭州市科技局  天津大学浙江校友会  北洋海棠基金</span>  
           </div>
         </div>
       </div>
@@ -608,31 +610,30 @@ const Main = () =>{
           <tbody className="">
             <tr> 
               <td className="pt-[40px] text-left"> 承办单位：</td>
+              <td className='flex items-end pl-8'>
+                <div className='flex items-end'>
+                  <div><p className='text-base pt-10'> 杭州市钱塘区经济信息化和科学技术局</p></div>
+                </div>
+              </td>
               <td className="text-left pt-1 pl-8">
                 <div className=''>
                   <img src={corpTianhua} className='w-[36pt] h-[24pt] mb-1'/>
                   <p className='text-base'>浙江天化科技发展有限公司</p>  
                 </div>  
               </td>
-              <td className='flex items-end pl-8'>
-                <div className='flex items-end'>
-                  <div><p className='text-base pt-10'> 杭州市钱塘区经济信息化和科学技术局</p></div>
-                </div>
-              </td>
             </tr>
             <tr> 
-              <td className="pt-[40px] text-left"> 协办单位：</td>
-              <td className="text-left pt-1 pl-8">
-                <div className='pt-2'>
-                  <img src={corpLvcheng} className='w-[65.5pt] h-[20pt] mb-1'/>
-                  <p className='text-base'>  绿城科技产业服务集团有限公司</p>
-                </div>  
-              </td>
+              <td className="pt-[40px] text-left"> 企业社群</td>
+
               <td className='pl-8 pt-[10px]'>
                 <img src={CorpLianchuan} className='w-[65.5pt] h-[20pt] mb-1 mt-8'/>
                 <p className='text-base pb-8'>  杭州联川生物技术股份有限公司</p>
               </td>
-            </tr>
+              <td className="text-left pt-1 pl-8">
+                <div className='pt-2'>
+
+                </div>  
+              </td>            </tr>
 
             <tr> 
               <td className="pt-[40px] text-left"> </td>
