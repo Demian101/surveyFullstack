@@ -161,8 +161,7 @@ const Profile = () => {
                     <td className="p-2"> {item?.checkInDate} </td>
                     <td className="p-2"> 
                       {/* <img src={`data:image/png;base64,${item?.image}`} alt="Red dot" /> */}
-                      {item?.image && <img src={item?.image} alt="" className='w-36' />}
-                      
+                      {item?.image && <img src={item?.image} alt="" className='' />}
                     </td>
                     <Td note={item?.note} id={item?._id} />
                     {/* <td className="p-2 flex"> 

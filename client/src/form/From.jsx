@@ -63,8 +63,6 @@ const From = (props) => {
   const [isOnline, setIsOnline] = useState(false); // 线上 or 线下
   
 
-
-
   // console.log(selectDefault)
   useEffect(()=>{
     const dv = options.filter( item =>{ return item.label === language })
@@ -75,24 +73,16 @@ const From = (props) => {
   },[language])
 
   const [postResult, setPostResult] = useState({'status':null, 'res':null});
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, getValues, formState: { errors } } = useForm();
   // const { register: register_upload, watch, formState: { error: errors_upload } } = useForm({
   //   resolver: yupResolver(schema),
   // });
 
   const [data, setData] = useState();
-
-  console.log('errors', errors)
-  /* 
-  console.log(props?.location?.state?.lang)
-  const [language, setLanguage] = useState()
-  useEffect(()=>{
-    setLanguage(props.location.state.lang)
-  },[props.location.state.lang]);
-    */
-
   const [image, setImage] = useState("");   // 图片上传
-  
+  const filevalues = getValues('files')
+  console.log('error: ', errors)
+
   const convert2base64 = (file) => {
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -101,28 +91,35 @@ const From = (props) => {
     reader.readAsDataURL(file)
   }
 
+  useEffect(()=>{ 
+    if(filevalues && filevalues[0]){
+      console.log('filevalues[0]', filevalues[0])
+      convert2base64(filevalues[0])
+    }
+  }, [filevalues])
+
+  if(filevalues){  console.log('pic values', filevalues[0]) }
+  if(image){  console.log('image values', image.substring(0,15))   }
+  
   const onSubmit = async (data) => {
-    if(data.files.length > 0){
-      convert2base64(data.files[0])
-    }
-    if(image){
-      const final_data = data
-      final_data.image = image
-      console.log('final_data: ', final_data)
-      setData(final_data);
-    }
-    console.log('setData',data)
+    const final_data = data
+    final_data.image = image
+    console.log('onSubmit setData, ',  final_data)
+    setData(final_data);
+
   };
 
   useEffect(()=>{
+    console.log('useEffect postForm!!!!!!!  data.image', data?.image?.substr(0,10))
     if(data) { 
       const token = localStorage.getItem("submittedFlag");
       const s_T = localStorage.getItem("submittedTime");
       let diff = (Date.now() - s_T)/(1000 * 60 )
-      console.log(diff)
-      if(token && diff < 2  ){
+      // console.log(diff)
+      if(token && diff < 2   ){
         alert("您已提交过，请等待 2 分钟后再提交。")
       }
+      else if(!data.image){ console.log('data.image is null ......... ') }
       else{
         localStorage.setItem("submittedFlag", 'submitted');
         localStorage.setItem("submittedTime", Date.now());        
@@ -162,7 +159,7 @@ const From = (props) => {
     console.log('data.files', data?.files)
   },[data?.files])
 
-  console.log('data  image', data, image)
+  // console.log('data  image', data, image)
 
   return (
     <>

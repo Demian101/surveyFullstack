@@ -903,6 +903,20 @@ cp -r webbg ./assets
 
 
 
+```bash
+处理 Git：
+error: Your local changes to the following files would be overwritten by merge:
+
+#If you want remove all local changes - including files that are untracked by git - from your working copy, simply stash them:
+
+git stash push --include-untracked
+
+#If you don't need them anymore, you now can drop that stash:
+git stash drop
+```
+
+
+
 
 
 ## SEO robots.txt 文件
