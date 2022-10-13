@@ -5,9 +5,12 @@ import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
 import httpClient from "../api/http-common";
 import Select from 'react-select'
-
+import { AiOutlineCloudUpload } from "react-icons/ai";
 import i18next, { use } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
+// import * as yup from 'yup' 
+// import { yupResolver} from '@hookform/resolvers/yup'
+
 
 i18next.use(LanguageDetector).init({
   detection:{
@@ -60,6 +63,8 @@ const From = (props) => {
   const [isOnline, setIsOnline] = useState(false); // 线上 or 线下
   
 
+
+
   // console.log(selectDefault)
   useEffect(()=>{
     const dv = options.filter( item =>{ return item.label === language })
@@ -70,7 +75,11 @@ const From = (props) => {
   },[language])
 
   const [postResult, setPostResult] = useState({'status':null, 'res':null});
-  const { register,  handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  // const { register: register_upload, watch, formState: { error: errors_upload } } = useForm({
+  //   resolver: yupResolver(schema),
+  // });
+
   const [data, setData] = useState();
 
   console.log('errors', errors)
@@ -82,8 +91,26 @@ const From = (props) => {
   },[props.location.state.lang]);
     */
 
-  const onSubmit = async (data) => {    
-    setData(data);
+  const [image, setImage] = useState("");   // 图片上传
+  
+  const convert2base64 = (file) => {
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setImage(reader.result.toString());
+    };
+    reader.readAsDataURL(file)
+  }
+
+  const onSubmit = async (data) => {
+    if(data.files.length > 0){
+      convert2base64(data.files[0])
+    }
+    if(image){
+      const final_data = data
+      final_data.image = image
+      console.log('final_data: ', final_data)
+      setData(final_data);
+    }
     console.log('setData',data)
   };
 
@@ -130,7 +157,13 @@ const From = (props) => {
      setLanguage(v.value)
   }
   // console.log('i18next :', i18next.language)
-  console.log('data', data)
+
+  useEffect(()=>{
+    console.log('data.files', data?.files)
+  },[data?.files])
+
+  console.log('data  image', data, image)
+
   return (
     <>
       {selectDefault && 
@@ -281,7 +314,19 @@ const From = (props) => {
           线下
         </label></div>
       
-
+      {/* {!watch('files') || watch('files').length === 0 ? ( */}
+        <div className='text-gray-700 font-medium mt-4'>
+          { image && <img src={image} className='w-48' /> }
+          {/* <label id="fileupload" className='text-gray-700 font-medium block mt-4'>*参会形式：</label> */}
+          <input type="file" id='fileupload' {...register('files', {'required': '请上传“名片”图片。'})} className='hidden'/>
+          *<label htmlFor='fileupload'
+            className='cursor-pointer '> 
+            <span className='inline'>请上传“名片” </span>
+            <AiOutlineCloudUpload className='w-12 h-6 inline mx-2 bg-slate-300 rounded border-b border-r shadow' /> 
+          </label>
+          {errors?.files && <div className='mb-3 text-normal text-red-500'> {errors?.files.message}</div>}
+        </div>
+       { watch('files') && <strong>{ watch('files')[0]?.name}</strong> }
 
       {isOnline && 
       <>

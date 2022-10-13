@@ -55,7 +55,7 @@ var writeData = function (form) {
     }
 };
 var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name_1, employedInstitution, position, email, tel, institution, participation, num, isNeedHotel, roomNum, checkInDate, note, formData, form_, savedForm, err_1;
+    var _a, name_1, employedInstitution, position, email, tel, institution, participation, num, isNeedHotel, roomNum, checkInDate, note, image, formData, form_, savedForm, err_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
@@ -64,8 +64,9 @@ var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void
                     res.status(500).json({ "Message": "Pls write name or email!" });
                 }
                 console.log('req.ip : ', req.ip);
-                _a = req.body, name_1 = _a.name, employedInstitution = _a.employedInstitution, position = _a.position, email = _a.email, tel = _a.tel, institution = _a.institution, participation = _a.participation, num = _a.num, isNeedHotel = _a.isNeedHotel, roomNum = _a.roomNum, checkInDate = _a.checkInDate, note = _a.note;
+                _a = req.body, name_1 = _a.name, employedInstitution = _a.employedInstitution, position = _a.position, email = _a.email, tel = _a.tel, institution = _a.institution, participation = _a.participation, num = _a.num, isNeedHotel = _a.isNeedHotel, roomNum = _a.roomNum, checkInDate = _a.checkInDate, note = _a.note, image = _a.image;
                 console.log('postInfo - req.body: ', req.body);
+                console.log('user\'s image', image);
                 formData = {
                     name: name_1,
                     employedInstitution: employedInstitution,
@@ -77,8 +78,9 @@ var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void
                     num: num,
                     isNeedHotel: isNeedHotel,
                     roomNum: roomNum,
-                    checkInDate: checkInDate.toString(),
+                    checkInDate: checkInDate === null || checkInDate === void 0 ? void 0 : checkInDate.toString(),
                     note: note,
+                    image: image,
                 };
                 form_ = new Form_1.default(formData);
                 return [4 /*yield*/, form_.save()];
@@ -168,7 +170,10 @@ var modifyNote = function (req, res) { return __awaiter(void 0, void 0, void 0, 
             case 3:
                 modiFormById = _a.sent();
                 if (modiFormById) {
-                    res.status(200).json({ message: "Form deleted successfully" });
+                    res.status(200).json(modiFormById);
+                }
+                else {
+                    res.status(500).send({ message: "Something goes wrong" });
                 }
                 _a.label = 4;
             case 4: return [3 /*break*/, 6];

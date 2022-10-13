@@ -383,6 +383,11 @@
   dependencies:
     "@floating-ui/core" "^1.0.1"
 
+"@hookform/resolvers@^2.9.8":
+  "integrity" "sha512-iVVjH0USq+1TqDdGkWe2M1x7Wn5OFPgVRo7CbWFsXTqqXqCaZtZcnzJu+UhljCWbthFWxWGXKLGYUDPZ04oVvQ=="
+  "resolved" "https://registry.npmmirror.com/@hookform/resolvers/-/resolvers-2.9.8.tgz"
+  "version" "2.9.8"
+
 "@jridgewell/resolve-uri@^3.0.3":
   "integrity" "sha512-VPeQ7+wH0itvQxnG+lIzWgkysKIr3L9sslimFW55rHMdGu/qCQ5z5h9zq4gI8uBtqkpHhsF4Z/OwExufUCThew=="
   "resolved" "https://registry.npmjs.org/@jridgewell/resolve-uri/-/resolve-uri-3.0.5.tgz"
@@ -2546,7 +2551,7 @@
     "loose-envify" "^1.1.0"
     "scheduler" "^0.23.0"
 
-"react-hook-form@^7.35.0":
+"react-hook-form@^7.0.0", "react-hook-form@^7.35.0":
   "integrity" "sha512-9CYdOed+Itbiu5VMVxW0PK9mBR3f0gDGJcZEyUSm0eJbDymQ913TRs2gHcQZZmfTC+rtxyDFRuelMxx/+xwMcw=="
   "resolved" "https://registry.npmmirror.com/react-hook-form/-/react-hook-form-7.35.0.tgz"
   "version" "7.35.0"

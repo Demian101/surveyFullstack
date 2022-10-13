@@ -34,10 +34,11 @@ const postInfo = async (req: Request, res: Response, next: NextFunction) => {
       roomNum,
       checkInDate,
       note,
-      } = req.body;
+      image,
+    } = req.body;
 
     console.log('postInfo - req.body: ' , req.body)
-
+    // console.log('user\'s image', image)
     const formData = { 
       name,
       employedInstitution,
@@ -49,8 +50,9 @@ const postInfo = async (req: Request, res: Response, next: NextFunction) => {
       num,
       isNeedHotel,
       roomNum,
-      checkInDate: checkInDate.toString(),
+      checkInDate: checkInDate?.toString(),
       note,
+      image,
     }
     const form_: IForm = new Form(formData);
     const savedForm = await form_.save();
@@ -59,8 +61,8 @@ const postInfo = async (req: Request, res: Response, next: NextFunction) => {
     res.json(savedForm)
   }
   catch(err){
-    console.log("error: ------- ", err);
-    // res.status(500).json( {message: "Something went wrong"} )
+    // console.log("error: ------- ", err);
+    res.status(500).json( {message: "Something went wrong"} )
   }
 };
 
@@ -108,8 +110,8 @@ const modifyNote = async (req: Request, res: Response) => {
     }
   }
   catch(err) {
-    console.log(err)
-    // res.status(500).send({ message: "Something goes wrong" });
+    // console.log(err)
+    res.status(500).send({ message: "Something goes wrong" });
   }
 };
 

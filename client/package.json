@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@emotion/styled": "^11.10.4",
+    "@hookform/resolvers": "^2.9.8",
     "@mui/material": "^5.10.5",
     "@reduxjs/toolkit": "^1.8.5",
     "antd-mobile": "^5.23.0",

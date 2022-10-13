@@ -8,7 +8,8 @@ var router = (0, express_1.Router)();
 router
     .route("/") // 39.105.169.246/form...
     .post(formController_1.postInfo)
-    .get(authenticate_1.authGuard, formController_1.getInfo); // 登录后才能获取 form 数据。
+    // .get(authGuard, getInfo)  // 登录后才能获取 form 数据。
+    .get(formController_1.getInfo); // 登录后才能获取 form 数据。
 router.route('/:id').delete(authenticate_1.authGuard, formController_1.deleteForm);
-router.route('/:id/note').put(formController_1.modifyNote);
+router.route('/:id/note').put(authenticate_1.authGuard, formController_1.modifyNote);
 exports.default = router;

@@ -5,7 +5,7 @@ import httpClient from "../api/http-common";
 
 
 const Td = ( {note, id} ) => {
-  console.log('TD note id', id, note)
+  // console.log('TD note id', id, note)
 
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(id);
@@ -22,10 +22,10 @@ const Td = ( {note, id} ) => {
     // e.preventDefault();
     setIsEditing((prevalue) => !prevalue);
   };
-  console.log('isEditing', isEditing, 'text', text)
+
   return(
     <td className='flex justify-between'>
-      { isEditing ? <textarea rows={2} value={text} onChange={(e)=>setText(e.target.value)} className='' autoFocus /> : <span className="p-2">{text}</span>  }
+      { isEditing ? <textarea rows={2} value={text} onChange={(e)=>setText(e.target.value)} className='p-1' autoFocus /> : <span className="p-2">{text}</span>  }
 
       {/* 2 buttons  */}
       { isEditing ? (

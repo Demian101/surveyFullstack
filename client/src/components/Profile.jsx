@@ -123,6 +123,9 @@ const Profile = () => {
                   <div className="font-semibold text-center">入住时间</div>
                 </th>
                 <th className="p-2">
+                  <div className="font-semibold text-center">名片</div>
+                </th>
+                <th className="p-2">
                   <div className="font-semibold text-center">备注</div>
                   {/* <button className=' bg-slate-300 rounded-md px-4 py-1 ml-2  text-cyan-900 font-extrabold text-sm shadow-md border-r border-b'> 更改 </button> */}
                 </th>
@@ -156,6 +159,11 @@ const Profile = () => {
                     <td className="p-2"> {item?.isNeedHotel} </td>
                     <td className="p-2"> {item?.roomNum} </td>
                     <td className="p-2"> {item?.checkInDate} </td>
+                    <td className="p-2"> 
+                      {/* <img src={`data:image/png;base64,${item?.image}`} alt="Red dot" /> */}
+                      {item?.image && <img src={item?.image} alt="" className='w-36' />}
+                      
+                    </td>
                     <Td note={item?.note} id={item?._id} />
                     {/* <td className="p-2 flex"> 
                      <button onClick={()=>{ setToggl((pre)=>{setToggl(!pre)}); setCurid(item?._id);console.log(item?._id) }}
