@@ -35,6 +35,7 @@ const postInfo = async (req: Request, res: Response, next: NextFunction) => {
       checkInDate,
       note,
       image,
+      knowchnl
     } = req.body;
 
     console.log('postInfo - req.body: ' , req.body)
@@ -53,6 +54,7 @@ const postInfo = async (req: Request, res: Response, next: NextFunction) => {
       checkInDate: checkInDate?.toString(),
       note,
       image,
+      knowchnl
     }
     const form_: IForm = new Form(formData);
     const savedForm = await form_.save();

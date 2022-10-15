@@ -93,13 +93,15 @@ const From = (props) => {
 
   useEffect(()=>{ 
     if(filevalues && filevalues[0]){
-      console.log('filevalues[0]', filevalues[0])
+      // console.log('filevalues[0]', filevalues[0])
       convert2base64(filevalues[0])
     }
   }, [filevalues])
 
-  if(filevalues){  console.log('pic values', filevalues[0]) }
-  if(image){  console.log('image values', image.substring(0,15))   }
+  if(filevalues){  // console.log('pic values', filevalues[0]) 
+  }
+  if(image){  //console.log('image values', image.substring(0,15))   
+  }
   
   const onSubmit = async (data) => {
     const final_data = data
@@ -110,7 +112,7 @@ const From = (props) => {
   };
 
   useEffect(()=>{
-    console.log('useEffect postForm!!!!!!!  data.image', data?.image?.substr(0,10))
+    // console.log('useEffect postForm!!!!!!!  data.image', data?.image?.substr(0,10))
     if(data) { 
       const token = localStorage.getItem("submittedFlag");
       const s_T = localStorage.getItem("submittedTime");
@@ -150,16 +152,31 @@ const From = (props) => {
 
 
   const languageHandler = (v, e) => {
-     console.log('e.target.value', e,v)
+    //  console.log('e.target.value', e,v)
      setLanguage(v.value)
   }
   // console.log('i18next :', i18next.language)
 
   useEffect(()=>{
-    console.log('data.files', data?.files)
+    // console.log('data.files', data?.files)
   },[data?.files])
 
   // console.log('data  image', data, image)
+
+  const [isChnlChecked, setIsChnlChecked] = useState(false);
+  const [checkedValue, setCheckedValue] = useState("");
+
+  const chnlOnChange = (e) => {
+    // console.log('chnlOnChange', e.target.value) 
+    if(e.target.value){
+      setIsChnlChecked(true)
+      setCheckedValue(e.target.value)
+    }
+  }
+  const setInputValue = (e) => {
+    // console.log(' setInputValue e.target.value', e.target.value)
+    setCheckedValue(e.target.value)
+  }
 
   return (
     <>
@@ -182,7 +199,7 @@ const From = (props) => {
       <h1 className="text-center text-2xl font-medium">前沿科技论坛（杭州）</h1>
       
     <form
-        className='max-w-xl m-auto py-10 mt-10 px-12 border text-gray-700'
+        className='w-screen m-auto py-10 mt-10 px-8 border text-gray-700'  // max-w-xl
         onSubmit={handleSubmit(onSubmit)}
       >
         <p className="mb-3 text-gray-500">报名表单填写：</p>
@@ -209,8 +226,8 @@ const From = (props) => {
           </div>
         )}
         <div> 
-          <label className='ml-4 inline-block'>
-            <input className='mt-4 mr-1'
+          <label className='ml-4 inline-block text-sm'>
+            <input className='mt-2 mr-1'
                 value='高校、研究机构'
                 type='radio'
                 {...register("institution", {'required': "This is required.",})}
@@ -218,15 +235,15 @@ const From = (props) => {
         </label></div>
 
         <div>
-          <label className='ml-4 inline-block'>
-            <input className='mt-4 mr-1' type='radio' value='企业' {...register("institution")} />
+          <label className='ml-4 inline-block text-sm'>
+            <input className='mt-2 mr-1' type='radio' value='企业' {...register("institution")} />
             企业
           </label>
         </div>
 
         <div>
-          <label className='ml-4 inline-block'>
-            <input className='mt-4 mr-1' type='radio' value='投资机构' {...register("institution")} />
+          <label className='ml-4 inline-block text-sm'>
+            <input className='mt-2 mr-1' type='radio' value='投资机构' {...register("institution")} />
               投资机构
           </label>
         </div>
@@ -294,9 +311,9 @@ const From = (props) => {
             {errors?.participation.message}
           </div>
         )}
-        <div> <label className='ml-4 inline-block'>
+        <div> <label className='ml-4 inline-block text-sm'>
         <input
-            className='mt-4 mr-1'
+            className='mt-2 mr-1'
             value='线上'
             type='radio'
             onClick={()=>{ setIsOnline(false) }}
@@ -305,8 +322,8 @@ const From = (props) => {
           线上
         </label></div>
 
-        <div><label className='ml-4 inline-block'>
-          <input className='mt-4 mr-1' type='radio' value='线下' {...register("participation")} 
+        <div><label className='ml-4 inline-block text-sm'>
+          <input className='mt-2 mr-1' type='radio' value='线下' {...register("participation")} 
             onClick={()=>{ setIsOnline(true) }}/>
           线下
         </label></div>
@@ -341,9 +358,9 @@ const From = (props) => {
 
         <label className='text-gray-700 font-medium block mt-4'>是否需要预定会议酒店（￥520/间）</label>
         <p className='itelic font-thin text-gray-500 text-xs'>*注：大会报告特邀嘉宾免房费，协办企业 2 人以内免房费</p>
-        <label className='ml-4 inline-block'>
+        <label className='ml-4 inline-block text-sm'>
         <input
-            className='mt-4 mr-1'
+            className='mt-2 mr-1'
             value='是'
             type='radio'
             onClick={()=>{ setIsNeed(true) }}
@@ -351,8 +368,8 @@ const From = (props) => {
           />是
         </label>
 
-        <label className='ml-4 inline-block'>
-          <input className='mt-4 mr-1' type='radio' value='否' {...register("isNeedHotel")} 
+        <label className='ml-4 inline-block text-sm'>
+          <input className='mt-2 mr-1' type='radio' value='否' {...register("isNeedHotel")} 
             onClick={()=>{ setIsNeed(false) }}
           />
           否
@@ -398,6 +415,46 @@ const From = (props) => {
         </> }
 
         </>}
+      
+      <div onChange={(e) => chnlOnChange(e)}>
+        <label className='text-gray-700 font-medium block mt-4'>*通过何种渠道了解到会议：</label>
+        <label className='ml-4 inline-block  text-sm'>
+          <input className='mt-2 mr-1' type='radio' value='会务方邀请' {...register("knowchnl", {'required': "This is required.",})} />会务方邀请
+        </label>
+        <label className='ml-4 inline-block  text-sm'>
+          <input className='mt-2 mr-1' type='radio' value='投资机构推荐' {...register("knowchnl")} />投资机构推荐
+        </label>
+        <label className='ml-4 inline-block  text-sm'>
+          <input className='mt-2 mr-1' type='radio' value='高校研究院所推荐' {...register("knowchnl")} />高校研究院所推荐
+        </label>
+        <label className='ml-4 inline-block  text-sm'>
+          <input className='mt-2 mr-1' type='radio' value='企业推荐' {...register("knowchnl")} />企业推荐
+        </label>
+        <label className='ml-4 inline-block  text-sm'>
+          <input className='mt-2 mr-1' type='radio' value='公司委派参会' {...register("knowchnl")} />公司委派参会
+        </label>
+        <label className='ml-4 inline-block  text-sm'>
+          <input className='mt-2 mr-1' type='radio' value='公众号' {...register("knowchnl")} />公众号
+        </label>
+        <label className='ml-4 inline-block  text-sm'>
+          <input className='mt-2 mr-1' type='radio' value='deeptech' {...register("knowchnl")} />deeptech
+        </label>
+      </div>
+      {!isChnlChecked &&
+        <div onChange={ (e) => setInputValue(e) }> 
+        <label className='ml-4 inline-block  text-sm'>其他：
+          <input className='mt-1 border-solid border-gray-300 border  rounded text-gray-700'
+            type='text'
+            value={checkedValue}
+            {...register("knowchnl")} /> 
+        </label>
+      </div>
+      }
+      {errors?.knowchnl && (
+          <div className='mb-3 text-normal text-red-500 '>
+            {errors?.knowchnl.message}
+          </div>
+      )}
 
         <label className='text-gray-700 font-medium block mt-4'>备注：</label>
         <textarea
@@ -411,24 +468,11 @@ const From = (props) => {
           </div>
         )}
 
-
         <button
           className='mt-4 w-full rounded-md bg-black px-20  py-2 text-white border font-semibold text-md'
           type='submit'
         > 提交
         </button>
-
-      {/* 
-      随行人数 
-        是否需要预定会议酒店 （520￥/间）
-        
-        房间数量
-        入住天数（勾选日期） 
-          
-          11月07日
-      */}
-
-      
       </form>
       </>
     )
@@ -436,8 +480,25 @@ const From = (props) => {
     
 
 
+
+
+
+
+
+
+
     :
     
+
+
+
+
+
+
+
+
+
+
     (
       <>
       <h1 className="pt-20 text-center text-3xl font-medium">International Forum on Chemical Synthetic Biology (Hangzhou)</h1>
@@ -465,8 +526,8 @@ const From = (props) => {
         {/* Radios 单选 - 机构类型  */}
         <label className='text-gray-700 font-medium block mt-4'>Type of your employer:</label>
         <div> 
-          <label className='ml-4 inline-block'>
-            <input className='mt-4 mr-1'
+          <label className='ml-4 inline-block text-sm'>
+            <input className='mt-2 mr-1'
                 value='高校、研究机构'
                 type='radio'
                 {...register("institution", {required: true})}
@@ -474,14 +535,14 @@ const From = (props) => {
         </label></div>
 
         <div>
-          <label className='ml-4 inline-block'>
-            <input className='mt-4 mr-1' type='radio' value='企业' {...register("institution")} />
+          <label className='ml-4 inline-block text-sm'>
+            <input className='mt-2 mr-1' type='radio' value='企业' {...register("institution")} />
             Industry
           </label>
         </div>
 
         <div>
-          <label className='ml-4 inline-block'>
+          <label className='ml-4 inline-block text-sm'>
             <input className='mt-4 mr-1' type='radio' value='投资机构' {...register("institution")} />
               Investment Institution
           </label>
@@ -534,7 +595,7 @@ const From = (props) => {
 
         {/*  Radios 单选 - 参与形式  */}
         <label className='text-gray-700 font-medium block mt-4'>Form of Participation:</label>
-        <div> <label className='ml-4 inline-block'>
+        <div> <label className='ml-4 inline-block text-sm'>
         <input
             className='mt-4 mr-1'
             value='线上'
@@ -544,7 +605,7 @@ const From = (props) => {
           online
         </label></div>
 
-        <div><label className='ml-4 inline-block'>
+        <div><label className='ml-4 inline-block text-sm'>
           <input className='mt-4 mr-1' type='radio' value='线下' {...register("participation")} />
           offline
         </label></div>

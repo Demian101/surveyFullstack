@@ -15,6 +15,7 @@ export interface IForm extends Document {
   checkInDate: string;     // 入住日期[11.6 11.7]
   note: string;            // 备注信息
   image: string;           // 名片
+  knowchnl: string;        // 获知渠道
 }
 
 const FormSchema: Schema = new Schema(
@@ -35,6 +36,7 @@ const FormSchema: Schema = new Schema(
     checkInDate: {type: String, },
     note: {type: String, },
     image: {type: String, },
+    knowchnl: {type: String, },
     
   },
   { collection: "forms", timestamps: true }
