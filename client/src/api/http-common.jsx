@@ -2,10 +2,11 @@ import axios from "axios";
 import store from '../store';
 import { logout } from "../store/reducer/authSlice";
 
+export const baseURL = "http://localhost:8080/api"  // Mac 测试用的 API
+// export const baseURL = "http://39.105.169.246/api"  // 服务器在用的 API
 
 const httpClient = axios.create({
-  // baseURL: "http://localhost:8080/api",     // Mac 测试用的 API
-  baseURL: "http://39.105.169.246/api",  // 服务器在用的 API
+  baseURL: baseURL,
 })
 
 httpClient.interceptors.request.use(
@@ -13,11 +14,12 @@ httpClient.interceptors.request.use(
     const token = store.getState().auth.token
     // console.log('Before AxiosAPI.interceptors.request token:' ,token)
 
-    if(token){
-      config.headers =  {
+    if (token) {
+      config.headers = {
         "Content-type": "application/json",
         "Authorization": `Bearer ${token}`,
-    }}
+      }
+    }
     return config
   },
   error => {
@@ -29,7 +31,7 @@ httpClient.interceptors.request.use(
  */
 httpClient.interceptors.response.use(
   response => response,
-  async(error) => {
+  async (error) => {
     if (error?.response?.status === 401) {  // 401 Unauthorized - 身份认证失败
       // store.dispatch(logoutUser());
       console.log('error?.response?.status', error?.response?.status);

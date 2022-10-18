@@ -1010,3 +1010,29 @@ script {
 - address 0x1  是另一种（配置 address）的写法
 - struct Empty {}  说明可以建一个空的 Struct ， ps：后面不需要加分号 ; 
 - sid , sage, ssex 是比较推荐的标准写法;
+
+
+
+
+
+
+
+# 记得删除：
+
+AccessKeyID=LTAI5tJScBToey9DgkdCcFAZ
+
+AccessKeySecret=HGq8MJyt4Uu5PEfJ8S67iv8MJN20Y7
+
+Bucket=imagesoda
+
+
+
+https://imagesoda.oss-cn-beijing.aliyuncs.com/15752293-506b32827c3e6799.jpg
+
+
+
+
+
+ssh [root@39.105.169.246](mailto:root@39.105.169.246)
+
+ALYZFXq!*985

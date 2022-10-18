@@ -42,7 +42,26 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.modifyNote = exports.deleteForm = exports.getInfo = exports.postInfo = void 0;
 var Form_1 = __importDefault(require("../models/Form"));
 var node_fs_1 = require("node:fs");
-//写入文件，会完全替换之前 JSON 文件中的内容
+require('dotenv').config();
+var multer = require('multer'); // multer是一个node.js文件上传中间件,有了他才能读取到文件
+var co = require('co'); // co 模块，它基于 ES6 的 generator 和 yield ，让我们能用同步的形式编写异步代码。
+var OSS = require('ali-oss'); // oss上传所需模块
+var fs = require('fs'); // fs可以对文件进行操作
+var client = new OSS({
+    region: process.env.Region,
+    accessKeyId: process.env.AccessKeyID,
+    accessKeySecret: process.env.AccessKeySecret,
+    bucket: process.env.Bucket, // 存储库名称
+});
+var ali_oss = {
+    endPoint: 'imagesoda.oss-cn-beijing.aliyuncs.com',
+    bucket: 'imagesoda'
+};
+// 文件暂存本地文件夹-自动生成./tmp/
+var upload = multer({
+    dest: './public/'
+});
+// 写入文件，会完全替换之前 JSON 文件中的内容
 var writeData = function (form) {
     var datapath = "/home/soda/data.json";
     try {
@@ -55,18 +74,70 @@ var writeData = function (form) {
     }
 };
 var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void 0, function () {
-    var _a, name_1, employedInstitution, position, email, tel, institution, participation, num, isNeedHotel, roomNum, checkInDate, note, image, formData, form_, savedForm, err_1;
+    var _a, name_1, employedInstitution, position, email, tel, institution, participation, num, isNeedHotel, roomNum, checkInDate, note, knowchnl, files, myFirstfile, temp, filePath, fileType, lastName, fileName_1, localFile_1, formData, form_, savedForm, err_1;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                _b.trys.push([0, 2, , 3]);
-                if (!req.body.name || !req.body.email) {
-                    res.status(500).json({ "Message": "Pls write name or email!" });
-                }
-                console.log('req.ip : ', req.ip);
-                _a = req.body, name_1 = _a.name, employedInstitution = _a.employedInstitution, position = _a.position, email = _a.email, tel = _a.tel, institution = _a.institution, participation = _a.participation, num = _a.num, isNeedHotel = _a.isNeedHotel, roomNum = _a.roomNum, checkInDate = _a.checkInDate, note = _a.note, image = _a.image;
+                console.log('req.files', req.files);
                 console.log('postInfo - req.body: ', req.body);
-                console.log('user\'s image', image);
+                _b.label = 1;
+            case 1:
+                _b.trys.push([1, 5, , 6]);
+                if (!(!req.body.name || !req.body.email)) return [3 /*break*/, 2];
+                res.status(500).json({ "Message": "Pls write name or email!" });
+                return [3 /*break*/, 4];
+            case 2:
+                _a = req.body, name_1 = _a.name, employedInstitution = _a.employedInstitution, position = _a.position, email = _a.email, tel = _a.tel, institution = _a.institution, participation = _a.participation, num = _a.num, isNeedHotel = _a.isNeedHotel, roomNum = _a.roomNum, checkInDate = _a.checkInDate, note = _a.note, knowchnl = _a.knowchnl;
+                files = req.files;
+                myFirstfile = files[0];
+                console.log('myFirstfile', myFirstfile);
+                temp = myFirstfile.originalname.split('.');
+                filePath = myFirstfile.path;
+                fileType = '';
+                if (temp) {
+                    fileType = temp[(temp === null || temp === void 0 ? void 0 : temp.length) - 1];
+                }
+                lastName = '.' + fileType;
+                fileName_1 = Date.now() + lastName;
+                console.log('fileType', fileType); // jpg
+                console.log('fileName', fileName_1); // 1666022143598.jpg
+                localFile_1 = './' + fileName_1;
+                // 图片重命名
+                fs.rename(filePath, fileName_1, function (err) {
+                    if (err) {
+                        res.json({
+                            code: 403,
+                            message: '文件写入失败(重命名失败)'
+                        });
+                    }
+                    else {
+                        // let localFile = './' + fileName;
+                        // 上传到指定目录（/imgs/2021-11-27/1637994928002.jpg）
+                        // 将文件上传到指定目录,需要输入目录名称。
+                        // 若输入的目录不存在,OSS将自动创建对应的文件目录并将文件上传到该目录中。
+                        var key_1 = fileName_1;
+                        console.log('key', key_1);
+                        // 阿里云 上传文件
+                        co(function () {
+                            var result;
+                            return __generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        client.useBucket(ali_oss.bucket);
+                                        return [4 /*yield*/, client.put(key_1, localFile_1)];
+                                    case 1:
+                                        result = _a.sent();
+                                        // 上传成功返回图片路径域名-域名修改成自己绑定到oss的
+                                        console.log('result', result);
+                                        return [2 /*return*/];
+                                }
+                            });
+                        }).catch(function (err) {
+                            // 上传之后删除本地文件
+                            // fs.unlinkSync(localFile);
+                        });
+                    }
+                });
                 formData = {
                     name: name_1,
                     employedInstitution: employedInstitution,
@@ -80,20 +151,23 @@ var postInfo = function (req, res, next) { return __awaiter(void 0, void 0, void
                     roomNum: roomNum,
                     checkInDate: checkInDate === null || checkInDate === void 0 ? void 0 : checkInDate.toString(),
                     note: note,
-                    image: image,
+                    knowchnl: knowchnl,
+                    image: "http://imagesoda.oss-cn-beijing.aliyuncs.com/".concat(fileName_1)
                 };
                 form_ = new Form_1.default(formData);
                 return [4 /*yield*/, form_.save()];
-            case 1:
+            case 3:
                 savedForm = _b.sent();
-                writeData(formData);
+                // writeData(formData);
                 res.json(savedForm);
-                return [3 /*break*/, 3];
-            case 2:
+                _b.label = 4;
+            case 4: return [3 /*break*/, 6];
+            case 5:
                 err_1 = _b.sent();
-                console.log("error: ------- ", err_1);
-                return [3 /*break*/, 3];
-            case 3: return [2 /*return*/];
+                // console.log("error: ------- ", err);
+                res.status(500).json({ message: "Something went wrong" });
+                return [3 /*break*/, 6];
+            case 6: return [2 /*return*/];
         }
     });
 }); };
@@ -179,7 +253,8 @@ var modifyNote = function (req, res) { return __awaiter(void 0, void 0, void 0, 
             case 4: return [3 /*break*/, 6];
             case 5:
                 err_4 = _a.sent();
-                console.log(err_4);
+                // console.log(err)
+                res.status(500).send({ message: "Something goes wrong" });
                 return [3 /*break*/, 6];
             case 6: return [2 /*return*/];
         }

@@ -3,14 +3,14 @@ import React, { useState } from "react";
 import { useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { useMutation, useQuery } from "react-query";
-import httpClient from "../api/http-common";
+import httpClient, { baseURL } from "../api/http-common";
 import Select from 'react-select'
 import { AiOutlineCloudUpload } from "react-icons/ai";
 import i18next, { use } from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 // import * as yup from 'yup' 
 // import { yupResolver} from '@hookform/resolvers/yup'
-
+import axios from 'axios'
 
 i18next.use(LanguageDetector).init({
   detection: {
@@ -43,7 +43,7 @@ i18next.use(LanguageDetector).init({
 
 
 
-const From = (props) => {
+const Form = (props) => {
 
   // 如果需要自己判断的话，原来的逻辑
   const options = [
@@ -52,13 +52,19 @@ const From = (props) => {
   ]
 
   const [language, setLanguage] = useState("zh-CN");
-  // const [language, setLanguage] = useState("en-US")
+  const [selectDefault, setSelectDefault] = useState();  // 语言选择
 
-  const [selectDefault, setSelectDefault] = useState();
+  const languageHandler = (v, e) => {
+    //  console.log('e.target.value', e,v)
+    setLanguage(v.value)
+  }
+
   useEffect(() => {
     setLanguage(i18next.language)
   }, [i18next.language]);
 
+  const [data, setData] = useState();  // set Formdata
+  const [image, setImage] = useState("");   // 图片上传
   const [isNeed, setIsNeed] = useState(false); // 是否需要酒店
   const [isOnline, setIsOnline] = useState(false); // 线上 or 线下
 
@@ -74,15 +80,9 @@ const From = (props) => {
 
   const [postResult, setPostResult] = useState({ 'status': null, 'res': null });
   const { register, handleSubmit, watch, getValues, formState: { errors } } = useForm();
-  // const { register: register_upload, watch, formState: { error: errors_upload } } = useForm({
-  //   resolver: yupResolver(schema),
-  // });
 
-  const [data, setData] = useState();
-  const [image, setImage] = useState("");   // 图片上传
+
   const filevalues = getValues('files')
-  console.log('error: ', errors)
-
   const convert2base64 = (file) => {
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -93,23 +93,45 @@ const From = (props) => {
 
   useEffect(() => {
     if (filevalues && filevalues[0]) {
-      // console.log('filevalues[0]', filevalues[0])
       convert2base64(filevalues[0])
     }
   }, [filevalues])
 
-  if (filevalues) {  // console.log('pic values', filevalues[0]) 
-  }
-  if (image) {  //console.log('image values', image.substring(0,15))   
-  }
-
   const onSubmit = async (data) => {
-    const final_data = data
-    final_data.image = image
-    console.log('onSubmit setData, ', final_data)
-    setData(final_data);
+    const formData = new FormData();
+    formData.append("files", data.files[0]);
+    // formData.append("name", data.name);    // formData.append("email", data.email);
+    const keys = Object.keys(data);
+    keys.forEach((key, index) => {
+      formData.append(key, data[key]);
+    });
+
+    setData(formData);
 
   };
+
+  const postFormdata = async (formData) => {
+    // const [_, formData] = queryKey    // 解构出 formData
+    console.log('postFormdata 里的 formData', formData)
+    const res = await fetch(`${baseURL}/form`, {
+      method: "POST",
+      headers: {
+        Accept: "multipart/form-data",
+      },
+      body: formData,
+    }).then((res) => res.json());
+    return res
+  }
+
+  const { isLoading: isPostingTutorial, mutate: postForm } = useMutation(
+    ['postForm', data],
+    () => postFormdata(data),
+    {
+      onSuccess: (res) => { setPostResult({ status: 'success', res: res }) },
+      onError: (err) => { setPostResult({ status: 'error', res: err.response?.data || err }); },
+      staleTime: 1000 * 60
+    }
+  );
 
   useEffect(() => {
     // console.log('useEffect postForm!!!!!!!  data.image', data?.image?.substr(0,10))
@@ -121,7 +143,7 @@ const From = (props) => {
       if (token && diff < 2) {
         alert("您已提交过，请等待 2 分钟后再提交。")
       }
-      else if (!data.image) { console.log('data.image is null ......... ') }
+      // else if (!data.image) { console.log('data.image is null ......... ') }
       else {
         localStorage.setItem("submittedFlag", 'submitted');
         localStorage.setItem("submittedTime", Date.now());
@@ -132,37 +154,8 @@ const From = (props) => {
     }
   }, [data]);
 
-  const { isLoading: isPostingTutorial, mutate: postForm } = useMutation(
-    async () => {
-      return await httpClient.post(`/form`, data
-      )
-    },
-    {
-      onSuccess: (res) => { setPostResult({ status: 'success', res: res }) },
-      onError: (err) => { setPostResult({ status: 'error', res: err.response?.data || err }); },
-    }
-  );
-
-  const applyFunc = (func, e) => {
-    try {
-      alert('报名成功！')
-      func();
-    }
-    catch (err) { console.log('err', err) }
-  }
 
 
-  const languageHandler = (v, e) => {
-    //  console.log('e.target.value', e,v)
-    setLanguage(v.value)
-  }
-  // console.log('i18next :', i18next.language)
-
-  useEffect(() => {
-    // console.log('data.files', data?.files)
-  }, [data?.files])
-
-  // console.log('data  image', data, image)
 
   const [isChnlChecked, setIsChnlChecked] = useState(false);
   const [checkedValue, setCheckedValue] = useState("");
@@ -681,4 +674,4 @@ const From = (props) => {
   );
 };
 
-export default From;
+export default Form;

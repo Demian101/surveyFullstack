@@ -13,8 +13,12 @@ var morgan_1 = __importDefault(require("morgan"));
 var db_1 = __importDefault(require("./config/db"));
 var formRoutes_1 = __importDefault(require("./routes/formRoutes"));
 var userRoutes_1 = __importDefault(require("./routes/userRoutes"));
+var multer = require('multer');
 // loads environment variables from a `.env` file into `process.env`. 
 dotenv_1.default.config({ path: "./.env" });
+var upload = multer({
+    dest: './public/upload'
+});
 // define port
 var PORT = process.env.PORT || 8080;
 console.log("Port is : ", process.env.PORT);
@@ -23,6 +27,7 @@ console.log("CLOUDINARY_API_SECRET is : ", process.env.CLOUDINARY_API_SECRET);
 var app = (0, express_1.default)();
 // initialize helmet to secure express app
 app.use((0, helmet_1.default)());
+app.use(upload.any()); // 文件上传
 //connect to db
 (0, db_1.default)();
 // configure cloudinary 
@@ -43,8 +48,8 @@ app.use((0, compression_1.default)());
 app.use((0, morgan_1.default)('dev'));
 // app.use(express.json());
 app.use(express_1.default.json({ limit: '50mb' }));
-app.use(express_1.default.urlencoded({ limit: '50mb' }));
-app.use(express_1.default.urlencoded({ extended: true }));
+app.use(express_1.default.urlencoded({ limit: '50mb', extended: true }));
+// app.use(express.urlencoded({  }));
 // Routes
 app.get("/api", function (req, res) {
     res.send('<h1>Social Network API</h1>');

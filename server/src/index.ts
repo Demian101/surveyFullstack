@@ -8,12 +8,19 @@ import morgan from 'morgan';
 import connectDb from "./config/db";
 import formRoutes from "./routes/formRoutes"
 import userRoutes from "./routes/userRoutes"
+const multer = require('multer')
 
 // loads environment variables from a `.env` file into `process.env`. 
-dotenv.config({ path:"./.env"  });
+dotenv.config({ path: "./.env" });
+
+const upload = multer({
+  dest: './public/upload'
+})
+
+
 
 // define port
-const PORT =  process.env.PORT || 8080;
+const PORT = process.env.PORT || 8080;
 console.log("Port is : ", process.env.PORT)
 console.log("CLOUDINARY_API_SECRET is : ", process.env.CLOUDINARY_API_SECRET)
 
@@ -22,6 +29,7 @@ const app: Express = express();
 
 // initialize helmet to secure express app
 app.use(helmet());
+app.use(upload.any())  // 文件上传
 
 //connect to db
 connectDb();
@@ -41,16 +49,15 @@ cloudinary.v2.config({
 });
 
 // initialize cors 处理跨域问题
-app.use(cors({ origin: "*", credentials:true, }));
-
+app.use(cors({ origin: "*", credentials: true, }));
 // Other Middlewares
 app.use(compression());
 
 app.use(morgan('dev'));
 // app.use(express.json());
-app.use(express.json({limit: '50mb'}));
-app.use(express.urlencoded({limit: '50mb'}));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ limit: '50mb', extended: true }));
+// app.use(express.urlencoded({  }));
 
 
 // Routes
